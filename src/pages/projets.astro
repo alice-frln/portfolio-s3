@@ -5,6 +5,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CardProjetM from "../components/CardProjetM.astro";
 import CardProjetL from "../components/CardProjetL.astro";
+import Banniere from "../components/Banniere.astro";
+import SectionContact from "../components/SectionContact.astro";
 import { pb, type Projet } from "../lib/pocketbase";
 
 import iconeFiltre from "../assets/svg/filtre.svg";
@@ -52,12 +54,13 @@ const menus = [
 
 <Layout title="Projets — Alice Frelin">
   <Header />
+  <Banniere titre="Projets" />
 
   <!-- ===== Carrousel des derniers projets =====
        Le scroll vertical fait défiler les cartes horizontalement, puis la page reprend. -->
   {projets.length > 0 && (
     <section id="carrousel" aria-labelledby="titre-projets-favoris" class="relative bg-base-100">
-      <div data-carrousel-cadre class="flex flex-col justify-center overflow-hidden pt-[78px] pb-[72px]">
+      <div data-carrousel-cadre class="flex flex-col justify-center overflow-hidden pt-10 pb-[72px] md:pt-[78px]">
         <h2
           id="titre-projets-favoris"
           class="px-6 text-section-title tracking-[-0.09em] text-primary [font-feature-settings:'liga'_0] md:px-12 xl:px-[170px]"
@@ -77,12 +80,12 @@ const menus = [
     </section>
   )}
 
-  <main class="mx-auto max-w-[1440px] px-6 pt-10 pb-20 md:px-12 xl:px-28">
-    <h1 id="tous-les-projets" class="scroll-mt-[78px] text-section-title text-primary">Tous les projets</h1>
+  <main class="mx-auto max-w-[1440px] px-6 pt-10 pb-10 md:px-12 xl:px-[167px]">
+    <h2 id="tous-les-projets" class="scroll-mt-[78px] text-section-title text-primary">Tous les projets</h2>
     <p class="mt-3 text-body-m">Réalisés dans un cadre scolaire, stagiaire et personnel.</p>
 
     <!-- ===== Filtres ===== -->
-    <form method="get" action="/projets#tous-les-projets" id="filtres"class="mt-12 flex flex-wrap items-center gap-4 md:gap-6">
+    <form method="get" action="/projets#tous-les-projets" id="filtres" class="mt-12 flex flex-wrap items-center gap-4 md:gap-6">
       <!-- Carré filtrer : affiche / cache les menus -->
       <button
         type="button"
@@ -130,18 +133,25 @@ const menus = [
 
     <!-- ===== Projets ===== -->
     {erreur ? (
-      <p class="mt-16 text-body-s">Les projets n'ont pas pu être chargés. Réessaie dans quelques instants.</p>
+      <p role="alert" class="mt-16 text-body-s">Les projets n'ont pas pu être chargés. Réessayez dans quelques instants.</p>
     ) : projetsAffiches.length === 0 ? (
-      <p class="mt-16 text-body-s">Aucun projet ne correspond à ces filtres.</p>
+      <p class="mt-16 text-body-s">
+        {filtreActif ? "Aucun projet ne correspond à ces filtres." : "Aucun projet pour le moment."}
+        {filtreActif && <a href="/projets#tous-les-projets" class="link">Voir tous les projets</a>}
+      </p>
     ) : (
-      <ul class="mt-16 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {projetsAffiches.map((projet) => (
-          <li><CardProjetM projet={projet} /></li>
-        ))}
-      </ul>
+      <>
+        <ul class="mt-16 grid grid-cols-1 gap-x-[43px] gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {projetsAffiches.map((projet) => (
+            <li><CardProjetM projet={projet} /></li>
+          ))}
+        </ul>
+        <p class="mt-28 text-center text-body-m">Fin des résultats</p>
+      </>
     )}
   </main>
 
+  <SectionContact />
   <Footer />
 </Layout>
 
