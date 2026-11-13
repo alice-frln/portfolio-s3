@@ -24,7 +24,8 @@
 
 @font-face {
   font-family: "Peix";
-  src: url("../assets/fonts/Peix.woff2") format("woff2");
+  /* Style "Round Void" extrait de la police variable Peix.ttf (VOID=800, ROND=800) */
+  src: url("../assets/fonts/PeixRoundVoid.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -41,6 +42,7 @@
   --color-noir: #000000;
   --color-rose-pastel: #f9d8dc;
   --color-rose-vif: #fc61bf;
+  --color-gris-clair: #f2f2f2;
 
   /* Ombre "carte" décalée */
   --shadow-card: 10px 10px 0 0 rgb(0 0 0 / 0.35);

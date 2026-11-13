@@ -1,0 +1,36 @@
+---
+// Grande carte projet : miniature plein cadre, voile noir dégradé, textes par-dessus
+import { pb, type Projet } from "../lib/pocketbase";
+
+interface Props {
+  projet: Projet;
+}
+
+const { projet } = Astro.props;
+---
+
+<a
+  href={`/projets/${projet.id}`}
+  class="group relative block aspect-[640/420] w-[80vw] max-w-[640px] overflow-hidden bg-noir text-blanc"
+>
+  {projet.Miniature && (
+    <img
+      src={pb.files.getURL(projet, projet.Miniature)}
+      alt=""
+      loading="lazy"
+      class="absolute inset-0 size-full object-cover transition duration-500 group-hover:scale-105"
+    />
+  )}
+
+  <!-- Voile noir dégradé -->
+  <div
+    class="pointer-events-none absolute inset-0
+           bg-[linear-gradient(180deg,rgb(0_0_0/0)_50%,rgb(0_0_0/0.3)_77%,rgb(0_0_0/0.45)_86%,rgb(0_0_0/0.6)_98%)]"
+  ></div>
+
+  <div class="absolute inset-x-6 bottom-5">
+    <p class="font-peix text-[1rem] leading-tight text-primary">{projet.Categorie.join(", ")}</p>
+    <h3 class="font-manrope text-[2.125rem] leading-tight font-bold tracking-[-0.09em]">{projet.Titre}</h3>
+    <p class="font-manrope text-[0.8125rem] font-normal">{projet.Sous_titres}</p>
+  </div>
+</a>

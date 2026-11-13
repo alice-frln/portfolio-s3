@@ -1,5 +1,201 @@
 ---
-import PocketBase from "pocketbase";
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CardProjetM from "../components/CardProjetM.astro";
+import CardProjetL from "../components/CardProjetL.astro";
+import { pb, type Projet } from "../lib/pocketbase";
 
-export const pb = new PocketBase(import.meta.env.PUBLIC_PB_URL);
+import iconeFiltre from "../assets/svg/filtre.svg";
+import iconeFlecheBas from "../assets/svg/fleche_bas.svg";
+
+let projets: Projet[] = [];
+let erreur = false;
+try {
+  projets = await pb.collection("Projets").getFullList<Projet>({ sort: "-Date" });
+} catch (e) {
+  console.error("Impossible de récupérer les projets :", e);
+  erreur = true;
+}
+
+// Choix possibles dans chaque menu, tirés des projets
+const annee = (p: Projet) => String(new Date(p.Date).getFullYear());
+const options = {
+  categorie: [...new Set(projets.flatMap((p) => p.Categorie ?? []))].sort(),
+  logiciel: [...new Set(projets.flatMap((p) => p.Logiciels ?? []))].sort(),
+  annee: [...new Set(projets.map(annee))].sort().reverse(),
+};
+
+// Filtres choisis (dans l'URL, ex. /projets?categorie=Design&annee=2025)
+const params = Astro.url.searchParams;
+const filtres = {
+  categorie: params.get("categorie") ?? "",
+  logiciel: params.get("logiciel") ?? "",
+  annee: params.get("annee") ?? "",
+};
+const filtreActif = Object.values(filtres).some(Boolean);
+
+const projetsAffiches = projets.filter(
+  (p) =>
+    (!filtres.categorie || p.Categorie?.includes(filtres.categorie)) &&
+    (!filtres.logiciel || p.Logiciels?.includes(filtres.logiciel)) &&
+    (!filtres.annee || annee(p) === filtres.annee),
+);
+
+const menus = [
+  { nom: "categorie", label: "Catégorie", tous: "Toutes" },
+  { nom: "logiciel", label: "Logiciel", tous: "Tous" },
+  { nom: "annee", label: "Année", tous: "Toutes" },
+] as const;
 ---
+
+<Layout title="Projets — Alice Frelin">
+  <Header />
+
+  <!-- ===== Carrousel des derniers projets =====
+       Le scroll vertical fait défiler les cartes horizontalement, puis la page reprend. -->
+  {projets.length > 0 && (
+    <section id="carrousel" aria-labelledby="titre-projets-favoris" class="relative bg-base-100">
+      <div data-carrousel-cadre class="flex flex-col justify-center overflow-hidden pt-[78px] pb-[72px]">
+        <h2
+          id="titre-projets-favoris"
+          class="px-6 text-section-title tracking-[-0.09em] text-primary [font-feature-settings:'liga'_0] md:px-12 xl:px-[170px]"
+        >
+          Projets favoris
+        </h2>
+
+        <ul
+          data-carrousel-piste
+          class="mt-4 flex snap-x snap-mandatory scroll-px-10 gap-[38px] overflow-x-auto px-10 will-change-transform"
+        >
+          {projets.slice(0, 5).map((projet) => (
+            <li class="shrink-0 snap-start"><CardProjetL projet={projet} /></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <main class="mx-auto max-w-[1440px] px-6 pt-10 pb-20 md:px-12 xl:px-28">
+    <h1 id="tous-les-projets" class="scroll-mt-[78px] text-section-title text-primary">Tous les projets</h1>
+    <p class="mt-3 text-body-m">Réalisés dans un cadre scolaire, stagiaire et personnel.</p>
+
+    <!-- ===== Filtres ===== -->
+    <form method="get" action="/projets#tous-les-projets" id="filtres"class="mt-12 flex flex-wrap items-center gap-4 md:gap-6">
+      <!-- Carré filtrer : affiche / cache les menus -->
+      <button
+        type="button"
+        id="bouton-filtrer"
+        aria-expanded={filtreActif ? "true" : "false"}
+        aria-controls="menus-filtres"
+        class="btn h-auto gap-4 rounded-none border-noir bg-rose-pastel px-6 py-2.5 text-body-s"
+      >
+        Filtrer <Image src={iconeFiltre} alt="" class="size-6" />
+      </button>
+
+      <!-- Menus déroulants (cachés tant qu'on n'a pas cliqué sur Filtrer) -->
+      <div id="menus-filtres" hidden={!filtreActif} class="contents">
+      {menus.map(({ nom, label, tous }) => (
+        <details class="dropdown group">
+          <summary class="btn h-auto gap-4 rounded-full border-noir bg-gris-clair px-6 py-2.5 text-body-s">
+            {filtres[nom] || label}
+            <Image src={iconeFlecheBas} alt="" class="h-auto w-5 transition-transform group-open:rotate-180" />
+          </summary>
+          <ul class="dropdown-content menu z-10 mt-2 max-h-72 w-60 flex-nowrap overflow-y-auto rounded-box border border-noir bg-base-100 p-2 shadow-card">
+            <li>
+              <label>
+                <input type="radio" name={nom} value="" checked={!filtres[nom]} class="radio radio-sm radio-primary" />
+                {tous}
+              </label>
+            </li>
+            {options[nom].map((valeur) => (
+              <li>
+                <label>
+                  <input type="radio" name={nom} value={valeur} checked={filtres[nom] === valeur}
+                         class="radio radio-sm radio-primary" />
+                  {valeur}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ))}
+
+      {filtreActif && (
+        <a href="/projets#tous-les-projets" class="link text-body-s">Réinitialiser</a>
+      )}
+      </div>
+    </form>
+
+    <!-- ===== Projets ===== -->
+    {erreur ? (
+      <p class="mt-16 text-body-s">Les projets n'ont pas pu être chargés. Réessaie dans quelques instants.</p>
+    ) : projetsAffiches.length === 0 ? (
+      <p class="mt-16 text-body-s">Aucun projet ne correspond à ces filtres.</p>
+    ) : (
+      <ul class="mt-16 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {projetsAffiches.map((projet) => (
+          <li><CardProjetM projet={projet} /></li>
+        ))}
+      </ul>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // ===== Carrousel : défilement horizontal piloté par le scroll vertical =====
+  // La section devient plus haute que l'écran ; son contenu reste collé en haut (sticky)
+  // pendant que la piste glisse vers la gauche. Une fois au bout, la page reprend son scroll.
+  const section = document.querySelector<HTMLElement>("#carrousel");
+  const cadre = document.querySelector<HTMLElement>("[data-carrousel-cadre]");
+  const piste = document.querySelector<HTMLElement>("[data-carrousel-piste]");
+  const mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (section && cadre && piste && !mouvementReduit) {
+    // On remplace le scroll horizontal natif par l'effet
+    piste.classList.remove("overflow-x-auto", "snap-x", "snap-mandatory");
+    cadre.classList.add("sticky", "top-0", "h-svh");
+
+    let distance = 0;
+
+    const mesurer = () => {
+      distance = Math.max(0, piste.scrollWidth - window.innerWidth);
+      section.style.height = `${window.innerHeight + distance}px`;
+      deplacer();
+    };
+
+    const deplacer = () => {
+      const avance = Math.min(Math.max(-section.getBoundingClientRect().top, 0), distance);
+      piste.style.transform = `translateX(${-avance}px)`;
+    };
+
+    window.addEventListener("scroll", deplacer, { passive: true });
+    window.addEventListener("resize", mesurer);
+    window.addEventListener("load", mesurer);
+    mesurer();
+  }
+
+  const formulaire =document.querySelector<HTMLFormElement>("#filtres")!;
+  const boutonFiltrer = document.querySelector<HTMLButtonElement>("#bouton-filtrer")!;
+  const zoneMenus = document.querySelector<HTMLElement>("#menus-filtres")!;
+
+  // Le bouton Filtrer affiche / cache les menus
+  boutonFiltrer.addEventListener("click", () => {
+    zoneMenus.hidden = !zoneMenus.hidden;
+    boutonFiltrer.setAttribute("aria-expanded", String(!zoneMenus.hidden));
+  });
+
+  // Choisir une option applique le filtre directement
+  formulaire.addEventListener("change", () => formulaire.requestSubmit());
+
+  // Ferme les autres menus quand on en ouvre un
+  const menus = document.querySelectorAll<HTMLDetailsElement>("details.dropdown");
+  menus.forEach((menu) =>
+    menu.addEventListener("toggle", () => {
+      if (menu.open) menus.forEach((autre) => autre !== menu && (autre.open = false));
+    }),
+  );
+</script>

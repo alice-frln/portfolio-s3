@@ -1,0 +1,31 @@
+---
+import { pb, type Projet } from "../lib/pocketbase";
+
+interface Props {
+  projet: Projet;
+}
+
+const { projet } = Astro.props;
+---
+
+<a href={`/projets/${projet.id}`} class="group block">
+  <article>
+    <div class="aspect-[211/145] overflow-hidden bg-base-100">
+      {projet.Miniature && (
+        <img
+          src={pb.files.getURL(projet, projet.Miniature)}
+          alt=""
+          loading="lazy"
+          class="size-full object-cover transition duration-300 group-hover:scale-105"
+        />
+      )}
+    </div>
+
+    <p class="mt-1 font-peix text-[1.125rem] leading-tight text-primary">{projet.Categorie.join(", ")}</p>
+    <h2 class="font-manrope text-[2.125rem] leading-tight font-bold tracking-[-0.09em] group-hover:underline">
+      {projet.Titre}
+    </h2>
+    <p class="mt-1 font-manrope text-[0.75rem] font-medium">{projet.Sous_titres}</p>
+    <p class="font-manrope text-[0.8125rem] font-medium text-noir/60">{new Date(projet.Date).getFullYear()}</p>
+  </article>
+</a>
