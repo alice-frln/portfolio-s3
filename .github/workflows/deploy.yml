@@ -1,0 +1,53 @@
+name: Deploy portfolios3
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Compiler Astro
+        run: |
+          bun install
+          bun run --bun build
+        env:
+          PUBLIC_PB_URL: https://pb.alice-frelin.fr
+
+      - name: Envoyer dist sur le VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: dist
+          target: /var/www/portfolios3
+
+      - name: Mettre a jour et redemarrer
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+            export PATH="$HOME/.bun/bin:$PATH"
+            cd /var/www/portfolios3
+            git pull --ff-only origin main
+            bun install
+            sudo systemctl restart portfolios3
+            sleep 3
+            systemctl is-active --quiet portfolios3
+            curl --fail --silent --output /dev/null http://127.0.0.1:3001/
+            echo "Deploiement termine"
