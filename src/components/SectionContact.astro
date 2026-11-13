@@ -1,0 +1,15 @@
+---
+// Bloc d'appel au contact en bas des pages ("Travaillons ensemble", "Un projet en tête ?")
+interface Props {
+  titre?: string;
+  texte?: string;
+}
+
+const { titre = "Travaillons ensemble", texte = "Vous avez un projet ?" } = Astro.props;
+---
+
+<section aria-labelledby="titre-section-contact" class="mx-auto flex max-w-[932px] flex-col items-center gap-6 px-6 py-16 text-center md:gap-8">
+  <h2 id="titre-section-contact" class="text-section-title text-rose-vif">{titre}</h2>
+  <p class="text-body-m">{texte}</p>
+  <a href="/contact" class="btn-pilule">Me contacter</a>
+</section>

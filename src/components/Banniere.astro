@@ -1,0 +1,13 @@
+---
+// Bande bleue avec un très grand titre blanc (haut des pages Projets et Contact).
+// Elle remonte sous le header (sticky, transparent) comme sur la maquette.
+interface Props {
+  titre: string;
+}
+
+const { titre } = Astro.props;
+---
+
+<div class="-mt-[78px] flex min-h-[220px] items-end overflow-hidden bg-bleu-vif px-4 pt-[110px] pb-6 md:h-[384px] md:px-[31px] md:pb-[62px]">
+  <h1 class="text-banniere text-blanc">{titre}</h1>
+</div>

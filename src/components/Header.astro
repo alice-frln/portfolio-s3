@@ -5,7 +5,7 @@ const pageActuelle = Astro.url.pathname.replace(/(.)\/$/, "$1");
 
 <header class="sticky top-0 z-50 flex h-[78px] w-full items-end justify-center px-4">
   <nav aria-label="Navigation principale">
-    <ul class="flex items-end justify-center gap-3 sm:gap-10 lg:gap-24 xl:gap-[215px]">
+    <ul class="flex items-end justify-center gap-1.5 sm:gap-10 lg:gap-24 xl:gap-[215px]">
       <li><a href="/" class="btn-nav" aria-current={pageActuelle === "/" ? "page" : undefined}>Accueil</a></li>
       <li><a href="/projets" class="btn-nav" aria-current={pageActuelle === "/projets" ? "page" : undefined}>Projets</a></li>
       <li><a href="/a-propos" class="btn-nav" aria-current={pageActuelle === "/a-propos" ? "page" : undefined}>À propos</a></li>

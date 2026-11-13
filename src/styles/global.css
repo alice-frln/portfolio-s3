@@ -56,6 +56,8 @@
   font-size: 3.5rem;
   font-weight: 400;
   line-height: 1;
+  letter-spacing: -0.09em;
+  font-feature-settings: "liga" 0;
   @variant md {
     font-size: 6rem;
   }
@@ -67,6 +69,29 @@
   font-size: 3rem;
   font-weight: 400;
   line-height: 1;
+  letter-spacing: -0.09em;
+  font-feature-settings: "liga" 0;
+}
+
+/* Très grand titre blanc des bannières bleues : 72px mobile → 250px en 1440px */
+@utility text-banniere {
+  font-family: var(--font-manrope);
+  font-size: var(--taille-banniere, clamp(4.5rem, 17.4vw, 15.625rem));
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.09em;
+}
+
+/* Titre bold des sections ("Mes derniers projets", "Le défi"…) : 32px → 50px */
+@utility text-titre-bold {
+  font-family: var(--font-manrope);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.07em;
+  @variant md {
+    font-size: 3.125rem;
+  }
 }
 
 /* Sous-titre : 30px mobile → 50px desktop */
@@ -100,11 +125,24 @@
 
 /* Bouton de navigation du header */
 @utility btn-nav {
-  @apply inline-block rounded-full border border-noir bg-blanc px-4 py-2 text-center font-manrope
-         text-[0.9375rem] leading-[1.625rem] font-semibold whitespace-nowrap text-noir
+  @apply inline-block rounded-full border border-noir bg-blanc px-3 py-2 text-center font-manrope
+         text-[0.875rem] leading-[1.625rem] font-semibold whitespace-nowrap text-noir sm:px-4 sm:text-[0.9375rem]
          transition-colors hover:bg-rose-pastel focus-visible:outline-2
          focus-visible:outline-offset-2 focus-visible:outline-noir
          md:px-6 md:py-3 md:text-[1.125rem];
+}
+
+/* Bouton d'action rose pastel ("Tous les projets", "Me contacter"…) */
+@utility btn-pilule {
+  @apply btn-nav bg-rose-pastel hover:bg-rose-vif;
+}
+
+/* Focus visible commun à tous les liens et boutons */
+@layer base {
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-noir);
+    outline-offset: 3px;
+  }
 }
 
 /* Texte courant XS : 15px */

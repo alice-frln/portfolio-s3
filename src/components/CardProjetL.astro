@@ -1,24 +1,30 @@
 ---
 // Grande carte projet : miniature plein cadre, voile noir dégradé, textes par-dessus
-import { pb, type Projet } from "../lib/pocketbase";
+import { urlFichier, type Projet } from "../lib/pocketbase";
 
 interface Props {
   projet: Projet;
+  /** "carrousel" : largeur fixe (Projets favoris) ; "grille" : remplit sa colonne (accueil) */
+  taille?: "carrousel" | "grille";
 }
 
-const { projet } = Astro.props;
+const { projet, taille = "carrousel" } = Astro.props;
 ---
 
 <a
   href={`/projets/${projet.id}`}
-  class="group relative block aspect-[640/420] w-[80vw] max-w-[640px] overflow-hidden bg-noir text-blanc"
+  class:list={[
+    "group relative block overflow-hidden bg-noir text-blanc",
+    taille === "carrousel" ? "aspect-[640/420] w-[80vw] max-w-[640px]" : "aspect-[347/308] w-full",
+  ]}
 >
   {projet.Miniature && (
     <img
-      src={pb.files.getURL(projet, projet.Miniature)}
+      src={urlFichier(projet, projet.Miniature)}
       alt=""
       loading="lazy"
-      class="absolute inset-0 size-full object-cover transition duration-500 group-hover:scale-105"
+      decoding="async"
+      class="absolute inset-0 size-full object-cover transition duration-500 group-hover:scale-105 motion-reduce:transition-none"
     />
   )}
 
@@ -28,9 +34,13 @@ const { projet } = Astro.props;
            bg-[linear-gradient(180deg,rgb(0_0_0/0)_50%,rgb(0_0_0/0.3)_77%,rgb(0_0_0/0.45)_86%,rgb(0_0_0/0.6)_98%)]"
   ></div>
 
-  <div class="absolute inset-x-6 bottom-5">
-    <p class="font-peix text-[1rem] leading-tight text-primary">{projet.Categorie.join(", ")}</p>
-    <h3 class="font-manrope text-[2.125rem] leading-tight font-bold tracking-[-0.09em]">{projet.Titre}</h3>
-    <p class="font-manrope text-[0.8125rem] font-normal">{projet.Sous_titres}</p>
+  <div class="absolute inset-x-6 bottom-4">
+    <p class="font-peix text-[1rem] leading-tight tracking-[-0.09em] text-primary [font-feature-settings:'liga'_0]">
+      {projet.Categorie.join(", ")}
+    </p>
+    <h3 class="font-manrope text-[1.75rem] leading-tight font-bold tracking-[-0.09em] group-hover:underline md:text-[2.125rem]">
+      {projet.Titre}
+    </h3>
+    <p class="font-manrope text-[0.8125rem] font-normal text-blanc/80">{projet.Sous_titres}</p>
   </div>
 </a>
