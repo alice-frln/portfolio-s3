@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "portfolio";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #ffffff;          /* blanc */
+  --color-base-200: #f9d8dc;          /* rose pastel */
+  --color-base-300: #f3c2c8;
+  --color-base-content: #000000;      /* noir */
+
+  --color-primary: #fc61bf;           /* rose vif */
+  --color-primary-content: #000000;
+  --color-secondary: #2ad2de;         /* bleu vif */
+  --color-secondary-content: #000000;
+  --color-accent: #826e68;            /* marron */
+  --color-accent-content: #ffffff;
+  --color-neutral: #000000;           /* noir */
+  --color-neutral-content: #ffffff;
+}
+
+@font-face {
+  font-family: "Peix";
+  src: url("../assets/fonts/Peix.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-manrope: "Manrope", sans-serif;
+  --font-peix: "Peix", sans-serif;
+
+  /* Couleurs du design, utilisables aussi directement : bg-rose-vif, text-marron… */
+  --color-blanc: #ffffff;
+  --color-bleu-vif: #2ad2de;
+  --color-marron: #826e68;
+  --color-noir: #000000;
+  --color-rose-pastel: #f9d8dc;
+  --color-rose-vif: #fc61bf;
+
+  /* Ombre "carte" décalée */
+  --shadow-card: 10px 10px 0 0 rgb(0 0 0 / 0.35);
+}
+
+/* ---------- Styles de texte (mobile d'abord, desktop à partir de md: 768px) ---------- */
+
+/* Titre de section : 56px mobile → 96px desktop */
+@utility text-section-title {
+  font-family: var(--font-peix);
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1;
+  @variant md {
+    font-size: 6rem;
+  }
+}
+
+/* Petit titre de section : 48px */
+@utility text-section-title-s {
+  font-family: var(--font-peix);
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Sous-titre : 30px mobile → 50px desktop */
+@utility text-sous-titre {
+  font-family: var(--font-manrope);
+  font-size: 1.875rem;
+  font-weight: 700;
+  @variant md {
+    font-size: 3.125rem;
+  }
+}
+
+/* Texte courant M : 17px/500 mobile → 28px/400 desktop */
+@utility text-body-m {
+  font-family: var(--font-manrope);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.5;
+  @variant md {
+    font-size: 1.75rem;
+    font-weight: 400;
+  }
+}
+
+/* Texte courant S : 18px */
+@utility text-body-s {
+  font-family: var(--font-manrope);
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+/* Bouton de navigation du header */
+@utility btn-nav {
+  @apply inline-block rounded-full border border-noir bg-blanc px-4 py-2 text-center font-manrope
+         text-[0.9375rem] leading-[1.625rem] font-semibold whitespace-nowrap text-noir
+         transition-colors hover:bg-rose-pastel focus-visible:outline-2
+         focus-visible:outline-offset-2 focus-visible:outline-noir
+         md:px-6 md:py-3 md:text-[1.125rem];
+}
+
+/* Texte courant XS : 15px */
+@utility text-body-xs {
+  font-family: var(--font-manrope);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}

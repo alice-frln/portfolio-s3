@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import linkedin from "../assets/img/linkedin.svg";
+import behance from "../assets/img/behance.svg";
+import enveloppe from "../assets/img/enveloppe.svg";
+---
+
+<footer class="flex min-h-[269px] items-center justify-center bg-secondary px-6 py-10 text-body-s text-blanc">
+  <div class="flex w-full max-w-[1130px] flex-wrap gap-12 xl:flex-nowrap xl:gap-0">
+    <!-- Nom + métier -->
+    <div class="flex w-[343px] flex-col gap-3 xl:mt-[10px] xl:ml-[30px]">
+      <p class="font-peix text-[2.5rem] leading-[2rem] tracking-[0.03em] uppercase">Alice Frelin</p>
+      <p class="font-bold">Designeuse &amp; Développeuse frontend</p>
+    </div>
+
+    <!-- Réseaux -->
+    <nav aria-labelledby="footer-me-suivre" class="flex w-[152px] flex-col gap-4 xl:ml-[116px]">
+      <h2 id="footer-me-suivre" class="font-bold text-blanc/80">Me suivre</h2>
+      <ul class="flex h-10 items-center gap-4">
+        <li>
+          <a href="https://www.linkedin.com/in/alice-frelin-7a0184337" target="_blank" rel="noopener"
+             aria-label="LinkedIn" class="block transition hover:opacity-80">
+            <Image src={linkedin} alt="" class="h-10 w-10" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.behance.net/alicefrelin2" target="_blank" rel="noopener"
+             aria-label="Behance" class="block transition hover:opacity-80">
+            <Image src={behance} alt="" class="h-[25px] w-10" />
+          </a>
+        </li>
+        <li>
+          <a href="mailto:alicefrelin.pro@gmail.com" aria-label="E-mail" class="block transition hover:opacity-80">
+            <Image src={enveloppe} alt="" class="h-10 w-10" />
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Informations légales -->
+    <nav aria-labelledby="footer-legal" class="flex w-[234px] flex-col gap-4 xl:ml-[202px]">
+      <h2 id="footer-legal">Informations légales</h2>
+      <ul class="flex flex-col gap-2">
+        <li><a href="/politique-de-confidentialite" class="hover:underline">Politique de confidentialité</a></li>
+        <li><a href="/mentions-legales" class="hover:underline">Mentions légales</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>

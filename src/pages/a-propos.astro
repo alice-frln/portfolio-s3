@@ -1,0 +1,334 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CardObjet from "../components/CardObjet.astro";
+import CardCompetence from "../components/CardCompetence.astro";
+
+import fond from "../assets/img/apropos_background.webp";
+import avatar from "../assets/img/apropos_avatar.webp";
+import photoProfil from "../assets/img/apropos_photo_profil.webp";
+
+import myMelody from "../assets/img/objets_mymelody.webp";
+import maquillage from "../assets/img/objets_maquillage.webp";
+import appareilPhoto from "../assets/img/objets_appareil_photo.webp";
+import lykyou from "../assets/img/objets_lykyou.webp";
+import ordinateur from "../assets/img/objets_ordinateur.webp";
+import papierCrayon from "../assets/img/objets_papier_crayon.webp";
+
+import photoshop from "../assets/img/photoshop.svg";
+import figma from "../assets/img/figma.svg";
+import premierePro from "../assets/img/premierepro.svg";
+import afterEffects from "../assets/img/aftereffects.svg";
+import capcut from "../assets/img/capcut.svg";
+import ia from "../assets/img/ia.svg";
+---
+
+<Layout title="À propos — Alice Frelin">
+  <!-- Hero : sur grand écran, tout tient dans la hauteur de la fenêtre -->
+  <div class="relative isolate flex flex-col overflow-x-clip xl:h-svh">
+    <!-- Fond -->
+    <Image
+      src={fond}
+      alt=""
+      width={1920}
+      class="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
+      loading="eager"
+    />
+
+    <Header />
+
+    <main
+      class="mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-14 px-6 py-10
+             xl:min-h-0 xl:flex-1 xl:grid-cols-[auto_1fr_auto] xl:items-stretch xl:gap-8 xl:px-12 xl:py-8"
+    >
+      <!-- ===== Colonne gauche (sa hauteur fixe celle de la ligne) ===== -->
+      <div class="flex w-full max-w-[335px] flex-col gap-14 xl:gap-8">
+        <!-- Carte identité -->
+        <section aria-label="Identité" class="card rounded-none border border-noir bg-secondary shadow-card">
+          <div class="card-body gap-4 p-5 text-body-s">
+            <div class="flex gap-5">
+              <Image
+                src={photoProfil}
+                alt="Photo d'Alice Frelin"
+                width={260}
+                class="h-[151px] w-[129px] shrink-0 border border-noir object-cover"
+              />
+              <ul class="mt-4 flex flex-col gap-2.5">
+                <li><strong class="font-bold">Prénom</strong> : Alice</li>
+                <li><strong class="font-bold">Nom</strong> : Frelin</li>
+                <li><strong class="font-bold">Âge</strong> : 20 ans</li>
+                <li><strong class="font-bold">Secteur</strong> : Design</li>
+              </ul>
+            </div>
+            <ul class="flex flex-col gap-2.5">
+              <li><strong class="font-bold">Langues</strong> : français, anglais</li>
+              <li>
+                <strong class="font-bold">Aime</strong> : le printemps, les bubble tea, collectionner les
+                porte-clés, le noir et le rose
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Carte parcours -->
+        <section
+          aria-labelledby="titre-parcours"
+          class="card rounded-none border border-noir bg-base-100 shadow-card"
+        >
+          <div class="card-body gap-4 px-5 py-6">
+            <h2
+              id="titre-parcours"
+              class="text-center font-manrope text-[2rem] leading-tight font-bold tracking-[-0.07em]"
+            >
+              Parcours
+            </h2>
+            <ol class="flex flex-col gap-3 text-body-xs">
+              <li>
+                <span class="font-bold text-primary">2026</span> - Stage de 8 semaines en tant qu’assistante de
+                direction artistique<br />
+                Agence My client is rich, Strasbourg
+              </li>
+              <li>
+                <span class="font-bold text-primary">2025</span> - Semestre d’échange en Intégration Multimédia<br />
+                Cégep anglophone de Vanier, Montréal
+              </li>
+              <li>
+                <span class="font-bold text-primary">2024/2026</span> - BUT Métiers du multimédia et de l’internet<br />
+                IUT de Montbéliard
+              </li>
+              <li>
+                <span class="font-bold text-primary">2024</span> - Baccalauréat général - LLCE, SES, Cinéma
+                Audiovisuel, Mention Bien<br />
+                Lycée Gustave Courbet, Belfort
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <!-- ===== Colonne centrale : avatar + barre ===== -->
+      <div class="flex w-full flex-col items-center gap-6 xl:min-h-0">
+        <!-- L'avatar prend la place restante sans agrandir la ligne -->
+        <div class="relative flex w-full justify-center xl:min-h-0 xl:flex-1">
+          <Image
+            src={avatar}
+            alt="Avatar d'Alice"
+            width={800}
+            class="h-auto w-full max-w-[324px] xl:absolute xl:inset-0 xl:size-full xl:max-w-none xl:object-contain"
+            loading="eager"
+          />
+        </div>
+
+        <nav
+          aria-label="Sections à propos"
+          class="flex shrink-0 items-center gap-8 rounded-full border border-noir bg-accent px-11 py-3.5"
+        >
+          <!-- Objets (affichés par défaut) -->
+          <button
+            type="button"
+            data-onglet="objets"
+            aria-pressed="true"
+            aria-label="Objets"
+            class="btn btn-circle size-[73px] border-2 border-noir bg-base-100 hover:scale-105 aria-pressed:bg-base-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-10" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="13.5" cy="6.5" r="1" fill="currentColor" />
+              <circle cx="17.5" cy="10.5" r="1" fill="currentColor" />
+              <circle cx="8.5" cy="7.5" r="1" fill="currentColor" />
+              <circle cx="6.5" cy="12.5" r="1" fill="currentColor" />
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+            </svg>
+          </button>
+
+          <!-- Compétences -->
+          <button
+            type="button"
+            data-onglet="competences"
+            aria-pressed="false"
+            aria-label="Compétences"
+            class="btn btn-circle size-[73px] border-2 border-noir bg-base-100 hover:scale-105 aria-pressed:bg-base-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-10" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+              <path d="M9 18h6" />
+              <path d="M10 22h4" />
+            </svg>
+          </button>
+
+          <!-- CV -->
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener"
+            aria-label="CV (PDF)"
+            class="btn btn-circle size-[73px] border-2 border-noir bg-base-100 text-[2rem] font-semibold hover:scale-105"
+          >
+            CV
+          </a>
+        </nav>
+      </div>
+
+      <!-- ===== Colonne droite : inventaire ===== -->
+      <section
+        aria-labelledby="titre-inventaire"
+        class="card w-full max-w-[397px] rounded-none border border-noir bg-base-200 shadow-card"
+      >
+        <div class="card-body flex-1 items-center gap-3 px-5 pt-6 pb-4">
+          <h2 id="titre-inventaire" class="text-sous-titre tracking-[-0.07em]">Inventaire</h2>
+
+          <!-- Panneau objets -->
+          <ul
+            data-panneau="objets"
+            aria-label="Objets"
+            class="grid w-full flex-1 grid-cols-2 grid-rows-3 gap-2 rounded-[3px] border-2 border-accent
+                   bg-base-100 p-3 shadow-[inset_-10px_9px_4px_0_rgb(144_140_177/0.25)]"
+          >
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Sanrio"
+                      onclick="document.getElementById('objet-mymelody').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105">
+                <Image src={myMelody} alt="" width={280} class="size-full max-h-40 object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Maquillage"
+                      onclick="document.getElementById('objet-maquillage').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105">
+                <Image src={maquillage} alt="" width={280} class="size-full max-h-40 object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Appareil photo"
+                      onclick="document.getElementById('objet-appareil-photo').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105">
+                <Image src={appareilPhoto} alt="" width={280} class="size-full max-h-40 object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Musique"
+                      onclick="document.getElementById('objet-lykyou').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105">
+                <Image src={lykyou} alt="" width={280} class="size-full max-h-40 object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Ordinateur"
+                      onclick="document.getElementById('objet-ordinateur').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105">
+                <Image src={ordinateur} alt="" width={280} class="size-full max-h-40 object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Crayon"
+                      onclick="document.getElementById('objet-papier-crayon').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105">
+                <Image src={papierCrayon} alt="" width={280} class="size-full max-h-40 object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+          </ul>
+
+          <!-- Panneau compétences (caché par défaut) -->
+          <ul
+            data-panneau="competences"
+            aria-label="Compétences"
+            hidden
+            class="grid w-full flex-1 grid-cols-2 grid-rows-3 gap-2 rounded-[3px] border-2 border-accent
+                   bg-base-100 p-3 shadow-[inset_-10px_9px_4px_0_rgb(144_140_177/0.25)]"
+          >
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Photoshop"
+                      onclick="document.getElementById('competence-photoshop').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center p-3 transition hover:scale-105 focus-visible:scale-105">
+                <Image src={photoshop} alt="" class="size-full max-h-28 object-contain" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Figma"
+                      onclick="document.getElementById('competence-figma').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center p-3 transition hover:scale-105 focus-visible:scale-105">
+                <Image src={figma} alt="" class="size-full max-h-28 object-contain" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Premiere Pro"
+                      onclick="document.getElementById('competence-premiere-pro').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center p-3 transition hover:scale-105 focus-visible:scale-105">
+                <Image src={premierePro} alt="" class="size-full max-h-28 object-contain" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="After Effects"
+                      onclick="document.getElementById('competence-after-effects').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center p-3 transition hover:scale-105 focus-visible:scale-105">
+                <Image src={afterEffects} alt="" class="size-full max-h-28 object-contain" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="CapCut"
+                      onclick="document.getElementById('competence-capcut').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center p-3 transition hover:scale-105 focus-visible:scale-105">
+                <Image src={capcut} alt="" class="size-full max-h-28 object-contain" />
+              </button>
+            </li>
+            <li class="h-36 xl:h-auto xl:min-h-0">
+              <button type="button" aria-haspopup="dialog" aria-label="Intelligence artificielle"
+                      onclick="document.getElementById('competence-ia').showModal()"
+                      class="flex size-full cursor-pointer items-center justify-center p-3 transition hover:scale-105 focus-visible:scale-105">
+                <Image src={ia} alt="" class="size-full max-h-28 object-contain" />
+              </button>
+            </li>
+          </ul>
+
+          <p class="grow-0 text-center text-body-s">Cliquez sur un objet pour plus de détails</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== Fenêtres de détail des objets ===== -->
+    <CardObjet id="objet-mymelody" titre="Sanrio" image={myMelody}
+               texte="Mon univers préféré dans ma collection de porte-clés." />
+    <CardObjet id="objet-maquillage" titre="Maquillage" image={maquillage}
+               texte="Pour me maquiller et essayer de nouveaux looks." />
+    <CardObjet id="objet-appareil-photo" titre="Appareil photo" image={appareilPhoto} petitTitre
+               texte="Pour prendre des photos et garder de bons souvenirs." />
+    <CardObjet id="objet-lykyou" titre="Musique" image={lykyou}
+               texte="Écouter de la pop, de la T-pop & du rock alternatif." />
+    <CardObjet id="objet-ordinateur" titre="Ordinateur" image={ordinateur}
+               texte="Pour faire du montage vidéo ou du design." />
+    <CardObjet id="objet-papier-crayon" titre="Crayon" image={papierCrayon}
+               texte="Pour dessiner, car c’est mon hobby favori." />
+
+    <!-- ===== Fenêtres de détail des compétences ===== -->
+    <CardCompetence id="competence-photoshop" nom="Photoshop"
+                    texte="Création d’affiches et GIF animés." />
+    <CardCompetence id="competence-figma" nom="Figma"
+                    texte="Réalisation de maquettes mobile et desktop pour des sites web." />
+    <CardCompetence id="competence-premiere-pro" nom="Premiere Pro"
+                    texte="Montage de vidéos mi-longues à usage professionnel et formats verticaux." />
+    <CardCompetence id="competence-after-effects" nom="After Effects"
+                    texte="Animation de logos ou création de jingle." />
+    <CardCompetence id="competence-capcut" nom="CapCut"
+                    texte="Montage de vidéos courtes pour les réseaux sociaux." />
+    <CardCompetence id="competence-ia" nom="Intelligence artificielle"
+                    texte="Utilisation de Firefly pour créer des supports pour des visuels. Utilisation occasionnelle d’IA textuelle pour de la gestion de contenu." />
+  </div>
+  <Footer />
+</Layout>
+
+<script>
+  // Bascule entre le panneau "objets" et le panneau "compétences" de l'inventaire
+  const onglets = document.querySelectorAll<HTMLButtonElement>("[data-onglet]");
+  const panneaux = document.querySelectorAll<HTMLElement>("[data-panneau]");
+
+  onglets.forEach((onglet) => {
+    onglet.addEventListener("click", () => {
+      const choix = onglet.dataset.onglet;
+      onglets.forEach((o) => o.setAttribute("aria-pressed", String(o === onglet)));
+      panneaux.forEach((p) => (p.hidden = p.dataset.panneau !== choix));
+    });
+  });
+</script>

@@ -1,0 +1,37 @@
+---
+// Fenêtre (modal DaisyUI) qui s'ouvre quand on clique sur un logo de compétence.
+// Même cadre que CardObjet, mais seulement un texte centré.
+// Ouverture : document.getElementById("<id>").showModal()
+import { Image } from "astro:assets";
+import croix from "../assets/img/bouton_croix_pixel.svg";
+
+interface Props {
+  id: string;
+  /** Nom de la compétence (lu par les lecteurs d'écran, pas affiché) */
+  nom: string;
+  texte: string;
+}
+
+const { id, nom, texte } = Astro.props;
+---
+
+<dialog id={id} class="modal" aria-label={nom}>
+  <div
+    class="modal-box relative flex h-[348px] w-[441px] max-w-none items-center justify-center
+           overflow-visible rounded-none border-10 border-primary bg-base-100 px-10 py-16 shadow-card"
+  >
+    <form method="dialog">
+      <button class="absolute top-2 right-2 size-[69px] cursor-pointer transition hover:scale-105" aria-label="Fermer">
+        <Image src={croix} alt="" class="size-full" />
+      </button>
+    </form>
+
+    <p class="max-w-[361px] text-center font-manrope text-[1.375rem] leading-[1.358] text-base-content">
+      {texte}
+    </p>
+  </div>
+
+  <form method="dialog" class="modal-backdrop">
+    <button>Fermer</button>
+  </form>
+</dialog>
