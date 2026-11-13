@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Banniere from "../components/Banniere.astro";
+
+import appareilPhoto from "../assets/img/contact/appareil_photo_pixel.png";
+import ordinateur from "../assets/img/contact/ordinateur_pixel.png";
+import linkedin from "../assets/img/contact/linkedin_bleu.svg";
+import behance from "../assets/img/contact/behance_bleu.svg";
+import enveloppe from "../assets/img/contact/enveloppe_bleu.svg";
+
+const reseaux = [
+  { nom: "LinkedIn", href: "https://www.linkedin.com/in/alice-frelin-7a0184337", icone: linkedin, classe: "size-[72px] md:size-[99px]", externe: true },
+  { nom: "Behance", href: "https://www.behance.net/alicefrelin2", icone: behance, classe: "h-[46px] w-[72px] md:h-[63px] md:w-[99px]", externe: true },
+  { nom: "E-mail", href: "mailto:alicefrelin.pro@gmail.com", icone: enveloppe, classe: "size-[72px] md:size-[99px]", externe: false },
+];
+---
+
+<Layout title="Contact — Alice Frelin">
+  <Header />
+  <Banniere titre="Contact" />
+
+  <main class="relative overflow-x-clip pb-24">
+    <p class="mx-auto max-w-[1100px] px-6 pt-14 text-body-m md:box-content md:px-12">
+      Étudiante en BUT MMI (Métiers du Multimédia et de l'Internet), je recherche un <strong>stage</strong> en
+      <strong>graphisme ou communication visuelle.</strong> Discutons ensemble de vos besoins et de la façon dont je peux
+      contribuer à vos projets créatifs.
+    </p>
+
+    <div class="relative mx-auto mt-12 flex max-w-[1440px] flex-col items-center gap-10 px-6 md:mt-10">
+      <!-- Décors pixel art (cachés sur petit écran pour ne pas gêner le contenu) -->
+      <Image
+        src={appareilPhoto}
+        alt=""
+        class="pointer-events-none absolute top-0 left-[-52px] hidden w-[27%] max-w-[393px] [image-rendering:pixelated] lg:block"
+      />
+      <Image
+        src={ordinateur}
+        alt=""
+        class="pointer-events-none absolute top-[15px] right-[4.5%] hidden w-[12%] max-w-[173px] [image-rendering:pixelated] lg:block"
+      />
+
+      <h2 class="text-section-title text-rose-vif">Contactez-moi</h2>
+
+      <ul class="flex items-center gap-8 md:gap-10">
+        {reseaux.map(({ nom, href, icone, classe, externe }) => (
+          <li>
+            <a
+              href={href}
+              aria-label={externe ? `${nom} (nouvel onglet)` : nom}
+              target={externe ? "_blank" : undefined}
+              rel={externe ? "noopener" : undefined}
+              class="block transition hover:-translate-y-1 hover:opacity-80 motion-reduce:transition-none"
+            >
+              <Image src={icone} alt="" class={classe} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
