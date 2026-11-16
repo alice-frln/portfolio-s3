@@ -29,6 +29,7 @@ import boutonEtoile from "../assets/img/accueil/bouton_etoile.png";
 import iconeMontage from "../assets/img/accueil/competence_montage_video.png";
 import iconeDesign from "../assets/img/accueil/competence_design.png";
 import iconeIllustration from "../assets/img/accueil/competence_illustration.png";
+import flecheCercle from "../assets/svg/fleche_cercle.svg";
 
 // ===== Derniers projets (PocketBase, lecture publique) =====
 let derniersProjets: Projet[] = [];
@@ -139,27 +140,52 @@ const competences = [
         )}
       </section>
 
-      <!-- ===== Ce que je fais ===== -->
+      <!-- ===== Ce que je fais : sélecteur façon jeu vidéo, un élément au premier plan ===== -->
       <section aria-labelledby="titre-fais">
         <h2 id="titre-fais" class="text-titre-bold">Ce que je fais</h2>
-        <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[30px]">
-          {competences.map(({ nom, image }) => (
-            <li>
-              <a
-                href={`/projets?categorie=${encodeURIComponent(nom)}#tous-les-projets`}
-                class="group flex aspect-[347/330] flex-col items-center justify-center gap-4 border-8 border-rose-vif bg-blanc p-6
-                       transition hover:-translate-y-1 hover:bg-rose-pastel hover:shadow-card motion-reduce:transition-none"
-              >
-                <Image
-                  src={image}
-                  alt=""
-                  class="h-[65%] w-auto object-contain [image-rendering:pixelated] transition-transform group-hover:scale-105"
-                />
-                <span class="text-body-m">{nom}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+
+        <div
+          data-carrousel-competences
+          class="relative mt-10 h-[260px] sm:h-[300px] md:h-[360px]"
+          style="perspective: 1300px;"
+        >
+          <button
+            type="button"
+            data-carrousel-precedent
+            aria-label="Compétence précédente"
+            class="absolute top-1/2 left-0 z-40 -translate-y-1/2 rounded-full bg-blanc transition hover:scale-110 focus-visible:scale-110"
+          >
+            <Image src={flecheCercle} alt="" class="size-10 md:size-12" />
+          </button>
+
+          <ul class="absolute inset-0">
+            {competences.map(({ nom, image }, i) => (
+              <li data-idx={i} class="carte-competence absolute top-1/2 left-1/2">
+                <a
+                  href={`/projets?categorie=${encodeURIComponent(nom)}#tous-les-projets`}
+                  class="flex aspect-square w-[clamp(11rem,34vw,18.75rem)] flex-col items-center justify-center gap-4
+                         border-8 border-rose-vif bg-blanc p-6 shadow-card"
+                >
+                  <Image
+                    src={image}
+                    alt=""
+                    class="h-[60%] w-auto object-contain [image-rendering:pixelated]"
+                  />
+                  <span class="text-body-m">{nom}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            data-carrousel-suivant
+            aria-label="Compétence suivante"
+            class="absolute top-1/2 right-0 z-40 -translate-y-1/2 rounded-full bg-blanc transition hover:scale-110 focus-visible:scale-110"
+          >
+            <Image src={flecheCercle} alt="" class="size-10 rotate-180 md:size-12" />
+          </button>
+        </div>
       </section>
     </div>
 
@@ -191,4 +217,78 @@ const competences = [
       rotate: 1.5deg;
     }
   }
+
+  /* Carrousel "Ce que je fais" : un élément au premier plan, les deux autres derrière, de part et d'autre */
+  .carte-competence {
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.4s ease,
+      filter 0.4s ease;
+  }
+  .carte-competence.role-devant {
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    opacity: 1;
+  }
+  .carte-competence.role-droite {
+    transform: translate(-50%, -50%) translateX(58%) scale(0.72) rotateY(-20deg);
+    z-index: 10;
+    opacity: 0.55;
+    filter: grayscale(15%);
+  }
+  .carte-competence.role-gauche {
+    transform: translate(-50%, -50%) translateX(-158%) scale(0.72) rotateY(20deg);
+    z-index: 10;
+    opacity: 0.55;
+    filter: grayscale(15%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .carte-competence {
+      transition: opacity 0.2s ease;
+    }
+  }
 </style>
+
+<script>
+  // ===== Carrousel "Ce que je fais" : sélection façon jeu vidéo =====
+  const carrousel = document.querySelector<HTMLElement>("[data-carrousel-competences]");
+
+  if (carrousel) {
+    const cartes = [...carrousel.querySelectorAll<HTMLLIElement>(".carte-competence")];
+    const roles = ["role-devant", "role-droite", "role-gauche"];
+    let devant = 0;
+
+    const afficher = () => {
+      cartes.forEach((carte, i) => {
+        const decalage = (i - devant + cartes.length) % cartes.length;
+        carte.classList.remove(...roles);
+        carte.classList.add(roles[decalage]);
+      });
+    };
+
+    const aller = (pas: number) => {
+      devant = (devant + pas + cartes.length) % cartes.length;
+      afficher();
+    };
+
+    afficher();
+    carrousel.querySelector("[data-carrousel-precedent]")?.addEventListener("click", () => aller(-1));
+    carrousel.querySelector("[data-carrousel-suivant]")?.addEventListener("click", () => aller(1));
+
+    // Cliquer une carte de l'arrière-plan la ramène devant ; la carte de devant garde son lien normal
+    cartes.forEach((carte, i) => {
+      carte.querySelector("a")?.addEventListener("click", (evenement) => {
+        if (i !== devant) {
+          evenement.preventDefault();
+          devant = i;
+          afficher();
+        }
+      });
+    });
+
+    carrousel.addEventListener("keydown", (evenement) => {
+      if (evenement.key === "ArrowLeft") aller(-1);
+      if (evenement.key === "ArrowRight") aller(1);
+    });
+  }
+</script>
