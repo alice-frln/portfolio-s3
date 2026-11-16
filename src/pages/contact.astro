@@ -36,14 +36,14 @@ const reseaux = [
     </div>
   </div>
 
-  <main class="relative overflow-x-clip pb-24">
-    <p class="mx-auto max-w-[1100px] px-6 pt-14 text-body-m md:box-content md:px-12">
+  <main class="relative overflow-x-clip pb-32">
+    <p class="mx-auto max-w-[1100px] px-6 pt-20 text-body-m md:box-content md:px-12 md:pt-24">
       Étudiante en BUT MMI (Métiers du Multimédia et de l'Internet), je recherche un <strong>stage</strong> en
       <strong> graphisme ou communication visuelle.</strong> Discutons ensemble de vos besoins et de la façon dont je peux
       contribuer à vos projets créatifs.
     </p>
 
-    <div class="relative mx-auto mt-12 flex max-w-[1440px] flex-col items-center gap-10 px-6 md:mt-10">
+    <div class="relative mx-auto mt-20 flex max-w-[1440px] flex-col items-center gap-14 px-6 md:mt-28 md:gap-16">
       <!-- Décors pixel art (cachés sur petit écran pour ne pas gêner le contenu) -->
       <Image
         src={appareilPhoto}
@@ -58,7 +58,7 @@ const reseaux = [
 
       <h2 class="text-section-title text-rose-vif">Contactez-moi</h2>
 
-      <ul class="flex items-center gap-8 md:gap-10">
+      <ul class="flex items-center gap-10 md:gap-14">
         {reseaux.map(({ nom, href, icone, classe, externe }) => (
           <li>
             <a
