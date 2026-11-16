@@ -11,19 +11,11 @@ import linkedin from "../assets/img/contact/linkedin_bleu.svg";
 import behance from "../assets/img/contact/behance_bleu.svg";
 import enveloppe from "../assets/img/contact/enveloppe_bleu.svg";
 
-import telephoneHelloKitty from "../assets/img/accueil/telephone_hello_kitty.png";
-import boutonCoeur from "../assets/img/accueil/bouton_coeur.png";
-import helloKitty from "../assets/img/accueil/hello_kitty.png";
-
 const reseaux = [
   { nom: "LinkedIn", href: "https://www.linkedin.com/in/alice-frelin-7a0184337", icone: linkedin, classe: "size-[72px] md:size-[99px]", externe: true },
   { nom: "Behance", href: "https://www.behance.net/alicefrelin2", icone: behance, classe: "h-[46px] w-[72px] md:h-[63px] md:w-[99px]", externe: true },
   { nom: "E-mail", href: "mailto:alicefrelin.pro@gmail.com", icone: enveloppe, classe: "size-[72px] md:size-[99px]", externe: false },
 ];
-
-// Petit autocollant à faire glisser dans la page, façon tableau de stickers 2000's
-// (le téléphone et le cœur sont placés plus bas, sous le paragraphe, pour ne pas le recouvrir)
-const stickers = [{ image: helloKitty, alt: "Hello Kitty", taille: "w-16 md:w-24", style: "bottom:10%;left:7%;" }];
 ---
 
 <Layout title="Contact — Alice Frelin">
@@ -33,18 +25,18 @@ const stickers = [{ image: helloKitty, alt: "Hello Kitty", taille: "w-16 md:w-24
   <!-- ===== Bandeau défilant façon vieux site des années 2000 ===== -->
   <div class="overflow-hidden border-y border-noir bg-rose-pastel py-2.5" aria-hidden="true">
     <div data-marquee class="flex w-max gap-8 whitespace-nowrap font-manrope text-[0.9375rem] font-bold text-noir">
-      <span class="marquee-texte flex items-center gap-8">
+      <span class="flex items-center gap-8">
         ⋆｡‧˚ʚ merci de passer par ici ɞ˚‧｡⋆ &nbsp; n'hésite pas à laisser un message &nbsp; ⋆｡‧˚ʚ à très vite ɞ˚‧｡⋆ &nbsp; ✧
         disponible pour un stage ✧
       </span>
-      <span class="marquee-texte flex items-center gap-8" aria-hidden="true">
+      <span class="flex items-center gap-8" aria-hidden="true">
         ⋆｡‧˚ʚ merci de passer par ici ɞ˚‧｡⋆ &nbsp; n'hésite pas à laisser un message &nbsp; ⋆｡‧˚ʚ à très vite ɞ˚‧｡⋆ &nbsp; ✧
         disponible pour un stage ✧
       </span>
     </div>
   </div>
 
-  <main data-page-contact class="relative overflow-x-clip pb-24">
+  <main class="relative overflow-x-clip pb-24">
     <p class="mx-auto max-w-[1100px] px-6 pt-14 text-body-m md:box-content md:px-12">
       Étudiante en BUT MMI (Métiers du Multimédia et de l'Internet), je recherche un <strong>stage</strong> en
       <strong> graphisme ou communication visuelle.</strong> Discutons ensemble de vos besoins et de la façon dont je peux
@@ -52,44 +44,16 @@ const stickers = [{ image: helloKitty, alt: "Hello Kitty", taille: "w-16 md:w-24
     </p>
 
     <div class="relative mx-auto mt-12 flex max-w-[1440px] flex-col items-center gap-10 px-6 md:mt-10">
-      <!-- Décors pixel art, cliquables pour un petit coucou (cachés sur petit écran pour ne pas gêner le contenu) -->
-      <div class="absolute top-0 left-[30px] hidden lg:block">
-        <button
-          type="button"
-          data-decor-bulle="📸 Souris !"
-          aria-label="Dire bonjour à l'appareil photo"
-          class="block rotate-[15deg] cursor-pointer transition hover:scale-105 focus-visible:scale-105"
-        >
-          <Image src={appareilPhoto} alt="" class="w-[clamp(220px,27vw,393px)] [image-rendering:pixelated]" />
-        </button>
-      </div>
-      <div class="absolute top-[15px] right-0 hidden lg:block">
-        <button
-          type="button"
-          data-decor-bulle="💻 Bip bip !"
-          aria-label="Dire bonjour à l'ordinateur"
-          class="block cursor-pointer transition hover:scale-105 focus-visible:scale-105"
-        >
-          <Image src={ordinateur} alt="" class="w-[clamp(120px,12vw,173px)] [image-rendering:pixelated]" />
-        </button>
-      </div>
-
-      <!-- Autocollants déplaçables (placés sous le paragraphe, jamais par-dessus le texte) -->
+      <!-- Décors pixel art (cachés sur petit écran pour ne pas gêner le contenu) -->
       <Image
-        src={telephoneHelloKitty}
-        alt="Téléphone Hello Kitty"
-        tabindex="-1"
-        data-sticker
-        aria-hidden="true"
-        class="sticker-contact absolute top-0 left-1 z-20 w-16 cursor-grab touch-none [image-rendering:pixelated] md:w-20"
+        src={appareilPhoto}
+        alt=""
+        class="pointer-events-none absolute top-0 left-[30px] hidden w-[27%] max-w-[393px] rotate-[15deg] [image-rendering:pixelated] lg:block"
       />
       <Image
-        src={boutonCoeur}
-        alt="Bouton cœur"
-        tabindex="-1"
-        data-sticker
-        aria-hidden="true"
-        class="sticker-contact absolute top-0 right-1 z-20 w-12 cursor-grab touch-none [image-rendering:pixelated] md:w-16"
+        src={ordinateur}
+        alt=""
+        class="pointer-events-none absolute top-[15px] right-0 hidden w-[12%] max-w-[173px] [image-rendering:pixelated] lg:block"
       />
 
       <h2 class="text-section-title text-rose-vif">Contactez-moi</h2>
@@ -102,57 +66,20 @@ const stickers = [{ image: helloKitty, alt: "Hello Kitty", taille: "w-16 md:w-24
               aria-label={externe ? `${nom} (nouvel onglet)` : nom}
               target={externe ? "_blank" : undefined}
               rel={externe ? "noopener" : undefined}
-              data-reseau
-              class="relative block transition hover:-translate-y-1 hover:opacity-80 motion-reduce:transition-none"
+              class="block transition hover:-translate-y-1 hover:opacity-80 motion-reduce:transition-none"
             >
               <Image src={icone} alt="" class={classe} />
             </a>
           </li>
         ))}
       </ul>
-
-      <!-- Compteur de visites façon vieux site perso -->
-      <div class="flex flex-col items-center gap-1.5 border-2 border-dashed border-noir/40 bg-blanc px-5 py-3 text-center">
-        <p class="text-[0.6875rem] font-bold tracking-[0.08em] text-noir/60 uppercase">✦ Merci de ta visite nº ✦</p>
-        <p
-          data-compteur-visites
-          class="rounded-[2px] bg-noir px-3 py-1 font-mono text-[1.375rem] leading-none font-bold tracking-[0.25em] text-[#39ff6a]"
-          aria-label="Nombre de fois où tu as visité cette page sur cet appareil"
-        >
-          0000
-        </p>
-      </div>
-    </div>
-
-    <!-- ===== Autocollants à déplacer dans la page (décor, ignorés des lecteurs d'écran) ===== -->
-    <div aria-hidden="true">
-      {stickers.map(({ image, alt, taille, style }) => (
-        <Image
-          src={image}
-          alt={alt}
-          tabindex="-1"
-          data-sticker
-          class={`sticker-contact absolute z-20 cursor-grab touch-none ${taille} [image-rendering:pixelated]`}
-          style={style}
-        />
-      ))}
     </div>
   </main>
-
-  <!-- Bulle de dialogue des décors cliquables -->
-  <div
-    data-decor-bulle-cible
-    hidden
-    role="status"
-    class="pointer-events-none fixed z-50 rounded-xl border-2 border-noir bg-blanc px-4 py-2 font-manrope text-[0.9375rem] font-bold text-noir shadow-card"
-  >
-  </div>
 
   <Footer />
 </Layout>
 
 <style>
-  /* ===== Bandeau défilant ===== */
   @media (prefers-reduced-motion: no-preference) {
     [data-marquee] {
       animation: defiler 22s linear infinite;
@@ -166,132 +93,4 @@ const stickers = [{ image: helloKitty, alt: "Hello Kitty", taille: "w-16 md:w-24
       transform: translateX(-50%);
     }
   }
-
-  /* ===== Autocollants déplaçables ===== */
-  .sticker-contact {
-    transition: scale 0.15s ease;
-  }
-  .sticker-contact:hover {
-    scale: 1.08;
-  }
-  .sticker-contact.en-glissement {
-    cursor: grabbing;
-    scale: 1.12;
-    transition: none;
-  }
-
-  /* ===== Petit cœur qui s'envole au clic sur les réseaux ===== */
-  .coeur-envole {
-    position: fixed;
-    z-index: 60;
-    pointer-events: none;
-    font-size: 1.25rem;
-    animation: envol 0.9s ease-out forwards;
-  }
-  @keyframes envol {
-    0% {
-      opacity: 1;
-      translate: 0 0 0;
-    }
-    100% {
-      opacity: 0;
-      translate: var(--derive, 10px) -70px 0;
-    }
-  }
 </style>
-
-<script>
-  // ===== Bandeau défilant : pas de doublon de texte si on réduit les animations =====
-  // (le CSS désactive déjà l'animation ; rien à faire ici)
-
-  // ===== Compteur de visites (propre à cet appareil, stocké en local) =====
-  const compteurEl = document.querySelector<HTMLElement>("[data-compteur-visites]");
-  if (compteurEl) {
-    const cle = "contact-visites";
-    const precedent = Number(localStorage.getItem(cle) ?? "0");
-    const total = Math.min(precedent + 1, 9999);
-    localStorage.setItem(cle, String(total));
-    compteurEl.textContent = String(total).padStart(4, "0");
-  }
-
-  // ===== Petites bulles quand on clique sur l'appareil photo / l'ordinateur =====
-  const bulle = document.querySelector<HTMLElement>("[data-decor-bulle-cible]");
-  let masquageBulle: ReturnType<typeof setTimeout> | undefined;
-
-  document.querySelectorAll<HTMLButtonElement>("[data-decor-bulle]").forEach((bouton) => {
-    bouton.addEventListener("click", () => {
-      if (!bulle) return;
-      const rect = bouton.getBoundingClientRect();
-      bulle.textContent = bouton.dataset.decorBulle ?? "";
-      bulle.style.left = `${rect.left + rect.width / 2}px`;
-      bulle.style.top = `${rect.top - 12}px`;
-      bulle.style.transform = "translate(-50%, -100%)";
-      bulle.hidden = false;
-      clearTimeout(masquageBulle);
-      masquageBulle = setTimeout(() => {
-        bulle.hidden = true;
-      }, 1600);
-    });
-  });
-
-  // ===== Petits cœurs qui s'envolent quand on clique sur un réseau =====
-  const reduitAnimations = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduitAnimations) {
-    document.querySelectorAll<HTMLAnchorElement>("[data-reseau]").forEach((lien) => {
-      lien.addEventListener("click", (evenement) => {
-        const rect = lien.getBoundingClientRect();
-        for (let i = 0; i < 3; i++) {
-          const coeur = document.createElement("span");
-          coeur.textContent = "💖";
-          coeur.className = "coeur-envole";
-          coeur.style.left = `${rect.left + rect.width / 2 + (Math.random() * 20 - 10)}px`;
-          coeur.style.top = `${rect.top + (evenement as MouseEvent).offsetY || rect.top}px`;
-          coeur.style.setProperty("--derive", `${Math.random() * 60 - 30}px`);
-          coeur.style.animationDelay = `${i * 80}ms`;
-          document.body.appendChild(coeur);
-          coeur.addEventListener("animationend", () => coeur.remove());
-        }
-      });
-    });
-  }
-
-  // ===== Autocollants déplaçables à la souris / au doigt =====
-  // La zone de déplacement est le parent positionné de chaque autocollant (celui qui sert
-  // de repère à ses left/top/right/bottom), pas forcément la page entière.
-  document.querySelectorAll<HTMLImageElement>("[data-sticker]").forEach((sticker) => {
-    let decalageX = 0;
-    let decalageY = 0;
-
-    const demarrer = (evenement: PointerEvent) => {
-      const rect = sticker.getBoundingClientRect();
-      decalageX = evenement.clientX - rect.left;
-      decalageY = evenement.clientY - rect.top;
-      sticker.setPointerCapture(evenement.pointerId);
-      sticker.classList.add("en-glissement");
-      sticker.style.right = "auto";
-      sticker.style.bottom = "auto";
-    };
-
-    const deplacer = (evenement: PointerEvent) => {
-      const zone = sticker.offsetParent;
-      if (!sticker.hasPointerCapture(evenement.pointerId) || !zone) return;
-      const cadre = zone.getBoundingClientRect();
-      const largeur = sticker.offsetWidth;
-      const hauteur = sticker.offsetHeight;
-      const x = Math.min(Math.max(evenement.clientX - decalageX - cadre.left, 0), cadre.width - largeur);
-      const y = Math.min(Math.max(evenement.clientY - decalageY - cadre.top, 0), cadre.height - hauteur);
-      sticker.style.left = `${x}px`;
-      sticker.style.top = `${y}px`;
-    };
-
-    const relacher = (evenement: PointerEvent) => {
-      sticker.releasePointerCapture(evenement.pointerId);
-      sticker.classList.remove("en-glissement");
-    };
-
-    sticker.addEventListener("pointerdown", demarrer);
-    sticker.addEventListener("pointermove", deplacer);
-    sticker.addEventListener("pointerup", relacher);
-    sticker.addEventListener("pointercancel", relacher);
-  });
-</script>
