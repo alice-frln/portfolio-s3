@@ -170,18 +170,15 @@ dialog.modal[open] {
   backdrop-filter: blur(3px);
 }
 
-/* Cadre : petit "pop" avec rebond et légère rotation, plutôt qu'un simple zoom */
+/* Cadre : petit "pop" avec rebond, plutôt qu'un simple zoom */
 dialog.modal > .modal-box {
   transition:
     scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-    rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
     opacity 0.25s ease-out;
   scale: 0.6;
-  rotate: -4deg;
 }
 dialog.modal[open] > .modal-box {
   scale: 1;
-  rotate: 0deg;
 }
 
 @starting-style {
@@ -190,7 +187,6 @@ dialog.modal[open] > .modal-box {
   }
   dialog.modal[open] > .modal-box {
     scale: 0.6;
-    rotate: -4deg;
     opacity: 0;
   }
 }
@@ -202,6 +198,5 @@ dialog.modal[open] > .modal-box {
     transition: opacity 0.15s ease-out;
     backdrop-filter: none;
     scale: 1;
-    rotate: 0deg;
   }
 }
