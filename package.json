@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.11",
     "daisyui": "^5.7.50",
+    "gsap": "^3.15.1",
     "pocketbase": "^0.29.0",
     "tailwindcss": "^4.3.5"
   }
