@@ -29,7 +29,8 @@ import boutonEtoile from "../assets/img/accueil/bouton_etoile.png";
 import iconeMontage from "../assets/img/accueil/competence_montage_video.png";
 import iconeDesign from "../assets/img/accueil/competence_design.png";
 import iconeIllustration from "../assets/img/accueil/competence_illustration.png";
-import flecheCercle from "../assets/svg/fleche_cercle.svg";
+import boutonFlecheGauche from "../assets/svg/bouton_fleche_gauche.svg";
+import boutonFlecheDroite from "../assets/svg/bouton_fleche_droite.svg";
 
 // ===== Derniers projets (PocketBase, lecture publique) =====
 let derniersProjets: Projet[] = [];
@@ -153,9 +154,9 @@ const competences = [
             type="button"
             data-carrousel-precedent
             aria-label="Compétence précédente"
-            class="absolute top-1/2 left-0 z-40 -translate-y-1/2 rounded-full bg-blanc transition hover:scale-110 focus-visible:scale-110"
+            class="absolute top-1/2 left-0 z-40 -translate-y-1/2 transition hover:scale-110 focus-visible:scale-110"
           >
-            <Image src={flecheCercle} alt="" class="size-10 md:size-12" />
+            <Image src={boutonFlecheGauche} alt="" class="h-auto w-10 md:w-12" />
           </button>
 
           <ul class="absolute inset-0">
@@ -181,9 +182,9 @@ const competences = [
             type="button"
             data-carrousel-suivant
             aria-label="Compétence suivante"
-            class="absolute top-1/2 right-0 z-40 -translate-y-1/2 rounded-full bg-blanc transition hover:scale-110 focus-visible:scale-110"
+            class="absolute top-1/2 right-0 z-40 -translate-y-1/2 transition hover:scale-110 focus-visible:scale-110"
           >
-            <Image src={flecheCercle} alt="" class="size-10 rotate-180 md:size-12" />
+            <Image src={boutonFlecheDroite} alt="" class="h-auto w-10 md:w-12" />
           </button>
         </div>
       </section>
@@ -237,7 +238,7 @@ const competences = [
     filter: grayscale(15%);
   }
   .carte-competence.role-gauche {
-    transform: translate(-50%, -50%) translateX(-158%) scale(0.72) rotateY(20deg);
+    transform: translate(-50%, -50%) translateX(-58%) scale(0.72) rotateY(20deg);
     z-index: 10;
     opacity: 0.55;
     filter: grayscale(15%);
