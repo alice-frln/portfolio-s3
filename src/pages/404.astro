@@ -1,17 +1,54 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Banniere from "../components/Banniere.astro";
+import chat from "../assets/img/accueil/chat.png";
 ---
 
 <Layout title="Page introuvable — Alice Frelin">
   <Header />
   <Banniere titre="Oups" />
-  <main class="mx-auto flex max-w-[1100px] flex-col items-start gap-8 px-6 py-20">
-    <h2 class="text-section-title text-rose-vif">Page introuvable</h2>
-    <p class="text-body-m">Cette page n'existe pas ou a été déplacée.</p>
-    <a href="/projets" class="btn-pilule">Voir les projets</a>
+
+  <main class="relative mx-auto flex max-w-[1100px] flex-col items-start gap-8 overflow-x-clip px-6 py-20 md:px-12">
+    <Image
+      src={chat}
+      alt=""
+      class="chat-404 pointer-events-none absolute top-6 right-0 hidden w-[160px] [image-rendering:pixelated] sm:block md:right-6 md:w-[210px]"
+    />
+
+    <p class="font-peix text-[6rem] leading-none text-rose-vif [font-feature-settings:'liga'_0] md:text-[9rem]">
+      404
+    </p>
+    <h2 class="text-section-title-s text-rose-vif">Page introuvable</h2>
+    <p class="max-w-[500px] text-body-m">
+      Cette page n'existe pas, a été déplacée… ou s'est perdue quelque part entre deux porte-clés.
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a href="/" class="btn-pilule">Retour à l'accueil</a>
+      <a href="/projets" class="btn-nav">Voir les projets</a>
+    </div>
   </main>
+
   <Footer />
 </Layout>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .chat-404 {
+      animation: flotter-404 6s ease-in-out infinite;
+    }
+  }
+  @keyframes flotter-404 {
+    0%,
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+    50% {
+      translate: 0 -8px;
+      rotate: 1.5deg;
+    }
+  }
+</style>
