@@ -170,17 +170,23 @@ const menus = [
     cadre.classList.add("sticky", "top-0");
 
     let distance = 0;
+    // Position du haut de la section dans le document (fixe, indépendante du scroll en cours)
+    let hautSection = 0;
 
     const mesurer = () => {
       distance = Math.max(0, piste.scrollWidth - window.innerWidth);
       // La section n'a besoin que de la hauteur du cadre + la distance à faire défiler
       // horizontalement (pas toute la hauteur de l'écran, sinon ça laisse un vide collé en bas)
       section.style.height = `${cadre.offsetHeight + distance}px`;
+      hautSection = section.getBoundingClientRect().top + window.scrollY;
       deplacer();
     };
 
     const deplacer = () => {
-      const avance = Math.min(Math.max(-section.getBoundingClientRect().top, 0), distance);
+      // Le défilement horizontal démarre dès le haut de la page (pas seulement une fois le
+      // cadre épinglé) et se termine pile quand le cadre se décroche : plus de zone "morte".
+      const portee = hautSection + distance;
+      const avance = portee > 0 ? Math.min(Math.max((window.scrollY / portee) * distance, 0), distance) : 0;
       piste.style.transform = `translateX(${-avance}px)`;
     };
 
