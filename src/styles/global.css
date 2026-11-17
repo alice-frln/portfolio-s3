@@ -171,6 +171,11 @@ dialog.modal[open] {
   backdrop-filter: blur(3px);
 }
 
+/* Visionneuse de galerie (page projet) : fond assombri en plus du flou */
+#visionneuse-galerie::backdrop {
+  background: rgb(0 0 0 / 0.85);
+}
+
 /* Cadre : petit "pop" avec rebond, plutôt qu'un simple zoom */
 dialog.modal > .modal-box {
   transition:

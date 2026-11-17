@@ -5,6 +5,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { pb, urlFichier, paragraphes, type Projet } from "../../lib/pocketbase";
 import flecheCercle from "../../assets/svg/fleche_cercle.svg";
+import croix from "../../assets/img/bouton_croix_pixel.svg";
 
 const { id = "" } = Astro.params;
 
@@ -41,6 +42,12 @@ const sections = projet
       { titre: "Ma solution", texte: paragraphes(projet.solution) },
     ].filter((s) => s.texte.length > 0)
   : [];
+
+// Une vidéo dans la galerie (détectée par extension) est mise en avant, à part des photos
+const estVideo = (nom: string) => /\.(mp4|webm|mov|m4v)$/i.test(nom);
+const galerieVideos = projet ? projet.Galerie.filter(estVideo) : [];
+const galeriePhotos = projet ? projet.Galerie.filter((g) => !estVideo(g)) : [];
+const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, g)) : [];
 ---
 
 <Layout
@@ -117,19 +124,94 @@ const sections = projet
 
         <!-- ===== Galerie ===== -->
         {projet.Galerie.length > 0 && (
-          <ul aria-label="Galerie du projet" class="mt-20 grid gap-8 md:mt-[160px] md:grid-cols-2 md:gap-[72px]">
-            {projet.Galerie.map((image, i) => (
-              <li class:list={[projet.Galerie.length === 1 && "md:col-span-2"]}>
-                <img
-                  src={urlFichier(projet, image)}
-                  alt={`${projet.Titre} — visuel ${i + 1}`}
-                  loading="lazy"
-                  decoding="async"
-                  class="h-auto w-full"
-                />
-              </li>
-            ))}
-          </ul>
+          <section aria-labelledby="titre-galerie" class="mt-20 md:mt-[120px]">
+            <h2 id="titre-galerie" class="text-titre-bold">Galerie</h2>
+
+            <!-- Vidéo(s) : mise(s) en avant, en premier et en grand -->
+            {galerieVideos.length > 0 && (
+              <div class="mt-8 flex flex-col gap-8">
+                {galerieVideos.map((video) => (
+                  <video
+                    src={urlFichier(projet, video)}
+                    controls
+                    preload="metadata"
+                    class="h-auto w-full border border-noir shadow-card"
+                  />
+                ))}
+              </div>
+            )}
+
+            <!-- Photos : façon Pinterest, on clique pour agrandir -->
+            {galeriePhotos.length > 0 && (
+              <ul
+                aria-label="Photos du projet"
+                data-galerie-photos
+                class="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3"
+              >
+                {galeriePhotos.map((image, i) => (
+                  <li class="mb-6 break-inside-avoid">
+                    <button
+                      type="button"
+                      data-index={i}
+                      aria-label={`Agrandir la photo ${i + 1}`}
+                      class="block w-full cursor-zoom-in transition hover:opacity-90 focus-visible:opacity-90"
+                    >
+                      <img
+                        src={urlFichier(projet, image)}
+                        alt={`${projet.Titre} — photo ${i + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        class="h-auto w-full border border-noir"
+                      />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <!-- Visionneuse plein écran -->
+            {galeriePhotos.length > 0 && (
+              <dialog id="visionneuse-galerie" class="modal" aria-label="Photo en grand">
+                <div class="modal-box relative flex max-w-[92vw] items-center justify-center bg-transparent p-0 shadow-none">
+                  <form method="dialog">
+                    <button
+                      aria-label="Fermer"
+                      class="absolute top-3 right-3 z-10 cursor-pointer rounded-full bg-blanc/90 p-1 transition hover:scale-110"
+                    >
+                      <Image src={croix} alt="" class="size-8" />
+                    </button>
+                  </form>
+
+                  {galeriePhotos.length > 1 && (
+                    <button
+                      type="button"
+                      data-visionneuse-precedent
+                      aria-label="Photo précédente"
+                      class="absolute left-2 z-10 rounded-full bg-blanc/90 p-2 transition hover:scale-110 md:-left-16"
+                    >
+                      <Image src={flecheCercle} alt="" class="size-6" />
+                    </button>
+                  )}
+
+                  <img data-visionneuse-image alt="" class="max-h-[80vh] w-auto max-w-full object-contain" />
+
+                  {galeriePhotos.length > 1 && (
+                    <button
+                      type="button"
+                      data-visionneuse-suivant
+                      aria-label="Photo suivante"
+                      class="absolute right-2 z-10 rounded-full bg-blanc/90 p-2 transition hover:scale-110 md:-right-16"
+                    >
+                      <Image src={flecheCercle} alt="" class="size-6 rotate-180" />
+                    </button>
+                  )}
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                  <button>Fermer</button>
+                </form>
+              </dialog>
+            )}
+          </section>
         )}
 
         <!-- ===== Précédent / suivant ===== -->
@@ -157,3 +239,39 @@ const sections = projet
 
   <Footer />
 </Layout>
+
+<script define:vars={{ urlsGaleriePhotos }}>
+  // ===== Galerie façon Pinterest : visionneuse plein écran avec navigation =====
+  const visionneuse = document.querySelector("#visionneuse-galerie");
+  const imageAffichee = visionneuse?.querySelector("[data-visionneuse-image]");
+
+  if (visionneuse && imageAffichee && urlsGaleriePhotos.length > 0) {
+    let indexActuel = 0;
+
+    const afficher = () => {
+      imageAffichee.src = urlsGaleriePhotos[indexActuel];
+    };
+
+    document.querySelectorAll("[data-galerie-photos] button[data-index]").forEach((bouton) => {
+      bouton.addEventListener("click", () => {
+        indexActuel = Number(bouton.dataset.index);
+        afficher();
+        visionneuse.showModal();
+      });
+    });
+
+    visionneuse.querySelector("[data-visionneuse-precedent]")?.addEventListener("click", () => {
+      indexActuel = (indexActuel - 1 + urlsGaleriePhotos.length) % urlsGaleriePhotos.length;
+      afficher();
+    });
+    visionneuse.querySelector("[data-visionneuse-suivant]")?.addEventListener("click", () => {
+      indexActuel = (indexActuel + 1) % urlsGaleriePhotos.length;
+      afficher();
+    });
+
+    visionneuse.addEventListener("keydown", (evenement) => {
+      if (evenement.key === "ArrowLeft") visionneuse.querySelector("[data-visionneuse-precedent]")?.dispatchEvent(new Event("click"));
+      if (evenement.key === "ArrowRight") visionneuse.querySelector("[data-visionneuse-suivant]")?.dispatchEvent(new Event("click"));
+    });
+  }
+</script>
