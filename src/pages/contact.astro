@@ -68,11 +68,11 @@ const etincelles = [
       <div class="relative mx-auto mt-10 flex max-w-[1440px] flex-col items-center gap-16 px-6 md:px-12 xl:mt-4 xl:w-full xl:max-w-none xl:flex-row xl:items-start xl:justify-between xl:gap-10 xl:mx-0 xl:px-16 2xl:px-24">
       <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
       <div class="relative hidden w-[300px] shrink-0 xl:block">
-        <div class="relative mx-auto h-[560px] w-[270px]">
-          <Image src={avatar} alt="Illustration d'Alice" width={540} class="h-full w-full object-contain object-bottom" />
+        <div class="relative mx-auto h-[500px] w-[240px]">
+          <Image src={avatar} alt="Illustration d'Alice" width={480} class="h-full w-full object-contain object-bottom" />
         </div>
 
-        <div class="mt-5 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1.5 pr-5 pl-5 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
+        <div class="mt-3 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1.5 pr-5 pl-5 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
           <span class="font-pixel text-[1.375rem] text-blanc">Alice</span>
           <Image src={coeurEtiquette} alt="" class="size-[18px]" />
         </div>
@@ -107,24 +107,24 @@ const etincelles = [
           </div>
 
           <!-- Contenu -->
-          <div class="flex flex-col gap-5 border border-marron/40 bg-[#f3f0f1] px-6 pt-6 pb-7 xl:gap-3 xl:pt-4 xl:pb-4">
+          <div class="flex flex-col gap-5 border border-marron/40 bg-[#f3f0f1] px-6 pt-6 pb-7">
             <div class="flex items-center gap-3">
-              <span class="font-pixel text-[1.25rem] text-marron xl:text-[1.0625rem]">À :</span>
-              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-marron/40 bg-gradient-to-b from-blanc to-rose-pastel py-1.5 pr-5 pl-2.5 xl:py-1">
-                <Image src={iconeUtilisatrice} alt="" class="size-7 xl:size-6" />
-                <span class="font-pixel text-[1.1875rem] text-marron xl:text-[1rem]">alice_frelin.jpg</span>
+              <span class="font-pixel text-[1.25rem] text-marron">À :</span>
+              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-marron/40 bg-gradient-to-b from-blanc to-rose-pastel py-1.5 pr-5 pl-2.5">
+                <Image src={iconeUtilisatrice} alt="" class="size-7" />
+                <span class="font-pixel text-[1.1875rem] text-marron">alice_frelin.jpg</span>
               </span>
             </div>
 
-            <p class="font-pixel text-[1.125rem] leading-snug text-marron xl:text-[0.9375rem]">
+            <p class="font-pixel text-[1.125rem] leading-snug text-marron">
               ( &lt;3 ) graphiste &amp; développeuse front<br />
               (99%) de chances qu'on s'entende bien
             </p>
 
-            <form id="formulaire-contact" class="flex flex-col gap-4 xl:gap-2.5" novalidate>
-              <div class="flex flex-col gap-3.5 sm:flex-row xl:gap-2.5">
+            <form id="formulaire-contact" class="flex flex-col gap-4" novalidate>
+              <div class="flex flex-col gap-3.5 sm:flex-row">
                 <div class="flex flex-1 flex-col gap-1.5">
-                  <label for="nom" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">Nom</label>
+                  <label for="nom" class="font-pixel text-[1.0625rem] text-marron">Nom</label>
                   <input
                     id="nom"
                     name="nom"
@@ -132,11 +132,11 @@ const etincelles = [
                     required
                     autocomplete="name"
                     placeholder="Ton prénom et nom"
-                    class="h-12 rounded-xl border-2 border-rose-vif/50 bg-white px-4 font-manrope text-[0.9375rem] text-marron shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-marron/50 focus-visible:border-rose-vif xl:h-10"
+                    class="h-12 rounded-xl border-2 border-rose-vif/50 bg-white px-4 font-manrope text-[0.9375rem] text-marron shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-marron/50 focus-visible:border-rose-vif"
                   />
                 </div>
                 <div class="flex flex-1 flex-col gap-1.5">
-                  <label for="email" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">E-mail</label>
+                  <label for="email" class="font-pixel text-[1.0625rem] text-marron">E-mail</label>
                   <input
                     id="email"
                     name="email"
@@ -144,14 +144,14 @@ const etincelles = [
                     required
                     autocomplete="email"
                     placeholder="ton@email.fr"
-                    class="h-12 rounded-xl border-2 border-rose-vif/50 bg-white px-4 font-manrope text-[0.9375rem] text-marron shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-marron/50 focus-visible:border-rose-vif xl:h-10"
+                    class="h-12 rounded-xl border-2 border-rose-vif/50 bg-white px-4 font-manrope text-[0.9375rem] text-marron shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-marron/50 focus-visible:border-rose-vif"
                   />
                 </div>
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="sujet" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">Sujet</label>
-                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-rose-vif/50 bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:h-10">
+                <label for="sujet" class="font-pixel text-[1.0625rem] text-marron">Sujet</label>
+                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-rose-vif/50 bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif">
                   <input
                     id="sujet"
                     name="sujet"
@@ -167,13 +167,13 @@ const etincelles = [
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="message" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">Message</label>
-                <div class="relative rounded-xl border-2 border-rose-vif/50 bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:py-2">
+                <label for="message" class="font-pixel text-[1.0625rem] text-marron">Message</label>
+                <div class="relative rounded-xl border-2 border-rose-vif/50 bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif">
                   <textarea
                     id="message"
                     name="message"
                     required
-                    rows="3"
+                    rows="4"
                     placeholder="Écris ton message ici…"
                     class="w-full resize-none bg-transparent font-manrope text-[0.9375rem] text-marron outline-none placeholder:text-marron/50"
                   ></textarea>
@@ -181,16 +181,16 @@ const etincelles = [
                 </div>
               </div>
 
-              <div class="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-between xl:pt-1">
+              <div class="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-between">
                 <button
                   type="submit"
-                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#1a9aa3] bg-gradient-to-b from-[#6fe6ee] to-bleu-vif font-pixel text-[1.375rem] text-blanc shadow-[0_3px_0_0_rgba(26,154,163,0.5)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#1a9aa3] bg-gradient-to-b from-[#6fe6ee] to-bleu-vif font-pixel text-[1.375rem] text-blanc shadow-[0_3px_0_0_rgba(26,154,163,0.5)] transition hover:scale-[1.03] active:scale-[0.97]"
                 >
                   envoyer &lt;3
                 </button>
                 <button
                   type="reset"
-                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-rose-vif bg-gradient-to-b from-rose-pastel to-rose-vif font-pixel text-[1.375rem] text-noir shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-rose-vif bg-gradient-to-b from-rose-pastel to-rose-vif font-pixel text-[1.375rem] text-noir shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97]"
                 >
                   effacer :(
                 </button>
