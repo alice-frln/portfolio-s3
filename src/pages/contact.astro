@@ -86,12 +86,12 @@ const etincelles = [
 
       <!-- ===== Colonne centrale : fenêtre "nouveau message" ===== -->
       <div class="flex w-full max-w-[760px] flex-col items-center gap-10 xl:gap-4">
-        <div class="w-full overflow-hidden rounded-xl border-[1.5px] border-[#a9879a] bg-gradient-to-b from-[#f9dcea] to-[#f2c2d8] p-2 shadow-card">
+        <div class="w-full overflow-hidden rounded-xl border-[1.5px] border-marron bg-gradient-to-b from-rose-pastel to-rose-vif/30 p-2 shadow-card">
           <!-- Barre de titre -->
-          <div class="flex items-center justify-between rounded-md bg-gradient-to-b from-[#fbe6f0] to-[#e9aeca] py-1.5 pr-1.5 pl-2.5 xl:py-1">
+          <div class="flex items-center justify-between rounded-md bg-gradient-to-b from-rose-pastel to-rose-vif/50 py-1.5 pr-1.5 pl-2.5 xl:py-1">
             <div class="flex items-center gap-2">
               <Image src={coeurTitre} alt="" class="size-[18px]" />
-              <span class="font-pixel text-[1.125rem] text-[#5a3a4a]">nouveau_message.txt</span>
+              <span class="font-pixel text-[1.125rem] text-marron">nouveau_message.txt</span>
             </div>
             <div aria-hidden="true" class="flex items-center gap-1">
               <span class="flex h-[26px] w-[34px] items-center justify-center rounded border border-[#8f8a8d] bg-gradient-to-b from-white to-[#e3dde1]">
@@ -107,16 +107,16 @@ const etincelles = [
           </div>
 
           <!-- Contenu -->
-          <div class="flex flex-col gap-5 border border-[#8f8a8d] bg-[#f3f0f1] px-6 pt-6 pb-7 xl:gap-3 xl:pt-4 xl:pb-4">
+          <div class="flex flex-col gap-5 border border-marron/40 bg-[#f3f0f1] px-6 pt-6 pb-7 xl:gap-3 xl:pt-4 xl:pb-4">
             <div class="flex items-center gap-3">
-              <span class="font-pixel text-[1.25rem] text-[#3b2b33] xl:text-[1.0625rem]">À :</span>
-              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-[#8f9aa3] bg-gradient-to-b from-white to-[#dde3e8] py-1.5 pr-5 pl-2.5 xl:py-1">
+              <span class="font-pixel text-[1.25rem] text-marron xl:text-[1.0625rem]">À :</span>
+              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-marron/40 bg-gradient-to-b from-blanc to-rose-pastel py-1.5 pr-5 pl-2.5 xl:py-1">
                 <Image src={iconeUtilisatrice} alt="" class="size-7 xl:size-6" />
-                <span class="font-pixel text-[1.1875rem] text-[#2e2a2c] xl:text-[1rem]">alice_frelin.jpg</span>
+                <span class="font-pixel text-[1.1875rem] text-marron xl:text-[1rem]">alice_frelin.jpg</span>
               </span>
             </div>
 
-            <p class="font-pixel text-[1.125rem] leading-snug text-[#3b2b33] xl:text-[0.9375rem]">
+            <p class="font-pixel text-[1.125rem] leading-snug text-marron xl:text-[0.9375rem]">
               ( &lt;3 ) graphiste &amp; développeuse front<br />
               (99%) de chances qu'on s'entende bien
             </p>
@@ -124,7 +124,7 @@ const etincelles = [
             <form id="formulaire-contact" class="flex flex-col gap-4 xl:gap-2.5" novalidate>
               <div class="flex flex-col gap-3.5 sm:flex-row xl:gap-2.5">
                 <div class="flex flex-1 flex-col gap-1.5">
-                  <label for="nom" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">Nom</label>
+                  <label for="nom" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">Nom</label>
                   <input
                     id="nom"
                     name="nom"
@@ -132,11 +132,11 @@ const etincelles = [
                     required
                     autocomplete="name"
                     placeholder="Ton prénom et nom"
-                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif xl:h-10"
+                    class="h-12 rounded-xl border-2 border-rose-vif/50 bg-white px-4 font-manrope text-[0.9375rem] text-marron shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-marron/50 focus-visible:border-rose-vif xl:h-10"
                   />
                 </div>
                 <div class="flex flex-1 flex-col gap-1.5">
-                  <label for="email" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">E-mail</label>
+                  <label for="email" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">E-mail</label>
                   <input
                     id="email"
                     name="email"
@@ -144,38 +144,38 @@ const etincelles = [
                     required
                     autocomplete="email"
                     placeholder="ton@email.fr"
-                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif xl:h-10"
+                    class="h-12 rounded-xl border-2 border-rose-vif/50 bg-white px-4 font-manrope text-[0.9375rem] text-marron shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-marron/50 focus-visible:border-rose-vif xl:h-10"
                   />
                 </div>
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="sujet" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">Sujet</label>
-                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-[#efa6c8] bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:h-10">
+                <label for="sujet" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">Sujet</label>
+                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-rose-vif/50 bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:h-10">
                   <input
                     id="sujet"
                     name="sujet"
                     type="text"
                     required
                     placeholder="Stage, projet, collab' ou juste un coucou…"
-                    class="min-w-0 flex-1 bg-transparent font-manrope text-[0.9375rem] text-[#3b2b33] outline-none placeholder:text-[#b79aaa]"
+                    class="min-w-0 flex-1 bg-transparent font-manrope text-[0.9375rem] text-marron outline-none placeholder:text-marron/50"
                   />
-                  <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-b from-[#fbd3e4] to-[#f2a5c7]" aria-hidden="true">
+                  <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-b from-rose-pastel to-rose-vif" aria-hidden="true">
                     <Image src={chevron} alt="" class="size-4" />
                   </span>
                 </div>
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="message" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">Message</label>
-                <div class="relative rounded-xl border-2 border-[#efa6c8] bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:py-2">
+                <label for="message" class="font-pixel text-[1.0625rem] text-marron xl:text-[0.9375rem]">Message</label>
+                <div class="relative rounded-xl border-2 border-rose-vif/50 bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:py-2">
                   <textarea
                     id="message"
                     name="message"
                     required
                     rows="3"
                     placeholder="Écris ton message ici…"
-                    class="w-full resize-none bg-transparent font-manrope text-[0.9375rem] text-[#3b2b33] outline-none placeholder:text-[#b79aaa]"
+                    class="w-full resize-none bg-transparent font-manrope text-[0.9375rem] text-marron outline-none placeholder:text-marron/50"
                   ></textarea>
                   <Image src={poignee} alt="" class="pointer-events-none absolute right-2 bottom-2 size-3.5" aria-hidden="true" />
                 </div>
@@ -184,26 +184,26 @@ const etincelles = [
               <div class="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-between xl:pt-1">
                 <button
                   type="submit"
-                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#7fa22e] bg-gradient-to-b from-[#e4f7a6] to-[#a9d24b] font-pixel text-[1.375rem] text-[#2f3a12] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#1a9aa3] bg-gradient-to-b from-[#6fe6ee] to-bleu-vif font-pixel text-[1.375rem] text-blanc shadow-[0_3px_0_0_rgba(26,154,163,0.5)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
                 >
                   envoyer &lt;3
                 </button>
                 <button
                   type="reset"
-                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#d1789f] bg-gradient-to-b from-[#fde1ec] to-[#f2a5c7] font-pixel text-[1.375rem] text-[#5a2a40] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-rose-vif bg-gradient-to-b from-rose-pastel to-rose-vif font-pixel text-[1.375rem] text-noir shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
                 >
                   effacer :(
                 </button>
               </div>
 
-              <p id="statut-formulaire" role="status" class="min-h-[1.5em] text-center font-manrope text-[0.9375rem] text-[#6b4a5a]"></p>
+              <p id="statut-formulaire" role="status" class="min-h-[1.5em] text-center font-manrope text-[0.9375rem] text-marron"></p>
             </form>
           </div>
 
           <!-- Barre de statut -->
           <div class="flex items-center gap-2 px-2 pt-1 pb-0.5">
             <Image src={coeurStatut} alt="" class="size-3.5" />
-            <span class="font-pixel text-[0.9375rem] text-[#6b4a5a]">réponse sous 48h&nbsp;&nbsp;-&nbsp;&nbsp;disponible pour un stage</span>
+            <span class="font-pixel text-[0.9375rem] text-marron">réponse sous 48h&nbsp;&nbsp;-&nbsp;&nbsp;disponible pour un stage</span>
           </div>
         </div>
       </div>
