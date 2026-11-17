@@ -331,4 +331,47 @@ import ia from "../assets/img/ia.svg";
       panneaux.forEach((p) => (p.hidden = p.dataset.panneau !== choix));
     });
   });
+
+  // ===== Petits cœurs / étoiles roses (GSAP) à l'ouverture d'un pop-up objet/compétence =====
+  import { gsap } from "gsap";
+
+  const reduitAnimations = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Vrais glyphes de texte (pas des emojis en couleur) pour qu'ils héritent bien du rose du site
+  const symboles = ["♥", "✦", "✧"];
+
+  /** Fait éclater quelques cœurs/étoiles roses depuis le centre de `element` */
+  const exploser = (element: Element, nombre: number) => {
+    const rect = element.getBoundingClientRect();
+    const depart = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+
+    for (let i = 0; i < nombre; i++) {
+      const particule = document.createElement("span");
+      particule.textContent = symboles[Math.floor(Math.random() * symboles.length)];
+      particule.setAttribute("aria-hidden", "true");
+      particule.style.cssText = `position:fixed;left:${depart.x}px;top:${depart.y}px;z-index:60;
+        pointer-events:none;font-size:${14 + Math.random() * 12}px;color:var(--color-rose-vif);translate:-50% -50%;`;
+      document.body.appendChild(particule);
+
+      // Trajectoire en arc, un peu différente à chaque fois
+      const angle = ((Math.random() * 90 - 45) * Math.PI) / 180;
+      const distance = 60 + Math.random() * 55;
+      const dx = Math.sin(angle) * distance;
+      const dy = -Math.cos(angle) * distance - 25;
+      const rotation = (Math.random() > 0.5 ? 1 : -1) * (40 + Math.random() * 80);
+      const delai = i * 0.04;
+
+      gsap
+        .timeline({ delay: delai, onComplete: () => particule.remove() })
+        .fromTo(particule, { scale: 0, opacity: 1 }, { scale: 1, duration: 0.25, ease: "back.out(3)" }, 0)
+        .to(particule, { x: dx, rotation, duration: 0.8, ease: "power1.out" }, 0)
+        .to(particule, { y: dy, duration: 0.8, ease: "power2.out" }, 0)
+        .to(particule, { opacity: 0, duration: 0.3, ease: "power1.in" }, 0.5);
+    }
+  };
+
+  if (!reduitAnimations) {
+    document.querySelectorAll<HTMLButtonElement>('[aria-haspopup="dialog"]').forEach((bouton) => {
+      bouton.addEventListener("click", () => exploser(bouton, 6));
+    });
+  }
 </script>
