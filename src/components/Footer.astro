@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import linkedin from "../assets/img/linkedin.svg";
 import behance from "../assets/img/behance.svg";
-import enveloppe from "../assets/img/enveloppe.svg";
+import enveloppe from "../assets/svg/enveloppe_pixel.svg";
 ---
 
 <footer class="flex min-h-[269px] items-center justify-center bg-secondary px-6 py-10 text-body-s text-blanc">
@@ -31,7 +31,7 @@ import enveloppe from "../assets/img/enveloppe.svg";
         </li>
         <li>
           <a href="mailto:alicefrelin.pro@gmail.com" aria-label="E-mail" class="block transition hover:opacity-80">
-            <Image src={enveloppe} alt="" class="h-10 w-10" />
+            <Image src={enveloppe} alt="" class="h-10 w-10 brightness-0 invert [image-rendering:pixelated]" />
           </a>
         </li>
       </ul>
