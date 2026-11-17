@@ -167,13 +167,15 @@ const menus = [
   if (section && cadre && piste && !mouvementReduit) {
     // On remplace le scroll horizontal natif par l'effet
     piste.classList.remove("overflow-x-auto", "snap-x", "snap-mandatory");
-    cadre.classList.add("sticky", "top-0", "h-svh");
+    cadre.classList.add("sticky", "top-0");
 
     let distance = 0;
 
     const mesurer = () => {
       distance = Math.max(0, piste.scrollWidth - window.innerWidth);
-      section.style.height = `${window.innerHeight + distance}px`;
+      // La section n'a besoin que de la hauteur du cadre + la distance à faire défiler
+      // horizontalement (pas toute la hauteur de l'écran, sinon ça laisse un vide collé en bas)
+      section.style.height = `${cadre.offsetHeight + distance}px`;
       deplacer();
     };
 
