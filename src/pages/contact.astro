@@ -47,55 +47,56 @@ const etincelles = [
 ---
 
 <Layout title="Contact — Alice Frelin">
-  <Header />
+  <div class="relative isolate flex flex-col overflow-x-clip xl:h-svh">
+    <Header />
 
-  <main class="relative overflow-x-clip bg-white pt-16 pb-24 md:pt-20">
-    <!-- Fond à pois, décoratif -->
-    <Image
-      src={fond}
-      alt=""
-      width={1200}
-      class="pointer-events-none absolute inset-0 -z-10 hidden size-full object-cover opacity-20 md:block"
-    />
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 hidden xl:block">
-      {etincelles.map(({ src, classe }) => <Image src={src} alt="" class={`absolute ${classe}`} />)}
-    </div>
+    <main class="relative bg-white pt-16 pb-24 md:pt-20 xl:flex xl:min-h-0 xl:flex-1 xl:flex-col xl:justify-center xl:py-0">
+      <!-- Fond à pois, décoratif -->
+      <Image
+        src={fond}
+        alt=""
+        width={1200}
+        class="pointer-events-none absolute inset-0 -z-10 hidden size-full object-cover opacity-20 md:block"
+      />
+      <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 hidden xl:block">
+        {etincelles.map(({ src, classe }) => <Image src={src} alt="" class={`absolute ${classe}`} />)}
+      </div>
 
-    <h1 class="text-section-title mx-auto max-w-[900px] px-6 text-center text-rose-vif [font-feature-settings:'liga'_0]">
-      Contactez-moi
-    </h1>
+      <h1 class="mx-auto max-w-[900px] px-6 text-center font-peix text-[3.5rem] leading-none tracking-[-0.09em] text-rose-vif [font-feature-settings:'liga'_0] xl:text-[4.5rem]">
+        Contactez-moi
+      </h1>
 
-    <div class="relative mx-auto mt-14 flex max-w-[1320px] flex-col items-center gap-16 px-6 md:px-12 xl:flex-row xl:items-start xl:justify-between xl:gap-6">
+      <div class="relative mx-auto mt-10 flex max-w-[1320px] flex-col items-center gap-16 px-6 md:px-12 xl:mt-8 xl:flex-row xl:items-start xl:justify-between xl:gap-6">
       <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
-      <div class="relative hidden w-[300px] shrink-0 xl:mt-6 xl:block">
-        <Image src={fondAvatar} alt="" width={340} class="pointer-events-none absolute -top-6 left-1/2 w-[120%] max-w-none -translate-x-1/2" />
-        <div class="relative mx-auto h-[520px] w-[235px] overflow-hidden">
-          <Image src={avatar} alt="Illustration d'Alice" width={400} class="h-full w-full object-cover object-top" />
+      <div class="relative hidden w-[240px] shrink-0 xl:block">
+        <Image src={fondAvatar} alt="" width={340} class="pointer-events-none absolute -top-4 left-1/2 w-[120%] max-w-none -translate-x-1/2" />
+        <div class="relative mx-auto h-[360px] w-[188px] overflow-hidden">
+          <Image src={avatar} alt="Illustration d'Alice" width={320} class="h-full w-full object-cover object-top" />
         </div>
         <Image
           src={ordinateur3}
           alt=""
           width={104}
-          class="pointer-events-none absolute top-0 right-0 w-[90px] -rotate-8"
+          class="pointer-events-none absolute top-0 right-0 w-[72px] -rotate-8"
         />
 
-        <div class="mt-10 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1 pr-4 pl-4 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
-          <span class="font-pixel text-[1.375rem] text-blanc">Alice</span>
-          <Image src={coeurEtiquette} alt="" class="size-[18px]" />
+        <div class="mt-5 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1 pr-4 pl-4 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
+          <span class="font-pixel text-[1.125rem] text-blanc">Alice</span>
+          <Image src={coeurEtiquette} alt="" class="size-[15px]" />
         </div>
 
         <!-- Bulle de dialogue -->
-        <div class="-mt-3 flex flex-col gap-0 rounded-[26px] border-3 border-bleu-vif bg-gradient-to-b from-white to-[#ffe3f0] px-7 pt-7 pb-6 text-center font-manrope text-[1.125rem] font-semibold text-[#8a5a6e] shadow-card">
+        <div class="-mt-3 flex flex-col gap-0 rounded-[26px] border-3 border-bleu-vif bg-gradient-to-b from-white to-[#ffe3f0] px-5 pt-5 pb-4 text-center font-manrope text-[0.9375rem] font-semibold text-[#8a5a6e] shadow-card">
           <p>Une idée, un stage, une collab' ?</p>
           <p>Écris-moi, je réponds vite !</p>
         </div>
       </div>
 
       <!-- ===== Colonne centrale : fenêtre "nouveau message" ===== -->
-      <div class="flex w-full max-w-[560px] flex-col items-center gap-10">
+      <div class="flex w-full max-w-[560px] flex-col items-center gap-10 xl:gap-4">
         <div class="w-full overflow-hidden rounded-xl border-[1.5px] border-[#a9879a] bg-gradient-to-b from-[#f9dcea] to-[#f2c2d8] p-2 shadow-card">
           <!-- Barre de titre -->
-          <div class="flex items-center justify-between rounded-md bg-gradient-to-b from-[#fbe6f0] to-[#e9aeca] py-1.5 pr-1.5 pl-2.5">
+          <div class="flex items-center justify-between rounded-md bg-gradient-to-b from-[#fbe6f0] to-[#e9aeca] py-1.5 pr-1.5 pl-2.5 xl:py-1">
             <div class="flex items-center gap-2">
               <Image src={coeurTitre} alt="" class="size-[18px]" />
               <span class="font-pixel text-[1.125rem] text-[#5a3a4a]">nouveau_message.txt</span>
@@ -114,24 +115,24 @@ const etincelles = [
           </div>
 
           <!-- Contenu -->
-          <div class="flex flex-col gap-5 border border-[#8f8a8d] bg-[#f3f0f1] px-6 pt-6 pb-7">
+          <div class="flex flex-col gap-5 border border-[#8f8a8d] bg-[#f3f0f1] px-6 pt-6 pb-7 xl:gap-3 xl:pt-4 xl:pb-4">
             <div class="flex items-center gap-3">
-              <span class="font-pixel text-[1.25rem] text-[#3b2b33]">À :</span>
-              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-[#8f9aa3] bg-gradient-to-b from-white to-[#dde3e8] py-1.5 pr-5 pl-2.5">
-                <Image src={iconeUtilisatrice} alt="" class="size-7" />
-                <span class="font-pixel text-[1.1875rem] text-[#2e2a2c]">alice_frelin.jpg</span>
+              <span class="font-pixel text-[1.25rem] text-[#3b2b33] xl:text-[1.0625rem]">À :</span>
+              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-[#8f9aa3] bg-gradient-to-b from-white to-[#dde3e8] py-1.5 pr-5 pl-2.5 xl:py-1">
+                <Image src={iconeUtilisatrice} alt="" class="size-7 xl:size-6" />
+                <span class="font-pixel text-[1.1875rem] text-[#2e2a2c] xl:text-[1rem]">alice_frelin.jpg</span>
               </span>
             </div>
 
-            <p class="font-pixel text-[1.125rem] leading-snug text-[#3b2b33]">
+            <p class="font-pixel text-[1.125rem] leading-snug text-[#3b2b33] xl:text-[0.9375rem]">
               ( &lt;3 ) graphiste &amp; développeuse front<br />
               (99%) de chances qu'on s'entende bien
             </p>
 
-            <form id="formulaire-contact" class="flex flex-col gap-4" novalidate>
-              <div class="flex flex-col gap-3.5 sm:flex-row">
+            <form id="formulaire-contact" class="flex flex-col gap-4 xl:gap-2.5" novalidate>
+              <div class="flex flex-col gap-3.5 sm:flex-row xl:gap-2.5">
                 <div class="flex flex-1 flex-col gap-1.5">
-                  <label for="nom" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">Nom</label>
+                  <label for="nom" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">Nom</label>
                   <input
                     id="nom"
                     name="nom"
@@ -139,11 +140,11 @@ const etincelles = [
                     required
                     autocomplete="name"
                     placeholder="Ton prénom et nom"
-                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif"
+                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif xl:h-10"
                   />
                 </div>
                 <div class="flex flex-1 flex-col gap-1.5">
-                  <label for="email" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">E-mail</label>
+                  <label for="email" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">E-mail</label>
                   <input
                     id="email"
                     name="email"
@@ -151,14 +152,14 @@ const etincelles = [
                     required
                     autocomplete="email"
                     placeholder="ton@email.fr"
-                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif"
+                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif xl:h-10"
                   />
                 </div>
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="sujet" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">Sujet</label>
-                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-[#efa6c8] bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif">
+                <label for="sujet" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">Sujet</label>
+                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-[#efa6c8] bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:h-10">
                   <input
                     id="sujet"
                     name="sujet"
@@ -174,13 +175,13 @@ const etincelles = [
               </div>
 
               <div class="flex flex-col gap-1.5">
-                <label for="message" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">Message</label>
-                <div class="relative rounded-xl border-2 border-[#efa6c8] bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif">
+                <label for="message" class="font-pixel text-[1.0625rem] text-[#6b4a5a] xl:text-[0.9375rem]">Message</label>
+                <div class="relative rounded-xl border-2 border-[#efa6c8] bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif xl:py-2">
                   <textarea
                     id="message"
                     name="message"
                     required
-                    rows="4"
+                    rows="3"
                     placeholder="Écris ton message ici…"
                     class="w-full resize-none bg-transparent font-manrope text-[0.9375rem] text-[#3b2b33] outline-none placeholder:text-[#b79aaa]"
                   ></textarea>
@@ -188,16 +189,16 @@ const etincelles = [
                 </div>
               </div>
 
-              <div class="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-between">
+              <div class="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-between xl:pt-1">
                 <button
                   type="submit"
-                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#7fa22e] bg-gradient-to-b from-[#e4f7a6] to-[#a9d24b] font-pixel text-[1.375rem] text-[#2f3a12] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97]"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#7fa22e] bg-gradient-to-b from-[#e4f7a6] to-[#a9d24b] font-pixel text-[1.375rem] text-[#2f3a12] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
                 >
                   envoyer &lt;3
                 </button>
                 <button
                   type="reset"
-                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#d1789f] bg-gradient-to-b from-[#fde1ec] to-[#f2a5c7] font-pixel text-[1.375rem] text-[#5a2a40] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97]"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#d1789f] bg-gradient-to-b from-[#fde1ec] to-[#f2a5c7] font-pixel text-[1.375rem] text-[#5a2a40] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-11 xl:w-[180px] xl:text-[1.1875rem]"
                 >
                   effacer :(
                 </button>
@@ -216,40 +217,40 @@ const etincelles = [
       </div>
 
       <!-- ===== Colonne téléphone : mes réseaux ===== -->
-      <div class="relative w-[260px] shrink-0 xl:mt-6">
+      <div class="relative w-[260px] shrink-0 xl:w-[220px]">
         <Image
           src={porteClesCoeur}
           alt=""
           width={64}
-          class="pointer-events-none absolute -top-10 right-6 hidden w-11 rotate-12 sm:block"
+          class="pointer-events-none absolute -top-10 right-6 hidden w-11 rotate-12 sm:block xl:-top-7 xl:w-9"
         />
         <Image
           src={refletPorteCles}
           alt=""
           width={14}
-          class="pointer-events-none absolute -top-[22px] right-[46px] hidden w-2.5 -rotate-20 sm:block"
+          class="pointer-events-none absolute -top-[22px] right-[46px] hidden w-2.5 -rotate-20 sm:block xl:-top-[16px] xl:right-9"
         />
 
         <div class="relative overflow-hidden rounded-[36px] border-3 border-white bg-gradient-to-b from-[#7fe3f2] to-[#b4f3de] p-[7px] shadow-card">
           <div class="relative overflow-hidden rounded-[30px] bg-white">
             <!-- Haut-parleur + caméra -->
-            <div class="relative flex items-center justify-center py-3">
+            <div class="relative flex items-center justify-center py-2 xl:py-1.5">
               <span class="h-[6px] w-12 rounded bg-[#dcd5da]"></span>
               <Image src={camera} alt="" class="absolute right-[26%] size-2" />
             </div>
 
             <!-- Écran -->
-            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-4 pt-3 pb-4">
+            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-4 pt-2.5 pb-3 xl:px-3 xl:pt-2 xl:pb-2.5">
               <Image src={motifPois} alt="" width={246} class="pointer-events-none absolute inset-0 size-full opacity-60" />
-              <div class="relative flex flex-col items-center gap-3">
+              <div class="relative flex flex-col items-center gap-2.5 xl:gap-2">
                 <div class="flex w-full items-center justify-between">
                   <span class="font-pixel text-[0.875rem] font-semibold text-[#c2367f]">4G</span>
                   <Image src={batterie} alt="" class="h-3 w-[26px]" />
                 </div>
-                <p class="font-pixel text-[1.75rem] font-bold text-[#e0459e]">Mes réseaux</p>
+                <p class="font-pixel text-[1.75rem] font-bold text-[#e0459e] xl:text-[1.5rem]">Mes réseaux</p>
                 <p class="font-manrope text-[0.875rem] font-semibold text-[#8a5a6e]">Choisis ta ligne &lt;3</p>
 
-                <ul class="mt-1 flex w-full flex-col items-center gap-3">
+                <ul class="mt-1 flex w-full flex-col items-center gap-2.5 xl:gap-2">
                   {reseaux.map(({ nom, href, externe }) => (
                     <li class="w-full">
                       <a
@@ -257,11 +258,11 @@ const etincelles = [
                         target={externe ? "_blank" : undefined}
                         rel={externe ? "noopener" : undefined}
                         data-reseau
-                        class="flex h-12 w-full items-center justify-between rounded-full border-[2.5px] border-[#f3a9c9] bg-gradient-to-b from-[#fffdf8] to-[#ffe6d9] px-3.5 shadow-[0_3px_0_0_rgba(216,138,176,0.6)] transition hover:scale-[1.03] active:scale-[0.97]"
+                        class="flex h-12 w-full items-center justify-between rounded-full border-[2.5px] border-[#f3a9c9] bg-gradient-to-b from-[#fffdf8] to-[#ffe6d9] px-3.5 shadow-[0_3px_0_0_rgba(216,138,176,0.6)] transition hover:scale-[1.03] active:scale-[0.97] xl:h-10"
                       >
-                        <Image src={coeurBouton} alt="" class="size-[22px]" />
-                        <span class="font-manrope text-[1rem] font-bold text-[#c2367f]">{nom}</span>
-                        <Image src={coeurBouton} alt="" class="size-[22px]" />
+                        <Image src={coeurBouton} alt="" class="size-[22px] xl:size-[18px]" />
+                        <span class="font-manrope text-[1rem] font-bold text-[#c2367f] xl:text-[0.9375rem]">{nom}</span>
+                        <Image src={coeurBouton} alt="" class="size-[22px] xl:size-[18px]" />
                       </a>
                     </li>
                   ))}
@@ -271,14 +272,15 @@ const etincelles = [
               </div>
             </div>
 
-            <div class="flex items-center justify-center py-3">
-              <Image src={boutonHome} alt="" class="size-7" />
+            <div class="flex items-center justify-center py-2 xl:py-1.5">
+              <Image src={boutonHome} alt="" class="size-7 xl:size-6" />
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+      </div>
+    </main>
+  </div>
 
   <Footer />
 </Layout>
