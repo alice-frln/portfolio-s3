@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-import fond from "../assets/img/contact/figma/fond.png";
+import fond from "../assets/img/apropos_background.webp";
 import avatar from "../assets/img/apropos_avatar.webp";
 import coeurBouton from "../assets/img/contact/figma/coeur_bouton.svg";
 import coeurTitre from "../assets/img/contact/figma/coeur_titre.svg";
@@ -46,20 +46,21 @@ const etincelles = [
 
 <Layout title="Contact — Alice Frelin">
   <div class="relative isolate flex flex-col overflow-x-clip xl:h-svh">
+    <!-- Fond à pois, décoratif : couvre tout le hero (header compris) -->
+    <Image
+      src={fond}
+      alt=""
+      width={1920}
+      loading="eager"
+      class="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
+    />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 hidden xl:block">
+      {etincelles.map(({ src, classe }) => <Image src={src} alt="" class={`absolute ${classe}`} />)}
+    </div>
+
     <Header />
 
-    <main class="relative bg-white pt-16 pb-24 md:pt-20 xl:flex xl:min-h-0 xl:flex-1 xl:flex-col xl:justify-center xl:py-0">
-      <!-- Fond à pois, décoratif -->
-      <Image
-        src={fond}
-        alt=""
-        width={1600}
-        class="pointer-events-none absolute inset-0 -z-10 size-full object-cover opacity-35"
-      />
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 hidden xl:block">
-        {etincelles.map(({ src, classe }) => <Image src={src} alt="" class={`absolute ${classe}`} />)}
-      </div>
-
+    <main class="relative pt-16 pb-24 md:pt-20 xl:flex xl:min-h-0 xl:flex-1 xl:flex-col xl:justify-center xl:py-0">
       <h1 class="mx-auto max-w-[900px] px-6 text-center font-peix text-[3.5rem] leading-none tracking-[-0.09em] text-rose-vif [font-feature-settings:'liga'_0] xl:text-[4.5rem]">
         Contactez-moi
       </h1>
