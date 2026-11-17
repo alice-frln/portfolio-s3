@@ -339,8 +339,12 @@ import ia from "../assets/img/ia.svg";
   // Vrais glyphes de texte (pas des emojis en couleur) pour qu'ils héritent bien du rose du site
   const symboles = ["♥", "✦", "✧"];
 
-  /** Fait éclater quelques cœurs/étoiles roses tout autour du pourtour de `element` */
-  const exploser = (element: Element, nombre: number) => {
+  /**
+   * Fait éclater quelques cœurs/étoiles roses tout autour du pourtour de `element`.
+   * Ajoutées dans `conteneur` (le <dialog> lui-même) : un <dialog> ouvert est rendu dans le
+   * "top layer" du navigateur, au-dessus de tout document.body quel que soit le z-index.
+   */
+  const exploser = (element: Element, nombre: number, conteneur: Element) => {
     const rect = element.getBoundingClientRect();
     const centre = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
     const demiLargeur = rect.width / 2;
@@ -359,7 +363,7 @@ import ia from "../assets/img/ia.svg";
       particule.setAttribute("aria-hidden", "true");
       particule.style.cssText = `position:fixed;left:${depart.x}px;top:${depart.y}px;z-index:60;
         pointer-events:none;font-size:${18 + Math.random() * 16}px;color:var(--color-rose-vif);translate:-50% -50%;`;
-      document.body.appendChild(particule);
+      conteneur.appendChild(particule);
 
       // S'éloigne du cadre, dans la direction où la particule est déjà partie
       const distance = 45 + Math.random() * 40;
@@ -381,7 +385,7 @@ import ia from "../assets/img/ia.svg";
       const cadre = dialogue.querySelector(".modal-box");
       if (!cadre) return;
       const observateur = new MutationObserver(() => {
-        if (dialogue.open) exploser(cadre, 8);
+        if (dialogue.open) exploser(cadre, 8, dialogue);
       });
       observateur.observe(dialogue, { attributes: true, attributeFilter: ["open"] });
     });
