@@ -65,11 +65,11 @@ const etincelles = [
         Contactez-moi
       </h1>
 
-      <div class="relative mx-auto mt-10 flex max-w-[1440px] flex-col items-center gap-16 px-6 md:px-12 xl:mt-8 xl:flex-row xl:items-start xl:justify-center xl:gap-14">
+      <div class="relative mx-auto mt-10 flex max-w-[1440px] flex-col items-center gap-16 px-6 md:px-12 xl:mt-4 xl:w-full xl:max-w-none xl:flex-row xl:items-start xl:justify-between xl:gap-10 xl:mx-0 xl:px-16 2xl:px-24">
       <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
       <div class="relative hidden w-[300px] shrink-0 xl:block">
-        <div class="relative mx-auto h-[420px] w-[280px]">
-          <Image src={avatar} alt="Illustration d'Alice" width={560} class="h-full w-full object-contain object-bottom" />
+        <div class="relative mx-auto h-[470px] w-[340px]">
+          <Image src={avatar} alt="Illustration d'Alice" width={680} class="h-full w-full object-contain object-bottom" />
         </div>
 
         <div class="mt-5 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1 pr-4 pl-4 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
@@ -85,7 +85,7 @@ const etincelles = [
       </div>
 
       <!-- ===== Colonne centrale : fenêtre "nouveau message" ===== -->
-      <div class="flex w-full max-w-[640px] flex-col items-center gap-10 xl:gap-4">
+      <div class="flex w-full max-w-[760px] flex-col items-center gap-10 xl:gap-4">
         <div class="w-full overflow-hidden rounded-xl border-[1.5px] border-[#a9879a] bg-gradient-to-b from-[#f9dcea] to-[#f2c2d8] p-2 shadow-card">
           <!-- Barre de titre -->
           <div class="flex items-center justify-between rounded-md bg-gradient-to-b from-[#fbe6f0] to-[#e9aeca] py-1.5 pr-1.5 pl-2.5 xl:py-1">
@@ -209,7 +209,7 @@ const etincelles = [
       </div>
 
       <!-- ===== Colonne téléphone : mes réseaux ===== -->
-      <div class="relative w-[260px] shrink-0">
+      <div class="relative w-[260px] shrink-0 xl:w-[320px]">
         <Image
           src={porteClesCoeur}
           alt=""
