@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Pixelify+Sans:wght@400..700&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 
@@ -34,6 +34,7 @@
 @theme {
   --font-manrope: "Manrope", sans-serif;
   --font-peix: "Peix", sans-serif;
+  --font-pixel: "Pixelify Sans", monospace;
 
   /* Couleurs du design, utilisables aussi directement : bg-rose-vif, text-marron… */
   --color-blanc: #ffffff;

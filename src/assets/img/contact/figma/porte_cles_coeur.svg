@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="porte-cl&#195;&#169;s coeur" filter="url(#filter0_d_0_177)">
+<path id="Vector" d="M32 56C32 56 12 43.7333 6.4 31.4667C2.4 22.9333 7.2 12 17.6 12C23.4667 12 27.4667 15.4667 29.3333 18.9333C31.2 15.4667 35.2 12 41.0667 12C51.4667 12 56.2667 22.9333 52.2667 31.4667C52 43.7333 32 56 32 56Z" fill="#FC61BF" stroke-width="1.5" stroke="white"/>
+</g>
+<defs>
+<filter id="filter0_d_0_177" x="0" y="0" width="64" height="68" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_177"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_177" result="shape"/>
+</filter>
+</defs>
+</svg>

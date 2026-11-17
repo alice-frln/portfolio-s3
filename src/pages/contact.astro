@@ -3,108 +3,318 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import Banniere from "../components/Banniere.astro";
 
-import appareilPhoto from "../assets/img/objets_appareil_photo.webp";
-import ordinateur from "../assets/img/contact/ordinateur_pixel.png";
-import linkedin from "../assets/img/contact/linkedin_bleu.svg";
-import behance from "../assets/img/contact/behance_bleu.svg";
-import enveloppe from "../assets/svg/enveloppe_pixel.svg";
+import fond from "../assets/img/contact/figma/fond.png";
+import avatar from "../assets/img/contact/figma/avatar.png";
+import fondAvatar from "../assets/img/contact/figma/fond_avatar.svg";
+import ordinateur3 from "../assets/img/contact/figma/ordinateur3.png";
+import coeurBouton from "../assets/img/contact/figma/coeur_bouton.svg";
+import coeurTitre from "../assets/img/contact/figma/coeur_titre.svg";
+import coeurStatut from "../assets/img/contact/figma/coeur_statut.svg";
+import coeurEtiquette from "../assets/img/contact/figma/coeur_etiquette.svg";
+import iconeReduire from "../assets/img/contact/figma/icone_reduire.svg";
+import iconeAgrandir from "../assets/img/contact/figma/icone_agrandir.svg";
+import iconeFermer from "../assets/img/contact/figma/icone_fermer.svg";
+import iconeUtilisatrice from "../assets/img/contact/figma/icone_utilisatrice.svg";
+import chevron from "../assets/img/contact/figma/chevron.svg";
+import poignee from "../assets/img/contact/figma/poignee.svg";
+import camera from "../assets/img/contact/figma/camera.svg";
+import motifPois from "../assets/img/contact/figma/motif_pois.svg";
+import batterie from "../assets/img/contact/figma/batterie.svg";
+import boutonHome from "../assets/img/contact/figma/bouton_home.svg";
+import porteClesCoeur from "../assets/img/contact/figma/porte_cles_coeur.svg";
+import refletPorteCles from "../assets/img/contact/figma/reflet_porte_cles.svg";
+import etincelle1 from "../assets/img/contact/figma/etincelle1.svg";
+import etincelle2 from "../assets/img/contact/figma/etincelle2.svg";
+import etincelle3 from "../assets/img/contact/figma/etincelle3.svg";
+import etincelle4 from "../assets/img/contact/figma/etincelle4.svg";
+import etincelle5 from "../assets/img/contact/figma/etincelle5.svg";
 
+const EMAIL = "alicefrelin.pro@gmail.com";
 const reseaux = [
-  { nom: "LinkedIn", href: "https://www.linkedin.com/in/alice-frelin-7a0184337", icone: linkedin, classe: "size-[72px] md:size-[99px]", externe: true },
-  { nom: "Behance", href: "https://www.behance.net/alicefrelin2", icone: behance, classe: "h-[46px] w-[72px] md:h-[63px] md:w-[99px]", externe: true },
-  { nom: "E-mail", href: "mailto:alicefrelin.pro@gmail.com", icone: enveloppe, classe: "size-[72px] md:size-[99px]", externe: false },
+  { nom: "LinkedIn", href: "https://www.linkedin.com/in/alice-frelin-7a0184337", externe: true },
+  { nom: "Behance", href: "https://www.behance.net/alicefrelin2", externe: true },
+  { nom: "E-mail", href: `mailto:${EMAIL}`, externe: false },
+];
+
+const etincelles = [
+  { src: etincelle1, classe: "top-[14%] left-[29%] size-5" },
+  { src: etincelle2, classe: "top-[20%] right-[6%] size-6" },
+  { src: etincelle3, classe: "top-[52%] left-[1%] size-5" },
+  { src: etincelle4, classe: "top-[62%] left-[26%] size-4" },
+  { src: etincelle5, classe: "top-[82%] right-[10%] size-5" },
 ];
 ---
 
 <Layout title="Contact — Alice Frelin">
   <Header />
-  <Banniere titre="Contact" />
 
-  <!-- ===== Bandeau défilant façon vieux site des années 2000 ===== -->
-  <div class="overflow-hidden border-y border-noir bg-rose-pastel py-2.5" aria-hidden="true">
-    <div data-marquee class="flex w-max gap-8 whitespace-nowrap font-manrope text-[0.9375rem] font-bold text-noir">
-      <span class="flex items-center gap-8">
-        ⋆｡‧˚ʚ merci de passer par ici ɞ˚‧｡⋆ &nbsp; n'hésite pas à laisser un message &nbsp; ⋆｡‧˚ʚ à très vite ɞ˚‧｡⋆ &nbsp; ✧
-        disponible pour un stage ✧
-      </span>
-      <span class="flex items-center gap-8" aria-hidden="true">
-        ⋆｡‧˚ʚ merci de passer par ici ɞ˚‧｡⋆ &nbsp; n'hésite pas à laisser un message &nbsp; ⋆｡‧˚ʚ à très vite ɞ˚‧｡⋆ &nbsp; ✧
-        disponible pour un stage ✧
-      </span>
+  <main class="relative overflow-x-clip bg-white pt-16 pb-24 md:pt-20">
+    <!-- Fond à pois, décoratif -->
+    <Image
+      src={fond}
+      alt=""
+      width={1200}
+      class="pointer-events-none absolute inset-0 -z-10 hidden size-full object-cover opacity-20 md:block"
+    />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 hidden xl:block">
+      {etincelles.map(({ src, classe }) => <Image src={src} alt="" class={`absolute ${classe}`} />)}
     </div>
-  </div>
 
-  <main class="relative overflow-x-clip pb-32">
-    <p class="mx-auto max-w-[1100px] px-6 pt-20 text-body-m md:box-content md:px-12 md:pt-24">
-      Étudiante en BUT MMI (Métiers du Multimédia et de l'Internet), je recherche un <strong>stage</strong> en
-      <strong> graphisme ou communication visuelle.</strong> Discutons ensemble de vos besoins et de la façon dont je peux
-      contribuer à vos projets créatifs.
-    </p>
+    <h1 class="text-section-title mx-auto max-w-[900px] px-6 text-center text-rose-vif [font-feature-settings:'liga'_0]">
+      Contactez-moi
+    </h1>
 
-    <div class="relative mx-auto mt-20 flex max-w-[1440px] flex-col items-center gap-14 px-6 md:mt-28 md:gap-16">
-      <!-- Décors pixel art (cachés sur petit écran pour ne pas gêner le contenu) -->
-      <Image
-        src={appareilPhoto}
-        alt=""
-        class="pointer-events-none absolute top-0 left-[30px] hidden w-[27%] max-w-[393px] rotate-[15deg] [image-rendering:pixelated] lg:block"
-      />
-      <Image
-        src={ordinateur}
-        alt=""
-        class="pointer-events-none absolute top-[15px] right-0 hidden w-[12%] max-w-[173px] [image-rendering:pixelated] lg:block"
-      />
+    <div class="relative mx-auto mt-14 flex max-w-[1320px] flex-col items-center gap-16 px-6 md:px-12 xl:flex-row xl:items-start xl:justify-between xl:gap-6">
+      <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
+      <div class="relative hidden w-[300px] shrink-0 xl:mt-6 xl:block">
+        <Image src={fondAvatar} alt="" width={340} class="pointer-events-none absolute -top-6 left-1/2 w-[120%] max-w-none -translate-x-1/2" />
+        <div class="relative mx-auto h-[520px] w-[235px] overflow-hidden">
+          <Image src={avatar} alt="Illustration d'Alice" width={400} class="h-full w-full object-cover object-top" />
+        </div>
+        <Image
+          src={ordinateur3}
+          alt=""
+          width={104}
+          class="pointer-events-none absolute top-0 right-0 w-[90px] -rotate-8"
+        />
 
-      <h2 class="text-section-title text-rose-vif">Contactez-moi</h2>
+        <div class="mt-10 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1 pr-4 pl-4 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
+          <span class="font-pixel text-[1.375rem] text-blanc">Alice</span>
+          <Image src={coeurEtiquette} alt="" class="size-[18px]" />
+        </div>
 
-      <ul class="flex items-center gap-10 md:gap-14">
-        {reseaux.map(({ nom, href, icone, classe, externe }) => (
-          <li>
-            <a
-              href={href}
-              aria-label={externe ? `${nom} (nouvel onglet)` : nom}
-              target={externe ? "_blank" : undefined}
-              rel={externe ? "noopener" : undefined}
-              data-reseau
-              class="block transition hover:-translate-y-1 hover:opacity-80 motion-reduce:transition-none"
-            >
-              <Image src={icone} alt="" class={classe} />
-            </a>
-          </li>
-        ))}
-      </ul>
+        <!-- Bulle de dialogue -->
+        <div class="-mt-3 flex flex-col gap-0 rounded-[26px] border-3 border-bleu-vif bg-gradient-to-b from-white to-[#ffe3f0] px-7 pt-7 pb-6 text-center font-manrope text-[1.125rem] font-semibold text-[#8a5a6e] shadow-card">
+          <p>Une idée, un stage, une collab' ?</p>
+          <p>Écris-moi, je réponds vite !</p>
+        </div>
+      </div>
+
+      <!-- ===== Colonne centrale : fenêtre "nouveau message" ===== -->
+      <div class="flex w-full max-w-[560px] flex-col items-center gap-10">
+        <div class="w-full overflow-hidden rounded-xl border-[1.5px] border-[#a9879a] bg-gradient-to-b from-[#f9dcea] to-[#f2c2d8] p-2 shadow-card">
+          <!-- Barre de titre -->
+          <div class="flex items-center justify-between rounded-md bg-gradient-to-b from-[#fbe6f0] to-[#e9aeca] py-1.5 pr-1.5 pl-2.5">
+            <div class="flex items-center gap-2">
+              <Image src={coeurTitre} alt="" class="size-[18px]" />
+              <span class="font-pixel text-[1.125rem] text-[#5a3a4a]">nouveau_message.txt</span>
+            </div>
+            <div aria-hidden="true" class="flex items-center gap-1">
+              <span class="flex h-[26px] w-[34px] items-center justify-center rounded border border-[#8f8a8d] bg-gradient-to-b from-white to-[#e3dde1]">
+                <Image src={iconeReduire} alt="" class="size-3" />
+              </span>
+              <span class="flex h-[26px] w-[34px] items-center justify-center rounded border border-[#8f8a8d] bg-gradient-to-b from-white to-[#e3dde1]">
+                <Image src={iconeAgrandir} alt="" class="size-3" />
+              </span>
+              <span class="flex h-[26px] w-[34px] items-center justify-center rounded border border-[#8e2b20] bg-gradient-to-b from-[#f39183] to-[#c9402f]">
+                <Image src={iconeFermer} alt="" class="size-3" />
+              </span>
+            </div>
+          </div>
+
+          <!-- Contenu -->
+          <div class="flex flex-col gap-5 border border-[#8f8a8d] bg-[#f3f0f1] px-6 pt-6 pb-7">
+            <div class="flex items-center gap-3">
+              <span class="font-pixel text-[1.25rem] text-[#3b2b33]">À :</span>
+              <span class="flex items-center gap-2 rounded-full border-[1.5px] border-[#8f9aa3] bg-gradient-to-b from-white to-[#dde3e8] py-1.5 pr-5 pl-2.5">
+                <Image src={iconeUtilisatrice} alt="" class="size-7" />
+                <span class="font-pixel text-[1.1875rem] text-[#2e2a2c]">alice_frelin.jpg</span>
+              </span>
+            </div>
+
+            <p class="font-pixel text-[1.125rem] leading-snug text-[#3b2b33]">
+              ( &lt;3 ) graphiste &amp; développeuse front<br />
+              (99%) de chances qu'on s'entende bien
+            </p>
+
+            <form id="formulaire-contact" class="flex flex-col gap-4" novalidate>
+              <div class="flex flex-col gap-3.5 sm:flex-row">
+                <div class="flex flex-1 flex-col gap-1.5">
+                  <label for="nom" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">Nom</label>
+                  <input
+                    id="nom"
+                    name="nom"
+                    type="text"
+                    required
+                    autocomplete="name"
+                    placeholder="Ton prénom et nom"
+                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col gap-1.5">
+                  <label for="email" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">E-mail</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    placeholder="ton@email.fr"
+                    class="h-12 rounded-xl border-2 border-[#efa6c8] bg-white px-4 font-manrope text-[0.9375rem] text-[#3b2b33] shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] outline-none placeholder:text-[#b79aaa] focus-visible:border-rose-vif"
+                  />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label for="sujet" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">Sujet</label>
+                <div class="flex h-12 items-center gap-2 rounded-xl border-2 border-[#efa6c8] bg-white pr-2 pl-4 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif">
+                  <input
+                    id="sujet"
+                    name="sujet"
+                    type="text"
+                    required
+                    placeholder="Stage, projet, collab' ou juste un coucou…"
+                    class="min-w-0 flex-1 bg-transparent font-manrope text-[0.9375rem] text-[#3b2b33] outline-none placeholder:text-[#b79aaa]"
+                  />
+                  <span class="flex size-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-b from-[#fbd3e4] to-[#f2a5c7]" aria-hidden="true">
+                    <Image src={chevron} alt="" class="size-4" />
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label for="message" class="font-pixel text-[1.0625rem] text-[#6b4a5a]">Message</label>
+                <div class="relative rounded-xl border-2 border-[#efa6c8] bg-white px-4 py-3.5 shadow-[inset_0_2px_3px_0_rgba(140,77,107,0.15)] has-[:focus-visible]:border-rose-vif">
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows="4"
+                    placeholder="Écris ton message ici…"
+                    class="w-full resize-none bg-transparent font-manrope text-[0.9375rem] text-[#3b2b33] outline-none placeholder:text-[#b79aaa]"
+                  ></textarea>
+                  <Image src={poignee} alt="" class="pointer-events-none absolute right-2 bottom-2 size-3.5" aria-hidden="true" />
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-center gap-4 pt-2 sm:justify-between">
+                <button
+                  type="submit"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#7fa22e] bg-gradient-to-b from-[#e4f7a6] to-[#a9d24b] font-pixel text-[1.375rem] text-[#2f3a12] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97]"
+                >
+                  envoyer &lt;3
+                </button>
+                <button
+                  type="reset"
+                  class="h-[52px] w-[210px] rounded-full border-[1.5px] border-[#d1789f] bg-gradient-to-b from-[#fde1ec] to-[#f2a5c7] font-pixel text-[1.375rem] text-[#5a2a40] shadow-[0_3px_0_0_rgba(0,0,0,0.18)] transition hover:scale-[1.03] active:scale-[0.97]"
+                >
+                  effacer :(
+                </button>
+              </div>
+
+              <p id="statut-formulaire" role="status" class="min-h-[1.5em] text-center font-manrope text-[0.9375rem] text-[#6b4a5a]"></p>
+            </form>
+          </div>
+
+          <!-- Barre de statut -->
+          <div class="flex items-center gap-2 px-2 pt-1 pb-0.5">
+            <Image src={coeurStatut} alt="" class="size-3.5" />
+            <span class="font-pixel text-[0.9375rem] text-[#6b4a5a]">réponse sous 48h&nbsp;&nbsp;-&nbsp;&nbsp;disponible pour un stage</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Colonne téléphone : mes réseaux ===== -->
+      <div class="relative w-[260px] shrink-0 xl:mt-6">
+        <Image
+          src={porteClesCoeur}
+          alt=""
+          width={64}
+          class="pointer-events-none absolute -top-10 right-6 hidden w-11 rotate-12 sm:block"
+        />
+        <Image
+          src={refletPorteCles}
+          alt=""
+          width={14}
+          class="pointer-events-none absolute -top-[22px] right-[46px] hidden w-2.5 -rotate-20 sm:block"
+        />
+
+        <div class="relative overflow-hidden rounded-[36px] border-3 border-white bg-gradient-to-b from-[#7fe3f2] to-[#b4f3de] p-[7px] shadow-card">
+          <div class="relative overflow-hidden rounded-[30px] bg-white">
+            <!-- Haut-parleur + caméra -->
+            <div class="relative flex items-center justify-center py-3">
+              <span class="h-[6px] w-12 rounded bg-[#dcd5da]"></span>
+              <Image src={camera} alt="" class="absolute right-[26%] size-2" />
+            </div>
+
+            <!-- Écran -->
+            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-4 pt-3 pb-4">
+              <Image src={motifPois} alt="" width={246} class="pointer-events-none absolute inset-0 size-full opacity-60" />
+              <div class="relative flex flex-col items-center gap-3">
+                <div class="flex w-full items-center justify-between">
+                  <span class="font-pixel text-[0.875rem] font-semibold text-[#c2367f]">4G</span>
+                  <Image src={batterie} alt="" class="h-3 w-[26px]" />
+                </div>
+                <p class="font-pixel text-[1.75rem] font-bold text-[#e0459e]">Mes réseaux</p>
+                <p class="font-manrope text-[0.875rem] font-semibold text-[#8a5a6e]">Choisis ta ligne &lt;3</p>
+
+                <ul class="mt-1 flex w-full flex-col items-center gap-3">
+                  {reseaux.map(({ nom, href, externe }) => (
+                    <li class="w-full">
+                      <a
+                        href={href}
+                        target={externe ? "_blank" : undefined}
+                        rel={externe ? "noopener" : undefined}
+                        data-reseau
+                        class="flex h-12 w-full items-center justify-between rounded-full border-[2.5px] border-[#f3a9c9] bg-gradient-to-b from-[#fffdf8] to-[#ffe6d9] px-3.5 shadow-[0_3px_0_0_rgba(216,138,176,0.6)] transition hover:scale-[1.03] active:scale-[0.97]"
+                      >
+                        <Image src={coeurBouton} alt="" class="size-[22px]" />
+                        <span class="font-manrope text-[1rem] font-bold text-[#c2367f]">{nom}</span>
+                        <Image src={coeurBouton} alt="" class="size-[22px]" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+
+                <p class="mt-1 font-pixel text-[0.875rem] text-[#c2367f]">- ligne ouverte 24h/24 -</p>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-center py-3">
+              <Image src={boutonHome} alt="" class="size-7" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
   <Footer />
 </Layout>
 
-<style>
-  @media (prefers-reduced-motion: no-preference) {
-    [data-marquee] {
-      animation: defiler 22s linear infinite;
-    }
-    [data-marquee]:hover {
-      animation-play-state: paused;
-    }
-  }
-  @keyframes defiler {
-    to {
-      transform: translateX(-50%);
-    }
-  }
-</style>
-
 <script>
-  // ===== Petits cœurs / étoiles roses (GSAP) au survol d'un réseau social, + curseur scintillant =====
+  // ===== Formulaire de contact : ouvre le client mail avec le message pré-rempli =====
+  const formulaire = document.querySelector<HTMLFormElement>("#formulaire-contact");
+  const statut = document.querySelector<HTMLParagraphElement>("#statut-formulaire");
+
+  formulaire?.addEventListener("submit", (evenement) => {
+    evenement.preventDefault();
+    if (!formulaire.reportValidity()) return;
+
+    const donnees = new FormData(formulaire);
+    const nom = String(donnees.get("nom") || "").trim();
+    const email = String(donnees.get("email") || "").trim();
+    const sujet = String(donnees.get("sujet") || "").trim();
+    const message = String(donnees.get("message") || "").trim();
+
+    const corps = `De : ${nom} (${email})\n\n${message}`;
+    const lien = `mailto:alicefrelin.pro@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+
+    if (statut) statut.textContent = "Ouverture de ta messagerie…";
+    window.location.href = lien;
+  });
+
+  formulaire?.addEventListener("reset", () => {
+    if (statut) statut.textContent = "";
+  });
+
+  // ===== Petits cœurs roses (GSAP) au survol des réseaux, façon reste du site =====
   import { gsap } from "gsap";
 
   const reduitAnimations = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Vrais glyphes de texte (pas des emojis en couleur) pour qu'ils héritent bien du rose du site
   const symboles = ["♥", "✦", "✧"];
 
-  /** Fait éclater quelques cœurs/étoiles roses depuis le centre de `element` */
   const exploser = (element: Element, nombre: number) => {
     const rect = element.getBoundingClientRect();
     const depart = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
@@ -117,7 +327,6 @@ const reseaux = [
         pointer-events:none;font-size:${14 + Math.random() * 12}px;color:var(--color-rose-vif);translate:-50% -50%;`;
       document.body.appendChild(particule);
 
-      // Trajectoire en arc, un peu différente à chaque fois
       const angle = ((Math.random() * 90 - 45) * Math.PI) / 180;
       const distance = 60 + Math.random() * 55;
       const dx = Math.sin(angle) * distance;
@@ -138,25 +347,5 @@ const reseaux = [
     document.querySelectorAll<HTMLAnchorElement>("[data-reseau]").forEach((lien) => {
       lien.addEventListener("pointerenter", () => exploser(lien, 4));
     });
-
-    // ===== Curseur scintillant : une petite étoile rose suit la souris avec un léger retard =====
-    if (window.matchMedia("(pointer: fine)").matches) {
-      const curseur = document.createElement("span");
-      curseur.textContent = "✦";
-      curseur.setAttribute("aria-hidden", "true");
-      curseur.style.cssText = `position:fixed;top:0;left:0;z-index:70;pointer-events:none;
-        font-size:1.375rem;color:var(--color-rose-vif);translate:-50% -50%;opacity:0;`;
-      document.body.appendChild(curseur);
-
-      const suivreX = gsap.quickTo(curseur, "x", { duration: 0.45, ease: "power3" });
-      const suivreY = gsap.quickTo(curseur, "y", { duration: 0.45, ease: "power3" });
-
-      window.addEventListener("pointermove", (evenement) => {
-        suivreX(evenement.clientX);
-        suivreY(evenement.clientY);
-        gsap.to(curseur, { opacity: 1, rotation: "+=25", duration: 0.4, ease: "none" });
-      });
-      window.addEventListener("pointerleave", () => gsap.to(curseur, { opacity: 0, duration: 0.3 }));
-    }
   }
 </script>
