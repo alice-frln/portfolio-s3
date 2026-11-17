@@ -68,17 +68,17 @@ const etincelles = [
       <div class="relative mx-auto mt-10 flex max-w-[1440px] flex-col items-center gap-16 px-6 md:px-12 xl:mt-4 xl:w-full xl:max-w-none xl:flex-row xl:items-start xl:justify-between xl:gap-10 xl:mx-0 xl:px-16 2xl:px-24">
       <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
       <div class="relative hidden w-[300px] shrink-0 xl:block">
-        <div class="relative mx-auto h-[470px] w-[340px]">
-          <Image src={avatar} alt="Illustration d'Alice" width={680} class="h-full w-full object-contain object-bottom" />
+        <div class="relative mx-auto h-[560px] w-[270px]">
+          <Image src={avatar} alt="Illustration d'Alice" width={540} class="h-full w-full object-contain object-bottom" />
         </div>
 
-        <div class="mt-5 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1 pr-4 pl-4 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
-          <span class="font-pixel text-[1.125rem] text-blanc">Alice</span>
-          <Image src={coeurEtiquette} alt="" class="size-[15px]" />
+        <div class="mt-5 flex w-max items-center gap-2 rounded-2xl border-3 border-white bg-gradient-to-b from-[#6fe6ee] to-bleu-vif py-1.5 pr-5 pl-5 shadow-[0_3px_0_0_rgba(26,154,163,0.5)]">
+          <span class="font-pixel text-[1.375rem] text-blanc">Alice</span>
+          <Image src={coeurEtiquette} alt="" class="size-[18px]" />
         </div>
 
         <!-- Bulle de dialogue -->
-        <div class="-mt-3 flex flex-col gap-0 rounded-[26px] border-3 border-bleu-vif bg-gradient-to-b from-white to-[#ffe3f0] px-5 pt-5 pb-4 text-center font-manrope text-[0.9375rem] font-semibold text-[#8a5a6e] shadow-card">
+        <div class="-mt-3 flex flex-col gap-0 rounded-[26px] border-3 border-bleu-vif bg-gradient-to-b from-white to-[#ffe3f0] px-7 pt-7 pb-6 text-center font-manrope text-[1.125rem] font-semibold text-[#8a5a6e] shadow-card">
           <p>Une idée, un stage, une collab' ?</p>
           <p>Écris-moi, je réponds vite !</p>
         </div>
@@ -209,7 +209,7 @@ const etincelles = [
       </div>
 
       <!-- ===== Colonne téléphone : mes réseaux ===== -->
-      <div class="relative w-[260px] shrink-0 xl:w-[320px]">
+      <div class="relative w-[260px] shrink-0 xl:w-[300px]">
         <Image
           src={porteClesCoeur}
           alt=""
@@ -223,18 +223,18 @@ const etincelles = [
           class="pointer-events-none absolute -top-[22px] right-[46px] hidden w-2.5 -rotate-20 sm:block"
         />
 
-        <div class="relative overflow-hidden rounded-[36px] border-3 border-white bg-gradient-to-b from-[#7fe3f2] to-[#b4f3de] p-[7px] shadow-card">
-          <div class="relative overflow-hidden rounded-[30px] bg-white">
+        <div class="relative overflow-hidden rounded-[40px] border-3 border-white bg-gradient-to-b from-[#7fe3f2] to-[#b4f3de] p-[8px] shadow-card">
+          <div class="relative overflow-hidden rounded-[32px] bg-white">
             <!-- Haut-parleur + caméra -->
-            <div class="relative flex items-center justify-center py-2">
+            <div class="relative flex items-center justify-center py-4">
               <span class="h-[6px] w-12 rounded bg-[#dcd5da]"></span>
               <Image src={camera} alt="" class="absolute right-[26%] size-2" />
             </div>
 
             <!-- Écran -->
-            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-4 pt-2.5 pb-3">
+            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-5 pt-8 pb-10">
               <Image src={motifPois} alt="" width={246} class="pointer-events-none absolute inset-0 size-full opacity-60" />
-              <div class="relative flex flex-col items-center gap-2.5">
+              <div class="relative flex flex-col items-center gap-5">
                 <div class="flex w-full items-center justify-between">
                   <span class="font-pixel text-[0.875rem] font-semibold text-[#c2367f]">4G</span>
                   <Image src={batterie} alt="" class="h-3 w-[26px]" />
@@ -242,7 +242,7 @@ const etincelles = [
                 <p class="font-pixel text-[1.75rem] font-bold text-[#e0459e]">Mes réseaux</p>
                 <p class="font-manrope text-[0.875rem] font-semibold text-[#8a5a6e]">Choisis ta ligne &lt;3</p>
 
-                <ul class="mt-1 flex w-full flex-col items-center gap-2.5">
+                <ul class="mt-2 flex w-full flex-col items-center gap-4">
                   {reseaux.map(({ nom, href, externe }) => (
                     <li class="w-full">
                       <a
@@ -250,7 +250,7 @@ const etincelles = [
                         target={externe ? "_blank" : undefined}
                         rel={externe ? "noopener" : undefined}
                         data-reseau
-                        class="flex h-12 w-full items-center justify-between rounded-full border-[2.5px] border-[#f3a9c9] bg-gradient-to-b from-[#fffdf8] to-[#ffe6d9] px-3.5 shadow-[0_3px_0_0_rgba(216,138,176,0.6)] transition hover:scale-[1.03] active:scale-[0.97]"
+                        class="flex h-14 w-full items-center justify-between rounded-full border-[2.5px] border-[#f3a9c9] bg-gradient-to-b from-[#fffdf8] to-[#ffe6d9] px-4 shadow-[0_3px_0_0_rgba(216,138,176,0.6)] transition hover:scale-[1.03] active:scale-[0.97]"
                       >
                         <Image src={coeurBouton} alt="" class="size-[22px]" />
                         <span class="font-manrope text-[1rem] font-bold text-[#c2367f]">{nom}</span>
@@ -260,11 +260,11 @@ const etincelles = [
                   ))}
                 </ul>
 
-                <p class="mt-1 font-pixel text-[0.875rem] text-[#c2367f]">- ligne ouverte 24h/24 -</p>
+                <p class="mt-2 font-pixel text-[0.875rem] text-[#c2367f]">- ligne ouverte 24h/24 -</p>
               </div>
             </div>
 
-            <div class="flex items-center justify-center py-2">
+            <div class="flex items-center justify-center py-5">
               <Image src={boutonHome} alt="" class="size-7" />
             </div>
           </div>
