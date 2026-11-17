@@ -1,9 +1,0 @@
-<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="340" height="610" viewBox="0 0 340 610" fill="none" xmlns="http://www.w3.org/2000/svg">
-<ellipse id="fond avatar" cx="170" cy="305" rx="170" ry="305" fill="url(#paint0_radial_0_519)" style="mix-blend-mode:lighten"/>
-<defs>
-<radialGradient id="paint0_radial_0_519" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(170 305) rotate(90) scale(305 170)">
-<stop offset="0.427885" stop-color="white"/>
-<stop offset="1" stop-color="#F9D8DC" stop-opacity="0"/>
-</radialGradient>
-</defs>
-</svg>
