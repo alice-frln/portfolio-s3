@@ -384,9 +384,9 @@ import ia from "../assets/img/ia.svg";
     document.querySelectorAll<HTMLDialogElement>("dialog.modal").forEach((dialogue) => {
       const cadre = dialogue.querySelector(".modal-box");
       if (!cadre) return;
-      const observateur = new MutationObserver(() => {
-        if (dialogue.open) exploser(cadre, 8, dialogue);
-      });
+      // L'attribut "open" change à l'ouverture ET à la fermeture (le <dialog> reste dans le
+      // "top layer" le temps de son animation de fermeture, donc le cadre est encore visible)
+      const observateur = new MutationObserver(() => exploser(cadre, 8, dialogue));
       observateur.observe(dialogue, { attributes: true, attributeFilter: ["open"] });
     });
   }
