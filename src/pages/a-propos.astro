@@ -28,10 +28,9 @@ import iconeObjets from "../assets/svg/a_propos_game_control.svg";
 import iconeCompetences from "../assets/svg/a_propos_star.svg";
 import cv from "../assets/img/CV_nouveau.jpg";
 
-import boutonPresentationMobile from "../assets/img/a_propos/figma/bouton_presentation.svg";
-import boutonParcoursMobile from "../assets/img/a_propos/figma/bouton_parcours.svg";
-import boutonObjetsMobile from "../assets/img/a_propos/figma/bouton_objets.svg";
-import boutonCompetencesMobile from "../assets/img/a_propos/figma/bouton_competences.svg";
+import iconePresentation from "../assets/svg/a_propos_presentation.svg";
+import iconeParcours from "../assets/svg/a_propos_parcours.svg";
+import croix from "../assets/img/bouton_croix_pixel.svg";
 
 // Carrousel mobile (bas de page) : mêmes objets/compétences que l'inventaire desktop
 const objetsCarrousel = [
@@ -315,59 +314,56 @@ const competencesCarrousel = [
           loading="eager"
         />
 
-        <!-- Boutons gauche : ouvrent les cartes Présentation et Parcours en overlay -->
+        <!-- Boutons gauche : ouvrent les cartes Présentation et Parcours en overlay (même style que les boutons desktop) -->
         <div class="absolute top-10 left-0 flex flex-col gap-4">
           <button
             type="button"
             aria-haspopup="dialog"
             aria-label="Présentation"
             onclick="document.getElementById('mobile-presentation').showModal()"
-            class="block w-16 cursor-pointer transition hover:scale-105 focus-visible:scale-105"
+            class="btn btn-circle size-16 border-2 border-noir bg-rose-vif hover:scale-105 hover:brightness-95"
           >
-            <Image src={boutonPresentationMobile} alt="" class="w-full" />
+            <Image src={iconePresentation} alt="" class="size-9 brightness-0 invert" />
           </button>
           <button
             type="button"
             aria-haspopup="dialog"
             aria-label="Parcours"
             onclick="document.getElementById('mobile-parcours').showModal()"
-            class="block w-16 cursor-pointer transition hover:scale-105 focus-visible:scale-105"
+            class="btn btn-circle size-16 border-2 border-noir bg-rose-vif hover:scale-105 hover:brightness-95"
           >
-            <Image src={boutonParcoursMobile} alt="" class="w-full" />
+            <Image src={iconeParcours} alt="" class="size-9 brightness-0 invert" />
           </button>
         </div>
 
-        <!-- Boutons droite : Objets, Compétences, CV -->
+        <!-- Boutons droite : Objets, Compétences, CV (mêmes boutons que la barre desktop) -->
         <div class="absolute top-10 right-0 flex flex-col gap-4">
           <button
             type="button"
             data-onglet="objets"
             aria-pressed="true"
             aria-label="Objets"
-            class="block w-16 cursor-pointer transition hover:scale-105 aria-pressed:brightness-90"
+            class="btn btn-circle size-16 border-2 border-noir bg-rose-vif hover:scale-105 hover:brightness-95 aria-pressed:brightness-90"
           >
-            <Image src={boutonObjetsMobile} alt="" class="w-full" />
+            <Image src={iconeObjets} alt="" class="size-9 brightness-0 invert [image-rendering:pixelated]" />
           </button>
           <button
             type="button"
             data-onglet="competences"
             aria-pressed="false"
             aria-label="Compétences"
-            class="block w-16 cursor-pointer transition hover:scale-105 aria-pressed:brightness-90"
+            class="btn btn-circle size-16 border-2 border-noir bg-rose-vif hover:scale-105 hover:brightness-95 aria-pressed:brightness-90"
           >
-            <Image src={boutonCompetencesMobile} alt="" class="w-full" />
+            <Image src={iconeCompetences} alt="" class="size-9 brightness-0 invert [image-rendering:pixelated]" />
           </button>
-          <div class="relative size-16">
-            <span class="absolute inset-0 translate-x-[3px] translate-y-[3px] rounded-full border border-noir bg-marron"></span>
-            <a
-              href={cv.src}
-              download="CV - Alice Frelin"
-              aria-label="Télécharger mon CV"
-              class="btn btn-circle relative size-16 border-2 border-noir bg-blanc text-[1.0625rem] font-semibold text-noir hover:scale-105"
-            >
-              CV
-            </a>
-          </div>
+          <a
+            href={cv.src}
+            download="CV - Alice Frelin"
+            aria-label="Télécharger mon CV"
+            class="btn btn-circle size-16 border-2 border-noir bg-rose-vif text-[1.25rem] font-semibold text-blanc hover:scale-105 hover:brightness-95"
+          >
+            CV
+          </a>
         </div>
       </div>
 
@@ -410,7 +406,9 @@ const competencesCarrousel = [
     <dialog id="mobile-presentation" class="modal" aria-label="Présentation">
       <div class="modal-box relative w-[min(90vw,360px)] max-w-none rounded-none border border-noir bg-secondary p-5 text-body-s shadow-card">
         <form method="dialog">
-          <button aria-label="Fermer" class="btn btn-circle btn-sm absolute top-3 right-3 border border-noir bg-blanc">✕</button>
+          <button class="absolute top-2 right-2 size-10 cursor-pointer transition hover:scale-105" aria-label="Fermer">
+            <Image src={croix} alt="" class="size-full" />
+          </button>
         </form>
         <div class="flex gap-5">
           <Image
@@ -442,7 +440,9 @@ const competencesCarrousel = [
     <dialog id="mobile-parcours" class="modal" aria-label="Parcours">
       <div class="modal-box relative w-[min(90vw,360px)] max-w-none rounded-none border border-noir bg-base-100 p-5 shadow-card">
         <form method="dialog">
-          <button aria-label="Fermer" class="btn btn-circle btn-sm absolute top-3 right-3 border border-noir bg-blanc">✕</button>
+          <button class="absolute top-2 right-2 size-10 cursor-pointer transition hover:scale-105" aria-label="Fermer">
+            <Image src={croix} alt="" class="size-full" />
+          </button>
         </form>
         <h2 class="text-center font-manrope text-[1.75rem] leading-tight font-bold tracking-[-0.07em]">Parcours</h2>
         <ol class="mt-4 flex flex-col gap-3 text-body-xs">
