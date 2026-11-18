@@ -164,14 +164,15 @@ const menus = [
   const piste = document.querySelector<HTMLElement>("[data-carrousel-piste]");
   const mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (section && cadre && piste && !mouvementReduit) {
-    // On remplace le scroll horizontal natif par l'effet
-    piste.classList.remove("overflow-x-auto", "snap-x", "snap-mandatory");
-    cadre.classList.add("sticky", "top-0");
+  // Sur mobile, pas d'effet de scroll détourné : un carrousel normal au doigt (scroll-snap
+  // natif, déjà posé dans le HTML), pour ne pas piéger le défilement et cacher la suite de la page.
+  const bascule = window.matchMedia("(min-width: 768px)");
 
+  if (section && cadre && piste && !mouvementReduit) {
     let distance = 0;
     // Position du haut de la section dans le document (fixe, indépendante du scroll en cours)
     let hautSection = 0;
+    let actif = false;
 
     const mesurer = () => {
       distance = Math.max(0, piste.scrollWidth - window.innerWidth);
@@ -190,10 +191,31 @@ const menus = [
       piste.style.transform = `translateX(${-avance}px)`;
     };
 
-    window.addEventListener("scroll", deplacer, { passive: true });
-    window.addEventListener("resize", mesurer);
-    window.addEventListener("load", mesurer);
-    mesurer();
+    const activer = () => {
+      if (actif) return;
+      actif = true;
+      // On remplace le scroll horizontal natif par l'effet
+      piste.classList.remove("overflow-x-auto", "snap-x", "snap-mandatory");
+      cadre.classList.add("sticky", "top-0");
+      window.addEventListener("scroll", deplacer, { passive: true });
+      window.addEventListener("resize", mesurer);
+      mesurer();
+    };
+
+    const desactiver = () => {
+      if (!actif) return;
+      actif = false;
+      window.removeEventListener("scroll", deplacer);
+      window.removeEventListener("resize", mesurer);
+      section.style.height = "";
+      piste.style.transform = "";
+      cadre.classList.remove("sticky", "top-0");
+      piste.classList.add("overflow-x-auto", "snap-x", "snap-mandatory");
+    };
+
+    const gerer = () => (bascule.matches ? activer() : desactiver());
+    gerer();
+    bascule.addEventListener("change", gerer);
   }
 
   const formulaire =document.querySelector<HTMLFormElement>("#filtres")!;

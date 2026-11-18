@@ -47,24 +47,24 @@ try {
 // Positions reprises de la maquette (cadre de 1440 × 1860 px), converties en % pour suivre la largeur.
 const LARGEUR = 1440;
 const HAUTEUR = 1860;
-const stickers: { image: ImageMetadata; x: number; y: number; l: number }[] = [
-  { image: pince, x: 631, y: 92, l: 177 },
-  { image: appareilPhoto, x: 994, y: 128, l: 446 },
-  { image: porteCle, x: 157, y: 167, l: 239 },
-  { image: helloKitty, x: 491, y: 241, l: 104 },
+const stickers: { image: ImageMetadata; x: number; y: number; l: number; mobile?: boolean }[] = [
+  { image: pince, x: 631, y: 92, l: 177, mobile: true },
+  { image: appareilPhoto, x: 994, y: 128, l: 446, mobile: true },
+  { image: porteCle, x: 157, y: 167, l: 239, mobile: true },
+  { image: helloKitty, x: 491, y: 241, l: 104, mobile: true },
   { image: carteSd, x: 863, y: 279, l: 96 },
-  { image: boutonCoeur, x: 78, y: 484, l: 109 },
+  { image: boutonCoeur, x: 78, y: 484, l: 109, mobile: true },
   { image: perlesDesign, x: 1090, y: 554, l: 327 },
-  { image: chat, x: 44, y: 599, l: 385 },
+  { image: chat, x: 44, y: 599, l: 385, mobile: true },
   { image: dossier, x: 863, y: 675, l: 158 },
   { image: tamagotchi, x: 994, y: 675, l: 446 },
   { image: des, x: 578, y: 730, l: 140 },
   { image: perlesAlice, x: 515, y: 1025, l: 276 },
   { image: ds, x: 52, y: 1127, l: 485 },
   { image: boutonRond, x: 863, y: 1336, l: 76 },
-  { image: cassette, x: 1028, y: 1347, l: 347 },
+  { image: cassette, x: 1028, y: 1347, l: 347, mobile: true },
   { image: boutonEtoile, x: 740, y: 1374, l: 51 },
-  { image: telephone, x: 600, y: 1578, l: 229 },
+  { image: telephone, x: 600, y: 1578, l: 229, mobile: true },
 ];
 const pct = (valeur: number, total: number) => `${((valeur / total) * 100).toFixed(2)}%`;
 
@@ -83,12 +83,12 @@ const competences = [
     <!-- ===== Hero : titre entouré de stickers ===== -->
     <div class="relative -mt-[78px] aspect-[1440/1860] w-full overflow-hidden">
       <div aria-hidden="true">
-        {stickers.map(({ image, x, y, l }, i) => (
+        {stickers.map(({ image, x, y, l, mobile }, i) => (
           <Image
             src={image}
             alt=""
             loading={y < 700 ? "eager" : "lazy"}
-            class="sticker absolute h-auto"
+            class:list={["sticker absolute h-auto", !mobile && "hidden sm:block"]}
             style={`left:${pct(x, LARGEUR)};top:${pct(y, HAUTEUR)};width:${pct(l, LARGEUR)};--delai:${(i % 5) * -1.3}s;--entree:${(i % 6) * 0.15}s`}
           />
         ))}
