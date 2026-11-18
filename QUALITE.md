@@ -114,18 +114,29 @@ Pistes identifiées, pas encore vérifiées en détail :
 - **Comment** : inspection du `<head>`.
 - **Corrigé** : ajout de `<link rel="canonical">` calculée dynamiquement dans `Layout.astro`.
 
-## 4. Conformité juridique — *à compléter*
+## 4. Conformité juridique
 
-Déjà en place :
-- Pages "Mentions légales" et "Politique de confidentialité" existantes (`src/pages/mentions-legales.astro`,
-  `src/pages/politique-de-confidentialite.astro`), liées depuis le footer de chaque page.
+### Mentions légales et politique de confidentialité
+- **Vérifié** : présence et contenu des pages "Mentions légales" et "Politique de confidentialité"
+  (identité de l'éditrice, hébergeur, données collectées, finalité, base légale, durée de conservation,
+  destinataires, cookies, droits RGPD, sécurité) — liées depuis le footer de chaque page.
+- **Comment** : relecture complète des deux pages (`src/pages/mentions-legales.astro`,
+  `src/pages/politique-de-confidentialite.astro`).
+- **Corrigé** : les mentions légales ne citaient que l'hébergeur du site (Infomaniak) mais pas celui qui
+  héberge réellement les données du formulaire de contact (la base PocketBase, sur un serveur mis à
+  disposition par l'IUT de Montbéliard) — ajout de cette précision dans la section "Hébergement".
 
-À vérifier/compléter avec toi :
-- Contenu exact des mentions légales : identité de l'éditrice, hébergeur (nom, adresse) — qui héberge
-  `portfolio.alice-frelin.fr` et le VPS PocketBase ?
-- Conformité RGPD du formulaire de contact : les messages envoyés via PocketBase sont des données
-  personnelles (nom, e-mail, message) — durée de conservation prévue, information de la personne qui
-  contacte (actuellement aucune mention sur la page Contact), droit d'accès/suppression.
-- Cookies/traceurs : le site utilise-t-il un outil d'analyse d'audience (Google Analytics, Plausible...)
-  ? Si oui, bandeau de consentement à prévoir. Si non, à préciser dans la politique de confidentialité.
-  Il faut aussi que la politique de confidentialité en place soit mise à jour avec les éléments décidés dans les deux points ci-dessus.
+### Information de la personne qui contacte
+- **Vérifié** : la page Contact informe-t-elle sur le traitement des données au moment de la saisie ?
+- **Décision** : pas d'ajout sur la page Contact elle-même — l'information complète (finalité, durée de
+  conservation, droits) existe déjà et reste accessible via le lien "Politique de confidentialité" du
+  footer, présent sur toutes les pages y compris Contact. Choix assumé pour ne pas alourdir le
+  formulaire.
+
+### Cookies et outils de suivi
+- **Vérifié** : la politique de confidentialité affirme qu'aucun cookie non essentiel ni outil de mesure
+  d'audience n'est utilisé — cette affirmation est-elle exacte ?
+- **Comment** : recherche dans tout le code source de scripts de suivi connus (Google Analytics, Google
+  Tag Manager, Plausible, Matomo, Hotjar, Umami...).
+- **Résultat** : aucun script de ce type présent dans le code. L'affirmation de la politique de
+  confidentialité est confirmée exacte, rien à corriger.
