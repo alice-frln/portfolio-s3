@@ -19,11 +19,11 @@ const { id, titre, image, texte, petitTitre = false } = Astro.props;
 
 <dialog id={id} class="modal" aria-labelledby={`${id}-titre`}>
   <div
-    class="modal-box relative h-[348px] w-[441px] max-w-none overflow-visible rounded-none border-10 border-primary
-           bg-base-100 px-5 pt-1 pb-4 text-center shadow-card"
+    class="modal-box relative h-auto w-[calc(100vw-2rem)] max-w-[441px] overflow-visible rounded-none border-6 border-primary
+           bg-base-100 px-4 pt-1 pb-4 text-center shadow-card sm:h-[348px] sm:border-10 sm:px-5"
   >
     <form method="dialog">
-      <button class="absolute top-2 right-2 size-[69px] cursor-pointer transition hover:scale-105" aria-label="Fermer">
+      <button class="absolute top-2 right-2 size-12 cursor-pointer transition hover:scale-105 sm:size-[69px]" aria-label="Fermer">
         <Image src={croix} alt="" class="size-full" />
       </button>
     </form>
@@ -31,8 +31,8 @@ const { id, titre, image, texte, petitTitre = false } = Astro.props;
     <h2
       id={`${id}-titre`}
       class:list={[
-        "px-16 font-peix leading-[1.4] whitespace-nowrap text-primary",
-        petitTitre ? "text-[2.625rem]" : "text-[3rem]",
+        "px-10 font-peix leading-[1.4] whitespace-nowrap text-primary sm:px-16",
+        petitTitre ? "text-[1.875rem] sm:text-[2.625rem]" : "text-[2.125rem] sm:text-[3rem]",
       ]}
     >
       {titre}

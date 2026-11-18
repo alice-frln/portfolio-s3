@@ -17,11 +17,12 @@ const { id, nom, texte } = Astro.props;
 
 <dialog id={id} class="modal" aria-label={nom}>
   <div
-    class="modal-box relative flex h-[348px] w-[441px] max-w-none items-center justify-center
-           overflow-visible rounded-none border-10 border-primary bg-base-100 px-10 py-16 shadow-card"
+    class="modal-box relative flex h-auto w-[calc(100vw-2rem)] max-w-[441px] items-center justify-center
+           overflow-visible rounded-none border-6 border-primary bg-base-100 px-6 py-12 shadow-card
+           sm:h-[348px] sm:border-10 sm:px-10 sm:py-16"
   >
     <form method="dialog">
-      <button class="absolute top-2 right-2 size-[69px] cursor-pointer transition hover:scale-105" aria-label="Fermer">
+      <button class="absolute top-2 right-2 size-12 cursor-pointer transition hover:scale-105 sm:size-[69px]" aria-label="Fermer">
         <Image src={croix} alt="" class="size-full" />
       </button>
     </form>
