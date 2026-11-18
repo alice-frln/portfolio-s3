@@ -144,6 +144,16 @@ const etincelles = [
             </p>
 
             <form id="formulaire-contact" class="flex flex-col gap-4" novalidate>
+              <!-- Honeypot anti-spam : invisible pour un humain, souvent rempli par les bots -->
+              <input
+                type="text"
+                name="piege"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+                class="absolute -left-[9999px]"
+              />
+
               <div class="flex flex-col gap-3.5 sm:flex-row">
                 <div class="flex flex-1 flex-col gap-1.5">
                   <label for="nom" class="font-pixel text-[1.0625rem] text-marron">Nom</label>
@@ -300,25 +310,45 @@ const etincelles = [
 </Layout>
 
 <script>
-  // ===== Formulaire de contact : ouvre le client mail avec le message pré-rempli =====
+  // ===== Formulaire de contact : envoi direct du message dans PocketBase =====
+  import { pb } from "../lib/pocketbase";
+
   const formulaire = document.querySelector<HTMLFormElement>("#formulaire-contact");
   const statut = document.querySelector<HTMLParagraphElement>("#statut-formulaire");
+  const boutonEnvoyer = formulaire?.querySelector<HTMLButtonElement>('[type="submit"]');
 
-  formulaire?.addEventListener("submit", (evenement) => {
+  formulaire?.addEventListener("submit", async (evenement) => {
     evenement.preventDefault();
     if (!formulaire.reportValidity()) return;
 
     const donnees = new FormData(formulaire);
-    const nom = String(donnees.get("nom") || "").trim();
-    const email = String(donnees.get("email") || "").trim();
-    const sujet = String(donnees.get("sujet") || "").trim();
-    const message = String(donnees.get("message") || "").trim();
 
-    const corps = `De : ${nom} (${email})\n\n${message}`;
-    const lien = `mailto:alicefrelin.pro@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+    // Honeypot : un champ normalement invisible, que seuls les bots remplissent.
+    // On fait comme si l'envoi avait réussi, sans rien envoyer.
+    if (String(donnees.get("piege") || "").trim()) {
+      formulaire.reset();
+      if (statut) statut.textContent = "Message envoyé, merci !";
+      return;
+    }
 
-    if (statut) statut.textContent = "Ouverture de ta messagerie…";
-    window.location.href = lien;
+    boutonEnvoyer?.setAttribute("disabled", "true");
+    if (statut) statut.textContent = "Envoi en cours…";
+
+    try {
+      await pb.collection("messages_contact").create({
+        nom: String(donnees.get("nom") || "").trim(),
+        email: String(donnees.get("email") || "").trim(),
+        sujet: String(donnees.get("sujet") || "").trim(),
+        message: String(donnees.get("message") || "").trim(),
+      });
+      formulaire.reset();
+      if (statut) statut.textContent = "Message envoyé, merci ! Je reviens vers toi vite <3";
+    } catch (erreur) {
+      if (statut) statut.textContent = "Oups, l'envoi a échoué. Réessaie ou écris-moi directement par mail.";
+      console.error(erreur);
+    } finally {
+      boutonEnvoyer?.removeAttribute("disabled");
+    }
   });
 
   formulaire?.addEventListener("reset", () => {
