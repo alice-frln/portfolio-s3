@@ -250,6 +250,7 @@ const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, 
 
     const afficher = () => {
       imageAffichee.src = urlsGaleriePhotos[indexActuel];
+      imageAffichee.alt = `Photo ${indexActuel + 1} sur ${urlsGaleriePhotos.length}`;
     };
 
     document.querySelectorAll("[data-galerie-photos] button[data-index]").forEach((bouton) => {
