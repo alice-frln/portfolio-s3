@@ -14,7 +14,7 @@ const { titre, description } = Astro.props;
 
 <Layout title={`${titre} — Alice Frelin`} description={description}>
   <Header />
-  <main class="mx-auto max-w-[1100px] px-6 pt-16 pb-24 md:box-content md:px-12 md:pt-24">
+  <main id="contenu" class="mx-auto max-w-[1100px] px-6 pt-16 pb-24 md:box-content md:px-12 md:pt-24">
     <h1 class="font-manrope text-[clamp(3rem,10.4vw,9.375rem)] leading-[1.05] font-extrabold tracking-[-0.07em] text-noir">
       {titre}
     </h1>

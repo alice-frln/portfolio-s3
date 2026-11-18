@@ -48,6 +48,12 @@ const urlImage = new URL(image, Astro.site);
     <meta name="twitter:image" content={urlImage} />
   </head>
   <body class="bg-base-100 font-manrope text-base-content antialiased">
+    <a
+      href="#contenu"
+      class="sr-only rounded-full border border-noir bg-blanc px-4 py-2 font-manrope text-[0.9375rem] font-semibold focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100]"
+    >
+      Aller au contenu
+    </a>
     <slot />
     <!-- TODO : composant Footer -->
   </body>
