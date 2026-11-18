@@ -27,6 +27,29 @@ import ia from "../assets/img/ia.svg";
 import iconeObjets from "../assets/svg/a_propos_game_control.svg";
 import iconeCompetences from "../assets/svg/a_propos_star.svg";
 import cv from "../assets/img/CV_nouveau.jpg";
+
+import boutonPresentationMobile from "../assets/img/a_propos/figma/bouton_presentation.svg";
+import boutonParcoursMobile from "../assets/img/a_propos/figma/bouton_parcours.svg";
+import boutonObjetsMobile from "../assets/img/a_propos/figma/bouton_objets.svg";
+import boutonCompetencesMobile from "../assets/img/a_propos/figma/bouton_competences.svg";
+
+// Carrousel mobile (bas de page) : mêmes objets/compétences que l'inventaire desktop
+const objetsCarrousel = [
+  { id: "mymelody", image: myMelody, label: "Sanrio" },
+  { id: "maquillage", image: maquillage, label: "Maquillage" },
+  { id: "appareil-photo", image: appareilPhoto, label: "Appareil photo" },
+  { id: "lykyou", image: lykyou, label: "Musique" },
+  { id: "ordinateur", image: ordinateur, label: "Ordinateur" },
+  { id: "papier-crayon", image: papierCrayon, label: "Crayon" },
+];
+const competencesCarrousel = [
+  { id: "photoshop", image: photoshop, label: "Photoshop" },
+  { id: "figma", image: figma, label: "Figma" },
+  { id: "premiere-pro", image: premierePro, label: "Premiere Pro" },
+  { id: "after-effects", image: afterEffects, label: "After Effects" },
+  { id: "capcut", image: capcut, label: "CapCut" },
+  { id: "ia", image: ia, label: "Intelligence artificielle" },
+];
 ---
 
 <Layout title="À propos — Alice Frelin">
@@ -46,12 +69,11 @@ import cv from "../assets/img/CV_nouveau.jpg";
     <Header />
 
     <main
-      class="mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-14 px-6 py-10
-             xl:min-h-0 xl:flex-1 xl:grid-cols-[335px_1fr_397px] xl:items-stretch xl:gap-8 xl:px-12 xl:py-8"
+      class="mx-auto hidden w-full max-w-[1440px] justify-items-center gap-8 px-12 py-8
+             xl:grid xl:min-h-0 xl:flex-1 xl:grid-cols-[335px_1fr_397px] xl:items-stretch"
     >
       <!-- ===== Colonne gauche (sa hauteur fixe celle de la ligne) ===== -->
-      <!-- En mobile, l'avatar (colonne centrale) passe en premier : voir order-* ci-dessous -->
-      <div class="order-2 flex w-full max-w-[335px] flex-col gap-14 xl:order-none xl:gap-8">
+      <div class="flex w-full max-w-[335px] flex-col gap-8">
         <!-- Carte identité -->
         <section aria-label="Identité" class="card rounded-none border border-noir bg-secondary shadow-card">
           <div class="card-body gap-4 p-5 text-body-s">
@@ -116,7 +138,7 @@ import cv from "../assets/img/CV_nouveau.jpg";
       </div>
 
       <!-- ===== Colonne centrale : avatar + barre ===== -->
-      <div class="order-1 flex w-full flex-col items-center gap-6 xl:order-none xl:min-h-0">
+      <div class="flex w-full flex-col items-center gap-6 xl:min-h-0">
         <!-- L'avatar prend la place restante sans agrandir la ligne -->
         <div class="relative flex w-full justify-center xl:min-h-0 xl:flex-1">
           <Image
@@ -169,7 +191,7 @@ import cv from "../assets/img/CV_nouveau.jpg";
       <!-- ===== Colonne droite : inventaire ===== -->
       <section
         aria-labelledby="titre-inventaire"
-        class="order-3 card w-full max-w-[397px] rounded-none border border-noir bg-base-200 shadow-card xl:order-none"
+        class="card w-full max-w-[397px] rounded-none border border-noir bg-base-200 shadow-card"
       >
         <div class="card-body flex-1 items-center gap-3 px-5 pt-6 pb-4">
           <h2 id="titre-inventaire" class="text-sous-titre tracking-[-0.07em]">Inventaire</h2>
@@ -281,6 +303,173 @@ import cv from "../assets/img/CV_nouveau.jpg";
         </div>
       </section>
     </main>
+
+    <!-- ===== Mobile (<xl) : avatar avec boutons sur les côtés, objets/compétences en carrousel bas ===== -->
+    <div class="flex w-full flex-col items-center gap-6 px-4 pt-6 pb-10 xl:hidden">
+      <div class="relative flex w-full max-w-[380px] justify-center">
+        <Image
+          src={avatar}
+          alt="Avatar d'Alice"
+          width={600}
+          class="h-auto w-[60%] max-w-[250px]"
+          loading="eager"
+        />
+
+        <!-- Boutons gauche : ouvrent les cartes Présentation et Parcours en overlay -->
+        <div class="absolute top-10 left-0 flex flex-col gap-4">
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            aria-label="Présentation"
+            onclick="document.getElementById('mobile-presentation').showModal()"
+            class="block w-16 cursor-pointer transition hover:scale-105 focus-visible:scale-105"
+          >
+            <Image src={boutonPresentationMobile} alt="" class="w-full" />
+          </button>
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            aria-label="Parcours"
+            onclick="document.getElementById('mobile-parcours').showModal()"
+            class="block w-16 cursor-pointer transition hover:scale-105 focus-visible:scale-105"
+          >
+            <Image src={boutonParcoursMobile} alt="" class="w-full" />
+          </button>
+        </div>
+
+        <!-- Boutons droite : Objets, Compétences, CV -->
+        <div class="absolute top-10 right-0 flex flex-col gap-4">
+          <button
+            type="button"
+            data-onglet="objets"
+            aria-pressed="true"
+            aria-label="Objets"
+            class="block w-16 cursor-pointer transition hover:scale-105 aria-pressed:brightness-90"
+          >
+            <Image src={boutonObjetsMobile} alt="" class="w-full" />
+          </button>
+          <button
+            type="button"
+            data-onglet="competences"
+            aria-pressed="false"
+            aria-label="Compétences"
+            class="block w-16 cursor-pointer transition hover:scale-105 aria-pressed:brightness-90"
+          >
+            <Image src={boutonCompetencesMobile} alt="" class="w-full" />
+          </button>
+          <div class="relative size-16">
+            <span class="absolute inset-0 translate-x-[3px] translate-y-[3px] rounded-full border border-noir bg-marron"></span>
+            <a
+              href={cv.src}
+              download="CV - Alice Frelin"
+              aria-label="Télécharger mon CV"
+              class="btn btn-circle relative size-16 border-2 border-noir bg-blanc text-[1.0625rem] font-semibold text-noir hover:scale-105"
+            >
+              CV
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carrousel objets / compétences -->
+      <div class="w-full overflow-x-auto pb-1">
+        <ul data-panneau="objets" aria-label="Objets" class="flex w-max gap-3 px-1">
+          {objetsCarrousel.map(({ id, image, label }) => (
+            <li class="size-24 shrink-0 rounded-[3px] border-2 border-accent bg-base-100 p-2 shadow-[inset_-6px_5px_3px_0_rgb(144_140_177/0.25)]">
+              <button
+                type="button"
+                aria-haspopup="dialog"
+                aria-label={label}
+                onclick={`document.getElementById('objet-${id}').showModal()`}
+                class="flex size-full cursor-pointer items-center justify-center transition hover:scale-105 focus-visible:scale-105"
+              >
+                <Image src={image} alt="" width={160} class="size-full object-contain [image-rendering:pixelated]" />
+              </button>
+            </li>
+          ))}
+        </ul>
+        <ul data-panneau="competences" aria-label="Compétences" hidden class="flex w-max gap-3 px-1">
+          {competencesCarrousel.map(({ id, image, label }) => (
+            <li class="size-24 shrink-0 rounded-[3px] border-2 border-accent bg-base-100 p-2 shadow-[inset_-6px_5px_3px_0_rgb(144_140_177/0.25)]">
+              <button
+                type="button"
+                aria-haspopup="dialog"
+                aria-label={label}
+                onclick={`document.getElementById('competence-${id}').showModal()`}
+                class="flex size-full cursor-pointer items-center justify-center p-1.5 transition hover:scale-105 focus-visible:scale-105"
+              >
+                <Image src={image} alt="" class="size-full object-contain" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== Présentation + Parcours mobile : mêmes infos que les cartes desktop, en popup ===== -->
+    <dialog id="mobile-presentation" class="modal" aria-label="Présentation">
+      <div class="modal-box relative w-[min(90vw,360px)] max-w-none rounded-none border border-noir bg-secondary p-5 text-body-s shadow-card">
+        <form method="dialog">
+          <button aria-label="Fermer" class="btn btn-circle btn-sm absolute top-3 right-3 border border-noir bg-blanc">✕</button>
+        </form>
+        <div class="flex gap-5">
+          <Image
+            src={photoProfil}
+            alt="Photo d'Alice Frelin"
+            width={260}
+            class="h-[151px] w-[129px] shrink-0 border border-noir object-cover"
+          />
+          <ul class="mt-4 flex flex-col gap-2.5">
+            <li><strong class="font-bold">Prénom</strong> : Alice</li>
+            <li><strong class="font-bold">Nom</strong> : Frelin</li>
+            <li><strong class="font-bold">Âge</strong> : 20 ans</li>
+            <li><strong class="font-bold">Secteur</strong> : Design</li>
+          </ul>
+        </div>
+        <ul class="mt-4 flex flex-col gap-2.5">
+          <li><strong class="font-bold">Langues</strong> : français, anglais</li>
+          <li>
+            <strong class="font-bold">Aime</strong> : le printemps, les bubble tea, collectionner les
+            porte-clés, le noir et le rose
+          </li>
+        </ul>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>Fermer</button>
+      </form>
+    </dialog>
+
+    <dialog id="mobile-parcours" class="modal" aria-label="Parcours">
+      <div class="modal-box relative w-[min(90vw,360px)] max-w-none rounded-none border border-noir bg-base-100 p-5 shadow-card">
+        <form method="dialog">
+          <button aria-label="Fermer" class="btn btn-circle btn-sm absolute top-3 right-3 border border-noir bg-blanc">✕</button>
+        </form>
+        <h2 class="text-center font-manrope text-[1.75rem] leading-tight font-bold tracking-[-0.07em]">Parcours</h2>
+        <ol class="mt-4 flex flex-col gap-3 text-body-xs">
+          <li>
+            <span class="font-bold text-primary">2026</span> - Stage de 8 semaines en tant qu’assistante de
+            direction artistique<br />
+            Agence My client is rich, Strasbourg
+          </li>
+          <li>
+            <span class="font-bold text-primary">2025</span> - Semestre d’échange en Intégration Multimédia<br />
+            Cégep anglophone de Vanier, Montréal
+          </li>
+          <li>
+            <span class="font-bold text-primary">2024/2026</span> - BUT Métiers du multimédia et de l’internet<br />
+            IUT de Montbéliard
+          </li>
+          <li>
+            <span class="font-bold text-primary">2024</span> - Baccalauréat général - LLCE, SES, Cinéma
+            Audiovisuel, Mention Bien<br />
+            Lycée Gustave Courbet, Belfort
+          </li>
+        </ol>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>Fermer</button>
+      </form>
+    </dialog>
 
     <!-- ===== Fenêtres de détail des objets ===== -->
     <CardObjet id="objet-mymelody" titre="Sanrio" image={myMelody}

@@ -66,6 +66,28 @@ const etincelles = [
       </h1>
 
       <div class="relative mx-auto mt-8 flex max-w-[1440px] flex-col items-center gap-10 px-4 sm:mt-10 sm:gap-16 sm:px-6 md:px-12 xl:mt-4 xl:w-full xl:max-w-none xl:flex-row xl:items-start xl:justify-between xl:gap-10 xl:mx-0 xl:px-16 2xl:px-24">
+      <!-- ===== Réseaux mobile : juste les boutons liens, avant le formulaire (le mockup téléphone est réservé au desktop) ===== -->
+      <div class="flex w-full max-w-[420px] flex-col items-center gap-4 xl:hidden">
+        <p class="font-peix text-[1.75rem] text-rose-vif [font-feature-settings:'liga'_0]">Mes réseaux</p>
+        <ul class="flex w-full flex-col items-center gap-3">
+          {reseaux.map(({ nom, href, externe }) => (
+            <li class="w-full">
+              <a
+                href={href}
+                target={externe ? "_blank" : undefined}
+                rel={externe ? "noopener" : undefined}
+                data-reseau
+                class="flex h-14 w-full items-center justify-between rounded-full border-[2.5px] border-[#f3a9c9] bg-gradient-to-b from-[#fffdf8] to-[#ffe6d9] px-4 shadow-[0_3px_0_0_rgba(216,138,176,0.6)] transition hover:scale-[1.03] active:scale-[0.97]"
+              >
+                <Image src={coeurBouton} alt="" class="size-[22px]" />
+                <span class="font-manrope text-[1rem] font-bold text-[#c2367f]">{nom}</span>
+                <Image src={coeurBouton} alt="" class="size-[22px]" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
       <div class="relative hidden w-[300px] shrink-0 xl:block">
         <div class="relative mx-auto h-[500px] w-[240px]">
@@ -208,8 +230,8 @@ const etincelles = [
         </div>
       </div>
 
-      <!-- ===== Colonne téléphone : mes réseaux ===== -->
-      <div class="relative w-[260px] shrink-0 xl:w-[300px]">
+      <!-- ===== Colonne téléphone : mes réseaux (mockup complet, desktop uniquement) ===== -->
+      <div class="relative hidden w-[260px] shrink-0 xl:block xl:w-[300px]">
         <Image
           src={porteClesCoeur}
           alt=""
