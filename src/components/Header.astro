@@ -5,7 +5,7 @@ import iconeProjets from "../assets/svg/header_project_cup_pixel.svg";
 import iconeAPropos from "../assets/svg/header_info_a_propos_pixel.svg";
 import iconeContact from "../assets/svg/header_contact_telephone_pixel.svg";
 import iconeHamburger from "../assets/svg/header_menu_hamburger.svg";
-import iconeFermer from "../assets/svg/header_menu_fermer.svg";
+import iconeFermer from "../assets/img/bouton_croix_pixel.svg";
 import fondMenu from "../assets/img/apropos_background.webp";
 
 // Page actuelle, sans le "/" final (sauf pour l'accueil)
@@ -19,10 +19,8 @@ const liens = [
 ];
 ---
 
-<header class="sticky top-0 z-50 flex h-[78px] w-full items-center justify-between px-5 md:items-end md:justify-center md:px-4">
-  <!-- Mobile uniquement : nom du site + bouton hamburger -->
-  <a href="/" class="font-manrope text-[1.5rem] font-extrabold tracking-[-0.05em] text-noir md:hidden">Alice</a>
-
+<header class="sticky top-0 z-50 flex h-[78px] w-full items-center justify-end px-5 md:items-end md:justify-center md:px-4">
+  <!-- Mobile uniquement : bouton hamburger -->
   <button
     type="button"
     id="bouton-menu-mobile"
@@ -56,11 +54,8 @@ const liens = [
   <div class="relative flex h-full flex-col">
     <div class="flex items-center justify-end px-5 py-4">
       <form method="dialog">
-        <button
-          aria-label="Fermer le menu"
-          class="flex size-10 items-center justify-center rounded-full bg-blanc/90 transition hover:scale-105"
-        >
-          <Image src={iconeFermer} alt="" class="size-4" />
+        <button aria-label="Fermer le menu" class="block cursor-pointer transition hover:scale-105">
+          <Image src={iconeFermer} alt="" class="size-10" />
         </button>
       </form>
     </div>
@@ -96,4 +91,10 @@ const liens = [
 
   // Ferme le tiroir après un clic sur un lien (navigation) pour éviter qu'il reste ouvert
   menuMobile?.querySelectorAll("a").forEach((lien) => lien.addEventListener("click", () => menuMobile.close()));
+
+  // Clique n'importe où ailleurs que sur un bouton/lien : ferme aussi le menu
+  menuMobile?.addEventListener("click", (evenement) => {
+    const cible = evenement.target as HTMLElement;
+    if (!cible.closest("a, button")) menuMobile.close();
+  });
 </script>
