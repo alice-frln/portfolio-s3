@@ -78,7 +78,7 @@ const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, 
       <!-- ===== Visuel principal ===== -->
       {projet.Miniature && (
         <img
-          src={urlFichier(projet, projet.Miniature)}
+          src={urlFichier(projet, projet.Miniature, "1600x0")}
           alt=""
           class="h-[260px] w-full object-cover md:h-[486px]"
           fetchpriority="high"
@@ -157,7 +157,7 @@ const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, 
                       class="block w-full cursor-zoom-in transition hover:opacity-90 focus-visible:opacity-90"
                     >
                       <img
-                        src={urlFichier(projet, image)}
+                        src={urlFichier(projet, image, "800x0")}
                         alt={`${projet.Titre} — photo ${i + 1}`}
                         loading="lazy"
                         decoding="async"

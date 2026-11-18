@@ -13,7 +13,7 @@ const { projet } = Astro.props;
     <div class="aspect-[211/145] overflow-hidden bg-base-100">
       {projet.Miniature && (
         <img
-          src={urlFichier(projet, projet.Miniature)}
+          src={urlFichier(projet, projet.Miniature, "700x0")}
           alt=""
           loading="lazy"
           class="size-full object-cover transition duration-300 group-hover:scale-105"

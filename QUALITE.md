@@ -73,16 +73,68 @@ Document vivant, rempli au fur et à mesure (voir les sections encore à complé
 
 ---
 
-## 2. Sobriété et performance — *à compléter*
+## 2. Sobriété et performance
 
-Pistes identifiées, pas encore vérifiées en détail :
-- Poids des images (optimisation automatique via `astro:assets`, formats WebP, `loading="lazy"` déjà
-  utilisé par endroits — à vérifier systématiquement).
-- Police web : `Manrope` et `Pixelify Sans` chargées via Google Fonts, `Peix` en police locale
-  (`.woff2`) — stratégie de chargement (`font-display`) à vérifier.
-- Mesure concrète : score Lighthouse (Performance) à faire tourner sur les pages principales.
-- Taille du bundle JS envoyé au client (Astro n'envoie du JS que pour les parties interactives —
-  à confirmer avec le rapport de build).
+### Méthode
+- **Outil** : Lighthouse (CLI, `npx lighthouse`), lancé sur un **build de production** (`astro build` +
+  serveur Node réel, pas le serveur de dev qui n'est pas représentatif) de la page d'accueil, la plus
+  lourde du site (collage de 17 stickers desktop + galerie de projets).
+- **Limite de la mesure** : exécuté en local sur la machine de développement (pas un environnement de
+  mesure dédié), les scores varient donc d'une exécution à l'autre selon la charge de la machine (62, 60
+  puis 71 sur trois passages). Les chiffres ci-dessous sont indicatifs ; **à refaire sur le site déployé
+  en production** pour un score fiable à citer en soutenance.
+
+### Résultat avant correctifs
+Performance **62/100** (Accessibilité 95, Bonnes pratiques 96, SEO 100). Le plus mauvais indicateur :
+LCP (Largest Contentful Paint) à **6.3 s**, score 0.1/1 — très en dessous de la cible (< 2.5 s).
+
+### Ce qui a été vérifié, et corrigé
+
+**1. L'image la plus grande visible à l'écran (LCP) était chargée en différé.**
+- **Vérifié** : l'élément LCP identifié par Lighthouse était un sticker du hero mobile (`ds.png`),
+  chargé avec `loading="lazy"` alors qu'il est visible dès l'arrivée sur la page.
+- **Comment** : audit `lcp-discovery-insight` de Lighthouse, qui signale `loading=lazy` sur l'élément
+  LCP comme anti-pattern.
+- **Corrigé** : passage en `loading="eager"` pour tous les stickers du hero mobile
+  (`src/pages/index.astro`), qui sont tous au-dessus de la ligne de flottaison sur mobile. Vérifié après
+  correction : Lighthouse confirme `eagerlyLoaded: true` sur cet élément.
+
+**2. Polices Google Fonts chargées en `@import` CSS (bloquant).**
+- **Vérifié** : la police était importée via `@import url(...)` en première ligne de `global.css`.
+- **Comment** : audit `render-blocking-insight` de Lighthouse, qui chiffre l'impact à ~809 ms — un
+  `@import` CSS ajoute un aller-retour réseau supplémentaire avant que le navigateur découvre la police,
+  car il doit d'abord télécharger et parser le CSS qui le contient.
+- **Corrigé** : remplacé par `<link rel="preconnect">` (vers `fonts.googleapis.com` et
+  `fonts.gstatic.com`) + `<link rel="stylesheet">` directement dans le `<head>`
+  (`src/layouts/Layout.astro`), découverts par le navigateur dès le HTML initial, en parallèle du reste.
+
+**3. Miniatures de projets (PocketBase) servies en pleine résolution.**
+- **Vérifié** : les miniatures de projets, affichées à ~260–640 px de large, étaient envoyées à leur
+  résolution d'origine (jusqu'à 2309×2048 px) — jusqu'à **1 069 Kio** gaspillés rien que sur la page
+  d'accueil.
+- **Comment** : audit `image-delivery-insight` de Lighthouse (taille réelle vs. taille affichée).
+- **Corrigé partiellement** : le code demande maintenant une taille réduite au serveur PocketBase via le
+  paramètre `thumb` déjà prévu dans `urlFichier()` (`700x0` à `1600x0` selon le contexte, dans
+  `CardProjetL.astro`, `CardProjetM.astro`, `projets/[id].astro`).
+- **Vérification du correctif** : test direct en comparant les en-têtes HTTP (`curl -I`) de l'image avec
+  et sans paramètre `thumb` → **taille identique dans les deux cas**. La génération de miniature à la
+  volée n'est pas activée côté serveur PocketBase pour ce champ.
+- **Reste à faire (action côté PocketBase, pas dans le code)** : dans l'admin PocketBase, sur les champs
+  fichier `Miniature` et `Galerie` de la collection `Projets`, ajouter les tailles de miniature utilisées
+  par le code (`700x0`, `800x0`, `1000x0`, `1600x0`) dans l'option "Thumb sizes" du champ. Une fois fait,
+  le gain sera immédiat sans nouveau déploiement (c'est PocketBase qui sert les miniatures).
+
+### Identifié, non corrigé (choix de budget temps)
+- **"Style & Layout"** domine le temps passé sur le thread principal (3.6 s sur un chargement), bien
+  plus que le JavaScript (39 ms) — cohérent avec une feuille de style compilée Tailwind/DaisyUI assez
+  volumineuse (~100 Kio, un seul fichier CSS pour tout le site) à faire correspondre à chaque élément de
+  la page. Piste identifiée (réduire les variantes DaisyUI generées, non utilisées) mais non traitée :
+  demanderait un audit plus poussé du CSS généré, hors budget de cette session.
+
+### Résultat après correctifs
+Performance entre **60 et 71/100** selon l'exécution (variance machine, voir "Méthode"), LCP amélioré de
+6.3 s à **3.7 s** sur la meilleure exécution. Accessibilité, Bonnes pratiques et SEO inchangés (95, 96,
+100).
 
 ## 3. Référencement
 
