@@ -26,11 +26,14 @@ import ia from "../assets/img/ia.svg";
 
 import iconeObjets from "../assets/svg/a_propos_game_control.svg";
 import iconeCompetences from "../assets/svg/a_propos_star.svg";
+import cv from "../assets/img/CV_nouveau.jpg";
 ---
 
 <Layout title="À propos — Alice Frelin">
-  <!-- Hero : sur grand écran, tout tient dans la hauteur de la fenêtre -->
-  <div class="relative isolate flex flex-col overflow-x-clip xl:h-svh">
+  <!-- Hero : sur grand écran, vise la hauteur de la fenêtre sans jamais rogner le contenu
+       (certains ordinateurs rendent les polices/éléments un peu plus grands : min-h laisse
+       la page s'allonger plutôt que de faire déborder les cartes sur le footer) -->
+  <div class="relative isolate flex flex-col overflow-x-clip xl:min-h-svh">
     <!-- Fond -->
     <Image
       src={fond}
@@ -152,10 +155,9 @@ import iconeCompetences from "../assets/svg/a_propos_star.svg";
 
           <!-- CV -->
           <a
-            href="/cv.pdf"
-            target="_blank"
-            rel="noopener"
-            aria-label="CV (PDF)"
+            href={cv.src}
+            download="CV - Alice Frelin"
+            aria-label="Télécharger mon CV"
             class="btn btn-circle size-[73px] border-2 border-noir bg-rose-vif text-[2rem] font-semibold text-blanc hover:scale-105 hover:brightness-95"
           >
             CV

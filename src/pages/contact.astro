@@ -45,7 +45,7 @@ const etincelles = [
 ---
 
 <Layout title="Contact — Alice Frelin">
-  <div class="relative isolate flex flex-col overflow-x-clip xl:h-svh">
+  <div class="relative isolate flex flex-col overflow-x-clip xl:min-h-svh">
     <!-- Fond à pois, décoratif : couvre tout le hero (header compris) -->
     <Image
       src={fond}
@@ -60,12 +60,12 @@ const etincelles = [
 
     <Header />
 
-    <main class="relative pt-16 pb-24 md:pt-20 xl:flex xl:min-h-0 xl:flex-1 xl:flex-col xl:justify-center xl:py-0">
-      <h1 class="mx-auto max-w-[900px] px-6 text-center font-peix text-[3.5rem] leading-none tracking-[-0.09em] text-rose-vif [font-feature-settings:'liga'_0] xl:text-[4.5rem]">
+    <main class="relative pt-10 pb-16 sm:pt-16 md:pt-20 xl:flex xl:min-h-0 xl:flex-1 xl:flex-col xl:justify-center xl:py-6">
+      <h1 class="mx-auto max-w-[900px] px-6 text-center font-peix text-[2.75rem] leading-none tracking-[-0.09em] text-rose-vif [font-feature-settings:'liga'_0] sm:text-[3.5rem] xl:text-[4.5rem]">
         Contactez-moi
       </h1>
 
-      <div class="relative mx-auto mt-10 flex max-w-[1440px] flex-col items-center gap-16 px-6 md:px-12 xl:mt-4 xl:w-full xl:max-w-none xl:flex-row xl:items-start xl:justify-between xl:gap-10 xl:mx-0 xl:px-16 2xl:px-24">
+      <div class="relative mx-auto mt-8 flex max-w-[1440px] flex-col items-center gap-10 px-4 sm:mt-10 sm:gap-16 sm:px-6 md:px-12 xl:mt-4 xl:w-full xl:max-w-none xl:flex-row xl:items-start xl:justify-between xl:gap-10 xl:mx-0 xl:px-16 2xl:px-24">
       <!-- ===== Colonne avatar (décorative, desktop uniquement) ===== -->
       <div class="relative hidden w-[300px] shrink-0 xl:block">
         <div class="relative mx-auto h-[500px] w-[240px]">
@@ -93,7 +93,7 @@ const etincelles = [
               <Image src={coeurTitre} alt="" class="size-[18px]" />
               <span class="font-pixel text-[1.125rem] text-marron">nouveau_message.txt</span>
             </div>
-            <div aria-hidden="true" class="flex items-center gap-1">
+            <div aria-hidden="true" class="hidden items-center gap-1 sm:flex">
               <span class="flex h-[26px] w-[34px] items-center justify-center rounded border border-[#8f8a8d] bg-gradient-to-b from-white to-[#e3dde1]">
                 <Image src={iconeReduire} alt="" class="size-3" />
               </span>
@@ -107,8 +107,8 @@ const etincelles = [
           </div>
 
           <!-- Contenu -->
-          <div class="flex flex-col gap-5 border border-marron/40 bg-[#f3f0f1] px-6 pt-6 pb-7">
-            <div class="flex items-center gap-3">
+          <div class="flex flex-col gap-4 border border-marron/40 bg-[#f3f0f1] px-4 pt-5 pb-5 sm:gap-5 sm:px-6 sm:pt-6 sm:pb-7">
+            <div class="hidden items-center gap-3 sm:flex">
               <span class="font-pixel text-[1.25rem] text-marron">À :</span>
               <span class="flex items-center gap-2 rounded-full border-[1.5px] border-marron/40 bg-gradient-to-b from-blanc to-rose-pastel py-1.5 pr-5 pl-2.5">
                 <Image src={iconeUtilisatrice} alt="" class="size-7" />
@@ -116,7 +116,7 @@ const etincelles = [
               </span>
             </div>
 
-            <p class="font-pixel text-[1.125rem] leading-snug text-marron">
+            <p class="hidden font-pixel text-[1.125rem] leading-snug text-marron sm:block">
               ( &lt;3 ) graphiste &amp; développeuse front<br />
               (99%) de chances qu'on s'entende bien
             </p>
@@ -226,13 +226,13 @@ const etincelles = [
         <div class="relative overflow-hidden rounded-[40px] border-3 border-white bg-gradient-to-b from-[#7fe3f2] to-[#b4f3de] p-[8px] shadow-card">
           <div class="relative overflow-hidden rounded-[32px] bg-white">
             <!-- Haut-parleur + caméra -->
-            <div class="relative flex items-center justify-center py-4">
+            <div class="relative hidden items-center justify-center py-4 sm:flex">
               <span class="h-[6px] w-12 rounded bg-[#dcd5da]"></span>
               <Image src={camera} alt="" class="absolute right-[26%] size-2" />
             </div>
 
             <!-- Écran -->
-            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-5 pt-8 pb-10">
+            <div class="relative overflow-hidden bg-gradient-to-b from-[#ffe6f2] to-[#f8bcd9] px-4 pt-6 pb-6 sm:px-5 sm:pt-8 sm:pb-10">
               <Image src={motifPois} alt="" width={246} class="pointer-events-none absolute inset-0 size-full opacity-60" />
               <div class="relative flex flex-col items-center gap-5">
                 <div class="flex w-full items-center justify-between">
@@ -264,7 +264,7 @@ const etincelles = [
               </div>
             </div>
 
-            <div class="flex items-center justify-center py-5">
+            <div class="hidden items-center justify-center py-5 sm:flex">
               <Image src={boutonHome} alt="" class="size-7" />
             </div>
           </div>
