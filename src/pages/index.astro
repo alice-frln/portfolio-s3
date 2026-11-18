@@ -68,6 +68,21 @@ const stickers: { image: ImageMetadata; x: number; y: number; l: number }[] = [
 ];
 const pct = (valeur: number, total: number) => `${((valeur / total) * 100).toFixed(2)}%`;
 
+// ===== Stickers du hero mobile (maquette resserrée, cadre de 375 × 520 px) =====
+const LARGEUR_MOBILE = 375;
+const HAUTEUR_MOBILE = 520;
+const stickersMobile: { image: ImageMetadata; x: number; y: number; l: number }[] = [
+  { image: porteCle, x: 50, y: 68, l: 58 },
+  { image: helloKitty, x: 222, y: 52, l: 74 },
+  { image: appareilPhoto, x: 285, y: 8, l: 98 },
+  { image: perlesDesign, x: 183, y: 230, l: 98 },
+  { image: chat, x: 10, y: 264, l: 100 },
+  { image: boutonRond, x: 96, y: 346, l: 34 },
+  { image: tamagotchi, x: 253, y: 270, l: 94 },
+  { image: ds, x: 10, y: 386, l: 120 },
+  { image: cassette, x: 248, y: 392, l: 124 },
+];
+
 // ===== Ce que je fais (liens vers la page Projets filtrée) =====
 const competences = [
   { nom: "Montage-vidéo", image: iconeMontage },
@@ -80,16 +95,20 @@ const competences = [
   <Header />
 
   <main>
-    <!-- ===== Hero mobile : titre + une poignée de stickers dans les marges, sans chevauchement ===== -->
-    <div class="relative overflow-hidden px-6 pt-16 pb-14 text-center sm:hidden">
-      <Image src={pince} alt="" class="pointer-events-none absolute top-1 left-3 w-14 -rotate-[10deg]" />
-      <Image src={appareilPhoto} alt="" class="pointer-events-none absolute -top-1 right-0 w-20 rotate-[6deg]" />
-      <Image src={helloKitty} alt="" class="pointer-events-none absolute bottom-3 left-1 w-12 rotate-[8deg]" />
-      <Image src={cassette} alt="" class="pointer-events-none absolute -bottom-2 right-2 w-20 -rotate-[8deg]" />
+    <!-- ===== Hero mobile : titre entouré de stickers resserrés, façon maquette (< sm) ===== -->
+    <div class="relative mx-auto aspect-[375/520] w-full max-w-[430px] overflow-hidden pt-4 text-center sm:hidden">
+      {stickersMobile.map(({ image, x, y, l }) => (
+        <Image
+          src={image}
+          alt=""
+          class="pointer-events-none absolute h-auto"
+          style={`left:${pct(x, LARGEUR_MOBILE)};top:${pct(y, HAUTEUR_MOBILE)};width:${pct(l, LARGEUR_MOBILE)}`}
+        />
+      ))}
 
-      <h1 class="relative z-10 mx-auto max-w-[260px] leading-[0.9]">
-        <span class="block font-manrope text-[2.5rem] font-extrabold tracking-[-0.02em] text-noir">Alice Frelin’s</span>
-        <span class="block font-peix text-[3.25rem] text-rose-vif [font-feature-settings:'liga'_0]">Archives</span>
+      <h1 class="absolute top-[27%] left-1/2 z-10 w-max -translate-x-1/2 leading-[0.9]">
+        <span class="block font-manrope text-[2.25rem] font-extrabold tracking-[-0.02em] text-noir">Alice Frelin’s</span>
+        <span class="block font-peix text-[3rem] text-rose-vif [font-feature-settings:'liga'_0]">Archives</span>
       </h1>
     </div>
 
