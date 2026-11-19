@@ -43,14 +43,13 @@ const sections = projet
     ].filter((s) => s.texte.length > 0)
   : [];
 
-// Une vidéo dans la galerie (détectée par extension) est mise en avant, à part des photos
+// Une vidéo dans la galerie (détectée par extension) est mise en avant, à part des photos.
+// Seule la première vidéo est affichée en grand ; les suivantes rejoignent la galerie.
 const estVideo = (nom: string) => /\.(mp4|webm|mov|m4v)$/i.test(nom);
 const galerieVideos = projet ? projet.Galerie.filter(estVideo) : [];
+const [premiereVideo, ...autresVideos] = galerieVideos;
 const galeriePhotos = projet ? projet.Galerie.filter((g) => !estVideo(g)) : [];
 const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, g)) : [];
-
-// Visuel principal : la miniature vidéo prend le pas sur la miniature classique si elle existe
-const miniaturePrincipale = projet ? projet.minia_video || projet.Miniature : "";
 ---
 
 <Layout
@@ -78,14 +77,25 @@ const miniaturePrincipale = projet ? projet.minia_video || projet.Miniature : ""
         </div>
       </div>
 
-      <!-- ===== Visuel principal : la miniature vidéo prend le pas si elle existe ===== -->
-      {miniaturePrincipale && (
-        <img
-          src={urlFichier(projet, miniaturePrincipale, "1600x0")}
-          alt=""
+      <!-- ===== Visuel principal : la vidéo de miniature prend le pas si elle existe ===== -->
+      {projet.minia_video ? (
+        <video
+          src={urlFichier(projet, projet.minia_video)}
+          autoplay
+          muted
+          loop
+          playsinline
           class="h-[260px] w-full object-cover md:h-[486px]"
-          fetchpriority="high"
         />
+      ) : (
+        projet.Miniature && (
+          <img
+            src={urlFichier(projet, projet.Miniature, "1600x0")}
+            alt=""
+            class="h-[260px] w-full object-cover md:h-[486px]"
+            fetchpriority="high"
+          />
+        )
       )}
 
       <div class="mx-auto max-w-[1100px] px-6 py-14 md:box-content md:px-12 md:py-10">
@@ -130,27 +140,33 @@ const miniaturePrincipale = projet ? projet.minia_video || projet.Miniature : ""
           <section aria-labelledby="titre-galerie" class="mt-20 md:mt-[120px]">
             <h2 id="titre-galerie" class="text-titre-bold">Galerie</h2>
 
-            <!-- Vidéo(s) : mise(s) en avant, en premier et en grand -->
-            {galerieVideos.length > 0 && (
-              <div class="mt-8 flex flex-col gap-8">
-                {galerieVideos.map((video) => (
-                  <video
-                    src={urlFichier(projet, video)}
-                    controls
-                    preload="metadata"
-                    class="h-auto w-full border border-noir shadow-card"
-                  />
-                ))}
-              </div>
+            <!-- Vidéo mise en avant : seulement la première, à moitié de la largeur -->
+            {premiereVideo && (
+              <video
+                src={urlFichier(projet, premiereVideo)}
+                controls
+                preload="metadata"
+                class="mx-auto mt-8 h-auto w-1/2 border border-noir shadow-card"
+              />
             )}
 
-            <!-- Photos : façon Pinterest, on clique pour agrandir -->
-            {galeriePhotos.length > 0 && (
+            <!-- Photos (façon Pinterest, on clique pour agrandir) + vidéos suivantes -->
+            {(galeriePhotos.length > 0 || autresVideos.length > 0) && (
               <ul
-                aria-label="Photos du projet"
+                aria-label="Photos et vidéos du projet"
                 data-galerie-photos
                 class="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3"
               >
+                {autresVideos.map((video) => (
+                  <li class="mb-6 break-inside-avoid">
+                    <video
+                      src={urlFichier(projet, video)}
+                      controls
+                      preload="metadata"
+                      class="h-auto w-full border border-noir shadow-card"
+                    />
+                  </li>
+                ))}
                 {galeriePhotos.map((image, i) => (
                   <li class="mb-6 break-inside-avoid">
                     <button
