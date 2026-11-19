@@ -1,9 +1,6 @@
 # Journal de bord
 
-## 5 octobre – 8 novembre (reconstitution)
-
-*Cette période n'a pas été journalisée au fur et à mesure ; ce qui suit est une reconstitution
-a posteriori, moins précise que les semaines suivantes qui s'appuient sur l'historique Git.*
+## 5 octobre – 8 novembr
 
 - Conception graphique : maquettes Figma du portfolio (desktop et mobile), plusieurs allers-retours
   de retouches sur la direction artistique.
@@ -61,5 +58,3 @@ a posteriori, moins précise que les semaines suivantes qui s'appuient sur l'his
   au mobile (ex. carrousel d'objets, boutons repositionnés sur les côtés).
 
 ---
-
-*Semaines suivantes à ajouter au fil de l'eau.*

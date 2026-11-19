@@ -1,11 +1,5 @@
 # Qualité web
 
-Grille de contrôle qualité du portfolio, sur les quatre domaines demandés : accessibilité, sobriété et
-performance, référencement, conformité juridique. Pour chaque critère : ce qui a été vérifié, comment, et
-ce qui a été corrigé.
-
-Document vivant, rempli au fur et à mesure (voir les sections encore à compléter plus bas).
-
 ## 1. Accessibilité
 
 ### Textes alternatifs (`alt`) et labels (`aria-label`)
