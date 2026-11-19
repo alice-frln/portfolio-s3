@@ -12,6 +12,7 @@ export interface Projet extends RecordModel {
   Date: string;
   Client: string;
   Miniature: string;
+  minia_video?: string;
   Galerie: string[];
   a_propos: string;
   defi: string;

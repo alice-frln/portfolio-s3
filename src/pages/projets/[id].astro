@@ -48,6 +48,9 @@ const estVideo = (nom: string) => /\.(mp4|webm|mov|m4v)$/i.test(nom);
 const galerieVideos = projet ? projet.Galerie.filter(estVideo) : [];
 const galeriePhotos = projet ? projet.Galerie.filter((g) => !estVideo(g)) : [];
 const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, g)) : [];
+
+// Visuel principal : la miniature vidéo prend le pas sur la miniature classique si elle existe
+const miniaturePrincipale = projet ? projet.minia_video || projet.Miniature : "";
 ---
 
 <Layout
@@ -75,10 +78,10 @@ const urlsGaleriePhotos = projet ? galeriePhotos.map((g) => urlFichier(projet!, 
         </div>
       </div>
 
-      <!-- ===== Visuel principal ===== -->
-      {projet.Miniature && (
+      <!-- ===== Visuel principal : la miniature vidéo prend le pas si elle existe ===== -->
+      {miniaturePrincipale && (
         <img
-          src={urlFichier(projet, projet.Miniature, "1600x0")}
+          src={urlFichier(projet, miniaturePrincipale, "1600x0")}
           alt=""
           class="h-[260px] w-full object-cover md:h-[486px]"
           fetchpriority="high"
